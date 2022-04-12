@@ -2,10 +2,12 @@ import Navsidebar from "./Navsidebar";
 
 const Layout = ({ children }) => {
   return (
-    <div className="content">
+    <body className="g-sidenav-show   bg-gray-100">
       <Navsidebar/>
+      <main className="main-content position-relative border-radius-lg ">
       {children}
-    </div>
+      </main>
+    </body>
   );
 };
 

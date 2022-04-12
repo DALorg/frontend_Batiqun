@@ -14,7 +14,7 @@ import {
   faWindowClose,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import Modal from "react-modal";
+import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 import ProductDetail from "react-modal";
 import EditProduct from "react-modal";
 import Swal from "sweetalert2";
@@ -59,47 +59,51 @@ const Products = () => {
 
   // ADD PRODUCT
   const [userInput, setUserInput] = useState({
-    title: "",
-    price: "",
-    description: "",
-    image: "",
-    category: "",
+    ProductId: "7Tk$K9N2nJIPW1BkBiCjpA__",
+    Nama_Product: "",
+    TokenID: "",
+    Product_image: "11.png",
+    intFavorites: 0,
+    bitApprove: null,
+    Harga: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (
-      (userInput.title === "",
-      userInput.price === "",
-      userInput.description === "",
-      userInput.image === "",
-      userInput.category === "")
+      (userInput.Nama_Product === "",
+      userInput.TokenID === "",
+      userInput.Harga === "")
     ) {
       return false;
     }
 
     dispatch(
       addProduct({
-        title: userInput.title,
-        price: userInput.price,
-        description: userInput.description,
-        image: userInput.image,
-        category: userInput.category,
+        ProductId: userInput.ProductId,
+        Nama_Product: userInput.Nama_Product,
+        TokenID: userInput.TokenID,
+        Product_image: userInput.Product_image,
+        intFavorites: userInput.intFavorites,
+        bitApprove: userInput.bitApprove,
+        Harga: userInput.Harga,
       })
     );
     Swal.fire(
       "Berhasil Tambah Produk!",
-      "Product " + userInput.title + " Berhasil di Tambah!",
+      "Product " + userInput.Nama_Product + " Berhasil di Tambah!",
       "success"
     );
 
     setUserInput({
-      title: "",
-      price: "",
-      description: "",
-      image: "",
-      category: "",
+      ProductId: "7Tk$K9N2nJIPW1BkBiCjpA__",
+      Nama_Product: userInput.Nama_Product,
+      TokenID: "",
+      Product_image: "11.png",
+      intFavorites: 0,
+      bitApprove: null,
+      Harga: "",
     });
   };
 
@@ -114,14 +118,14 @@ const Products = () => {
 
   const handleEdit = (product) => {
     setUserEdit({
-      id: product.id,
-      title: product.title,
+      id: product.encProductId,
+      title: product.Nama_Product,
       price: product.price,
       description: product.description,
       image: product.image,
       category: product.category,
     });
-    console.log("Product = " + product.id);
+    console.log("Product = " + product.encProductId);
   };
 
   const handleUpdate = (e) => {
@@ -153,12 +157,20 @@ const Products = () => {
   };
 
   return (
-    <section className="article">
-      <h1
-        style={{ lineHeight: "0px", marginTop: "80px", fontFamily: "Quando" }}
-      >
-        List Products
-      </h1>
+    <div className="container-fluid py-4">
+      <div className="row">
+        <div className="col-12">
+          <div className="card mb-4">
+            <div className="card-header pb-0">
+              <div className="row">
+                <div className="col-6 d-flex align-items-center">
+                  <h6 className="mb-0">Payment Method</h6>
+                </div>
+                <div className="col-6 text-end">
+                  <a className="btn bg-gradient-dark mb-0"onClick={() => setModalIsOpen(true)}><i className="fas fa-plus"></i>&nbsp;&nbsp;Add New Card</a>
+                </div>
+              </div>
+            </div>
       
       {/* MODAL PRODUCT DETAIL BILA LIST PRODUCT DI KLIK AKAN MUNCUL DETAIL PRODUCT */}
       <ProductDetail
@@ -321,156 +333,101 @@ const Products = () => {
 
       <div className="Modal">
         {/* MODAL TAMBAH PRODUCT */}
-        <Modal
-          isOpen={modalIsOpen}
-          ariaHideApp={false}
-          style={{
-            content: {
-              top: "50px",
-              left: "250px",
-              right: "40px",
-              bottom: "40px",
-            },
-          }}
-        >
-          <button
-            onClick={() => setModalIsOpen(false)}
-            style={{ float: "right" }}
-            className="button-ud"
+        <Modal toggle={() => setModalIsOpen(!modalIsOpen)} isOpen={modalIsOpen}>
+        <div className=" modal-header">
+          <h5 className=" modal-title" id="exampleModalLabel">
+            New Product
+          </h5>
+          <a
+            aria-label="Close"
+            className=" close"
+            type="button"
+            onClick={() => setModalIsOpen(!modalIsOpen)}
           >
-            <FontAwesomeIcon
-              icon={faWindowClose}
-              size="2x"
-              style={{ color: "red" }}
-            />
-          </button>
-          <section className="content-product">
-            <section className="add-product">
-              <h1> New Product </h1>
-              <div className="form-container">
-                <form id="form" className="form">
-                  <div className="page">
-                    <div className="form__group field">
-                      <input
+            <span aria-hidden={true}>×</span>
+          </a>
+        </div>
+        <ModalBody>
+        <div class="row">
+        <div class="col-md-12">
+              <p class="text-uppercase text-sm">User Information</p>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label">Nama Product</label>
+                    <input
                         type="input"
-                        className="form__field"
-                        placeholder="Title"
-                        name="title"
+                        className="form-control"
+                        placeholder="Nama Product"
+                        name="Nama_Product"
                         onChange={handleChange}
-                        value={userInput.title}
+                        value={userInput.Nama_Product}
                       />
-                      <label className="form__label">Title</label>
-                    </div>
-                    <div className="form__group field">
-                      <input
-                        type="input"
-                        className="form__field"
-                        placeholder="Price"
-                        name="price"
-                        onChange={handleChange}
-                        value={userInput.price}
-                      />
-                      <label className="form__label">Price</label>
-                    </div>
-                    <div className="form__group field">
-                      <input
-                        type="input"
-                        className="form__field"
-                        placeholder="Description"
-                        name="description"
-                        onChange={handleChange}
-                        value={userInput.description}
-                      />
-                      <label className="form__label">Description</label>
-                    </div>
-                    <div className="form__group field">
-                      <input
-                        type="input"
-                        className="form__field"
-                        placeholder="Image"
-                        name="image"
-                        onChange={handleChange}
-                        value={userInput.image}
-                      />
-                      <label className="form__label">Image</label>
-                    </div>
-                    <div className="form__group field">
-                      <input
-                        type="input"
-                        className="form__field"
-                        placeholder="Category"
-                        name="category"
-                        onChange={handleChange}
-                        value={userInput.category}
-                      />
-                      <label className="form__label">Category</label>
-                    </div>
                   </div>
-
-                  <div className="button">
-                    <button
-                      className="bn54"
-                      type="button"
-                      onClick={handleSubmit}
-                    >
-                      <span className="bn54span">Submit</span>
-                    </button>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label">TokenID</label>
+                    <input
+                        type="input"
+                        className="form-control"
+                        placeholder="TokenID"
+                        name="TokenID"
+                        onChange={handleChange}
+                        value={userInput.TokenID}
+                      />
                   </div>
-                </form>
+                </div>
               </div>
-            </section>
-          </section>
-          <br />
-        </Modal>
-      </div>
-
-      <div className="Header">
-        <button onClick={() => setModalIsOpen(true)} className="bn54">
-          Create Product
-        </button>
-
-        {/* SEACRH PRODUCT BY TITLE */}
-        <div className="search">
-          <form id="animated">
-            {" "}
-            <input
-              name={inputSearch}
-              type="text"
-              placeholder="Search Product Here..."
-              onChange={handleChangeSearch}
-              value={inputSearch}
-              className="input-search"
-            />
-          </form>
+              <hr class="horizontal dark"/>
+              <p class="text-uppercase text-sm">Contact Information</p>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label">Price</label>
+                    <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Price"
+                        name="Harga"
+                        onChange={handleChange}
+                        value={userInput.Harga}
+                      />
+                  </div>
+                </div>
+              </div>
         </div>
       </div>
-
-      <section>
-        <section className="product">
-          <title>Product List</title>
-          <div className="product-detail">
-            <div className="id">
-              <span>No.</span>
-            </div>
-
-            <div className="left-column">
-              <span>Title</span>
-            </div>
-
-            <div className="right-column">
-              <div className="product-description">
-                <span>Category</span>
-              </div>
-            </div>
-
-            <div className="action-column">
-              <div className="product-description">
-                <span>Action</span>
-              </div>
-            </div>
-          </div>
-          <hr />
-          {loading
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="secondary"
+            type="button"
+            onClick={() => setModalIsOpen(!modalIsOpen)}
+          >
+            Close
+          </Button>
+          <Button onClick={handleSubmit} color="primary" type="button">
+            Save changes
+          </Button>
+        </ModalFooter>
+      </Modal>
+      </div>
+      <div className="card-body px-0 pt-0 pb-2">
+              <div className="table-responsive p-0">
+                <table className="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
+                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product Name</th>
+                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Function</th>
+                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
+                      <th className="text-secondary opacity-7"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {loading
             ? "Loading..."
             : error
             ? error.message
@@ -479,33 +436,33 @@ const Products = () => {
                   if (inputSearch === "") {
                     return product;
                   } else if (
-                    product.title
+                    product.Nama_Product
                       .toLowerCase()
                       .includes(inputSearch.toLowerCase())
                   ) {
                     return product;
                   }
                 })
-                .map((product) => (
-                  <div>
-                    <div className="product-detail" key={product.id}>
-                      <div className="id">
-                        <span>{product.id}</span>
-                      </div>
-
-                      <div className="left-column">
-                        <span>{product.title}</span>
-                      </div>
-
-                      <div className="right-column">
-                        <div className="product-description">
-                          <span>{product.category}</span>
-                        </div>
-                      </div>
-
-                      <div className="action-column">
+                .map((product,idx) => (
+                    <tr>
+                       <td className="align-middle text-center text-sm">
+                          <p className="text-xs font-weight-bold mb-0">{idx + 1}</p>
+                      </td>
+                      <td className="align-middle text-center text-sm">
+                            <h6 className="mb-0 text-sm">{product.Nama_Product}</h6>
+                      </td>
+                      <td className="align-middle text-center text-sm">
+                          <span className="text-secondary text-xs font-weight-bold">23/04/18</span>
+                      </td>
+                      <td className="align-middle text-center text-sm">
+                        <span className="badge badge-sm bg-gradient-success">Online</span>
+                      </td>
+                      <td className="align-middle text-center">
+                        <span className="text-secondary text-xs font-weight-bold">23/04/18</span>
+                      </td>
+                      <td className="align-middle">
                         {/* DETAIL PRODUCT */}
-                        <button
+                        <a
                           onClick={() =>
                             setdescModalIsOpen(true) & handleEdit(product)
                           }
@@ -516,10 +473,10 @@ const Products = () => {
                             size="1x"
                             style={{ color: "green" }}
                           />
-                        </button>
+                        </a>
 
                         {/* EDIT PRODUCT */}
-                        <button
+                        <a
                           onClick={() =>
                             seteditModalIsOpen(true) & handleEdit(product)
                           }
@@ -530,38 +487,40 @@ const Products = () => {
                             size="1x"
                             style={{ color: "blue" }}
                           />
-                        </button>
+                        </a>
 
                         {/* DELETE PRODUCT */}
-                        <button
-                          onClick={() =>
+                        <a onClick={() =>
                             dispatch(
-                              deleteProduct(product.id),
+                              deleteProduct(product.encProductId),
                               Swal.fire(
                                 "Berhasil Menghapus!",
                                 "Product " +
-                                  product.title +
+                                  product.Nama_Product +
                                   " Berhasil di Hapus!",
                                 "success"
                               )
                             )
                           }
-                          className="button-ud"
                         >
                           <FontAwesomeIcon
                             icon={faTrash}
                             size="1x"
                             style={{ color: "red" }}
                           />
-                        </button>
-                      </div>
-                    </div>
-                    <hr />
-                  </div>
-                ))}
-        </section>
-      </section>
-    </section>
+                        </a>
+                      </td>
+                    </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+         
   );
 };
 
