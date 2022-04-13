@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProducts,
   deleteProduct,
-  editProduct,
-  addProduct,
-} from "../redux/actions/productActions";
+  saveProduct,
+} from "../../redux/actions/productActions";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -18,6 +18,8 @@ import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 import ProductDetail from "react-modal";
 import EditProduct from "react-modal";
 import Swal from "sweetalert2";
+import axios from "axios";
+import "../components/GlobalVariable"
 
 (Modal, ProductDetail, EditProduct).setAppElement();
 
@@ -29,7 +31,6 @@ const Products = () => {
   // MODAL
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [descModalIsOpen, setdescModalIsOpen] = useState(false);
-  const [editModalIsOpen, seteditModalIsOpen] = useState(false);
 
   // LOAD DATA
   useEffect(() => {
@@ -38,13 +39,6 @@ const Products = () => {
 
   // SEARCH TITLE
   const [inputSearch, setInputSearch] = useState("");
-
-  // HANDLE CHANGE
-  const handleChange = (e) => {
-    let data = { ...userInput };
-    data[e.target.name] = e.target.value;
-    setUserInput(data);
-  };
 
   const handleChangeEdit = (e) => {
     let data = { ...userEdit };
@@ -57,102 +51,96 @@ const Products = () => {
     setInputSearch(e.target.value);
   };
 
-  // ADD PRODUCT
-  const [userInput, setUserInput] = useState({
-    ProductId: "7Tk$K9N2nJIPW1BkBiCjpA__",
-    Nama_Product: "",
-    TokenID: "",
-    Product_image: "11.png",
-    intFavorites: 0,
-    bitApprove: null,
-    Harga: "",
-  });
+  const handleFile = (e) =>{
+    let data = { ...userEdit };
+    let file = e.target.files[0];
+    data[e.target.name] = file;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (
-      (userInput.Nama_Product === "",
-      userInput.TokenID === "",
-      userInput.Harga === "")
-    ) {
-      return false;
-    }
-
-    dispatch(
-      addProduct({
-        ProductId: userInput.ProductId,
-        Nama_Product: userInput.Nama_Product,
-        TokenID: userInput.TokenID,
-        Product_image: userInput.Product_image,
-        intFavorites: userInput.intFavorites,
-        bitApprove: userInput.bitApprove,
-        Harga: userInput.Harga,
-      })
-    );
-    Swal.fire(
-      "Berhasil Tambah Produk!",
-      "Product " + userInput.Nama_Product + " Berhasil di Tambah!",
-      "success"
-    );
-
-    setUserInput({
-      ProductId: "7Tk$K9N2nJIPW1BkBiCjpA__",
-      Nama_Product: userInput.Nama_Product,
-      TokenID: "",
-      Product_image: "11.png",
-      intFavorites: 0,
-      bitApprove: null,
-      Harga: "",
-    });
+    setUserEdit(data);
   };
 
-  // EDIT AND UPDATE PRODUCT
+  const router = useRouter()
+
+  // EDIT AND CREATE PRODUCT
   const [userEdit, setUserEdit] = useState({
-    title: "",
-    price: "",
-    description: "",
-    image: "",
-    category: "",
+    ProductId: "",
+    Nama_Product: "",
+    TokenID: "",
+    Product_image: "",
+    intFavorites: "",
+    bitApprove: "",
+    Harga: "",
+    file: "",
   });
 
   const handleEdit = (product) => {
+    debugger;
+    if(product != null){
     setUserEdit({
-      id: product.encProductId,
-      title: product.Nama_Product,
-      price: product.price,
-      description: product.description,
-      image: product.image,
-      category: product.category,
-    });
-    console.log("Product = " + product.encProductId);
+        ProductId: product.encProductId,
+        Nama_Product: product.Nama_Product,
+        TokenID: product.TokenID,
+        Product_image: product.Product_image,
+        intFavorites: product.intFavorites,
+        bitApprove: product.bitApprove,
+        Harga: product.Harga,
+    })}else{
+      setUserEdit({
+        ProductId: "7Tk$K9N2nJIPW1BkBiCjpA__",
+        Nama_Product: "",
+        TokenID: "",
+        Product_image: "11.png",
+        intFavorites: 0,
+        bitApprove: null,
+        Harga: "",
+    })
+    };
   };
 
   const handleUpdate = (e) => {
     e.preventDefault();
 
-    dispatch(
-      editProduct({
-        id: userEdit.id,
-        title: userEdit.title,
-        price: userEdit.price,
-        description: userEdit.description,
-        image: userEdit.image,
-        category: userEdit.category,
-      })
-    );
-    Swal.fire(
-      "Berhasil Update Produk!",
-      "Product " + userEdit.title + " Berhasil di Update!",
-      "success"
-    );
+    //UPLOAD IMAGE
+    let file = userEdit.file;
+
+    let formData = new FormData();
+
+    formData.append('image', file);
+
+    axios({
+      url: global.apiurl + 'api/user/uploadfile',
+      method: 'POST',
+      data: formData  
+    }).then((res)=>{
+      console.log(res.data.objData);
+          //SELESAI UPLOAD IMAGE
+      dispatch(
+        saveProduct({
+          ProductId: userEdit.ProductId,
+          Nama_Product: userEdit.Nama_Product,
+          TokenID: userEdit.TokenID,
+          Product_image: res.data.objData,
+          intFavorites: userEdit.intFavorites,
+          bitApprove: userEdit.bitApprove,
+          Harga: userEdit.Harga,
+        })
+      );
+      Swal.fire(
+        "Berhasil Update Produk!",
+        "Product " + userEdit.Nama_Product + " Berhasil di Update!",
+        "success"
+      );
+    })
+
 
     setUserEdit({
-      title: "",
-      price: "",
-      description: "",
-      image: "",
-      category: "",
+      ProductId: "",
+      Nama_Product: "",
+      TokenID: "",
+      Product_image: "",
+      intFavorites: "",
+      bitApprove: "",
+      Harga: "",
     });
   };
 
@@ -167,7 +155,7 @@ const Products = () => {
                   <h6 className="mb-0">Payment Method</h6>
                 </div>
                 <div className="col-6 text-end">
-                  <a className="btn bg-gradient-dark mb-0"onClick={() => setModalIsOpen(true)}><i className="fas fa-plus"></i>&nbsp;&nbsp;Add New Card</a>
+                  <a className="btn bg-gradient-dark mb-0"onClick={() => setModalIsOpen(true)  & handleEdit(null)}><i className="fas fa-plus"></i>&nbsp;&nbsp;Add New Product</a>
                 </div>
               </div>
             </div>
@@ -216,124 +204,9 @@ const Products = () => {
         </section>
       </ProductDetail>
 
-      {/* MODAL EDIT PRODUCT */}
-      <EditProduct
-        isOpen={editModalIsOpen}
-        ariaHideApp={false}
-        style={{
-          content: {
-            top: "50px",
-            left: "250px",
-            right: "40px",
-            bottom: "40px",
-          },
-        }}
-      >
-        <button
-          onClick={() => seteditModalIsOpen(false)}
-          style={{ float: "right" }}
-          className="button-ud"
-        >
-          <FontAwesomeIcon
-            icon={faWindowClose}
-            size="2x"
-            style={{ color: "red" }}
-          />
-        </button>
-        <div>
-          <section className="content-product">
-            <section className="add-product">
-              <h1> Edit Product</h1>
-              <div className="form-container">
-                <form id="form" className="form">
-                  <div className="page">
-                    <div className="form__group field">
-                      <input
-                        type="input"
-                        className="form__field"
-                        placeholder="Title"
-                        name="id"
-                        value={userEdit.id}
-                        disabled
-                      />
-                      <label className="form__label">product id</label>
-                    </div>
-                    <div className="form__group field">
-                      <input
-                        type="input"
-                        className="form__field"
-                        placeholder="Title"
-                        name="title"
-                        onChange={handleChangeEdit}
-                        value={userEdit.title}
-                      />
-                      <label className="form__label">Title</label>
-                    </div>
-                    <div className="form__group field">
-                      <input
-                        type="input"
-                        className="form__field"
-                        placeholder="Price"
-                        name="price"
-                        onChange={handleChangeEdit}
-                        value={userEdit.price}
-                      />
-                      <label className="form__label">Price</label>
-                    </div>
-                    <div className="form__group field">
-                      <input
-                        type="input"
-                        className="form__field"
-                        placeholder="Description"
-                        name="description"
-                        onChange={handleChangeEdit}
-                        value={userEdit.description}
-                      />
-                      <label className="form__label">Description</label>
-                    </div>
-                    <div className="form__group field">
-                      <input
-                        type="input"
-                        className="form__field"
-                        placeholder="Image"
-                        name="image"
-                        onChange={handleChangeEdit}
-                        value={userEdit.image}
-                      />
-                      <label className="form__label">Image</label>
-                    </div>
-                    <div className="form__group field">
-                      <input
-                        type="input"
-                        className="form__field"
-                        placeholder="Category"
-                        name="category"
-                        onChange={handleChangeEdit}
-                        value={userEdit.category}
-                      />
-                      <label className="form__label">Category</label>
-                    </div>
-                  </div>
-
-                  <div className="button">
-                    <button
-                      className="bn54"
-                      type="button"
-                      onClick={handleUpdate}
-                    >
-                      <span className="bn54span">Update</span>
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </section>
-          </section>
-        </div>
-      </EditProduct>
-
       <div className="Modal">
         {/* MODAL TAMBAH PRODUCT */}
-        <Modal toggle={() => setModalIsOpen(!modalIsOpen)} isOpen={modalIsOpen}>
+        <Modal className="bd-example-modal-lg" toggle={() => setModalIsOpen(!modalIsOpen)} isOpen={modalIsOpen}>
         <div className=" modal-header">
           <h5 className=" modal-title" id="exampleModalLabel">
             New Product
@@ -348,50 +221,74 @@ const Products = () => {
           </a>
         </div>
         <ModalBody>
-        <div class="row">
-        <div class="col-md-12">
-              <p class="text-uppercase text-sm">User Information</p>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Nama Product</label>
+        <div className="row">
+        <div className="col-md-12">
+              <p className="text-uppercase text-sm">User Information</p>
+              <div className="row">
+              <div className="col-md-6">
+                  <div className="form-group">
+                    <label for="example-text-input" className="form-control-label">Id</label>
+                    <input
+                              type="input"
+                              className="form-control"
+                              placeholder="Title"
+                              name="id"
+                              value={userEdit.ProductId}
+                              disabled
+                            />
+                    </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label for="example-text-input" className="form-control-label">Files</label>
+                    <input
+                              type="file"
+                              className="form-control"
+                              name="file"
+                              onChange={handleFile}
+                            />
+                    </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label for="example-text-input" className="form-control-label">Nama Product</label>
                     <input
                         type="input"
                         className="form-control"
                         placeholder="Nama Product"
                         name="Nama_Product"
-                        onChange={handleChange}
-                        value={userInput.Nama_Product}
+                        onChange={handleChangeEdit}
+                        value={userEdit.Nama_Product}
                       />
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">TokenID</label>
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label for="example-text-input" className="form-control-label">TokenID</label>
                     <input
                         type="input"
                         className="form-control"
                         placeholder="TokenID"
                         name="TokenID"
-                        onChange={handleChange}
-                        value={userInput.TokenID}
+                        onChange={handleChangeEdit}
+                        value={userEdit.TokenID}
                       />
                   </div>
                 </div>
               </div>
-              <hr class="horizontal dark"/>
-              <p class="text-uppercase text-sm">Contact Information</p>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Price</label>
+              <hr className="horizontal dark"/>
+              <p className="text-uppercase text-sm">Contact Information</p>
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="form-group">
+                    <label for="example-text-input" className="form-control-label">Price</label>
                     <input
                         type="number"
                         className="form-control"
                         placeholder="Price"
                         name="Harga"
-                        onChange={handleChange}
-                        value={userInput.Harga}
+                        onChange={handleChangeEdit}
+                        value={userEdit.Harga}
                       />
                   </div>
                 </div>
@@ -407,7 +304,7 @@ const Products = () => {
           >
             Close
           </Button>
-          <Button onClick={handleSubmit} color="primary" type="button">
+          <Button onClick={handleUpdate} color="primary" type="button">
             Save changes
           </Button>
         </ModalFooter>
@@ -419,10 +316,9 @@ const Products = () => {
                   <thead>
                     <tr>
                       <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
+                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product Image</th>
                       <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product Name</th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Function</th>
                       <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
                       <th className="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
@@ -449,23 +345,23 @@ const Products = () => {
                           <p className="text-xs font-weight-bold mb-0">{idx + 1}</p>
                       </td>
                       <td className="align-middle text-center text-sm">
-                            <h6 className="mb-0 text-sm">{product.Nama_Product}</h6>
+                          <img className="avatar" src={global.apiurl + "Data/" + product.Product_image} width="10%" />
                       </td>
                       <td className="align-middle text-center text-sm">
-                          <span className="text-secondary text-xs font-weight-bold">23/04/18</span>
+                            <h6 className="mb-0 text-sm">{product.Nama_Product}</h6>
                       </td>
                       <td className="align-middle text-center text-sm">
                         <span className="badge badge-sm bg-gradient-success">Online</span>
                       </td>
-                      <td className="align-middle text-center">
-                        <span className="text-secondary text-xs font-weight-bold">23/04/18</span>
-                      </td>
                       <td className="align-middle">
                         {/* DETAIL PRODUCT */}
                         <a
-                          onClick={() =>
-                            setdescModalIsOpen(true) & handleEdit(product)
-                          }
+                          onClick={() => {
+                            router.push({
+                              pathname: './Product/[pid]',
+                              query: { pid: product.encProductId },
+                            })
+                          }}
                           className="button-ud"
                         >
                           <FontAwesomeIcon
@@ -478,7 +374,7 @@ const Products = () => {
                         {/* EDIT PRODUCT */}
                         <a
                           onClick={() =>
-                            seteditModalIsOpen(true) & handleEdit(product)
+                            setModalIsOpen(true) & handleEdit(product)
                           }
                           className="button-ud"
                         >

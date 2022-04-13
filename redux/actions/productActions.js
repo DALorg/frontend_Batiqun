@@ -29,7 +29,7 @@ export const getProducts = () => async (dispatch) => {
   }
 };
 
-export const addProduct = (objRequestData) => async (dispatch) => {
+export const saveProduct = (objRequestData) => async (dispatch) => {
   try {
     var testResp = {
         objRequestData
@@ -53,25 +53,6 @@ export const addProduct = (objRequestData) => async (dispatch) => {
   }
 };
 
-export const editProduct = (product) => async (dispatch) => {
-  try {
-    await axios
-      .put(`https://fakestoreapi.com/products/${product.id}`, product)
-      .then((response) => {
-        dispatch({
-          type: EDIT_PRODUCTS,
-          payload: response.data,
-        });
-        console.log(response);
-      });
-  } catch (error) {
-    dispatch({
-      type: PRODUCTS_ERROR,
-      payload: error,
-    });
-  }
-};
-
 export const deleteProduct = (id) => async (dispatch) => {
   try {
     debugger;
@@ -87,6 +68,31 @@ export const deleteProduct = (id) => async (dispatch) => {
           payload: response.data,
         });
         console.log(response);
+      });
+  } catch (error) {
+    dispatch({
+      type: PRODUCTS_ERROR,
+      payload: error,
+    });
+    console.log(error);
+  }
+};
+
+export const getById = (id) => async (dispatch) => {
+  try {
+    debugger;
+    await axios.post(`https://batiqunapi.azurewebsites.net/api/product/get`, 
+    {      
+      objRequestData: {
+        ProductId: id
+      }
+    })
+      .then((response) => {
+        dispatch({
+          type: GET_PRODUCTS,
+          payload: response.data.objData,
+        });
+        console.log(response.data.objData);
       });
   } catch (error) {
     dispatch({
