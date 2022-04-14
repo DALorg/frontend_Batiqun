@@ -31,7 +31,10 @@ const ProductDetail = () => {
 
 
   return (
-        <div className="container-fluid py-4">      
+        <div className="container-fluid py-4">    
+        <title>Product</title>  
+        <link rel="icon" href="/icon.png" />
+
         <div className="row">
         <div className="col-md-4">
             <div className="card">
