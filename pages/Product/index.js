@@ -6,22 +6,16 @@ import {
   deleteProduct,
   saveProduct,
 } from "../../redux/actions/productActions";
-import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
   faPen,
-  faWindowClose,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
-import ProductDetail from "react-modal";
-import EditProduct from "react-modal";
 import Swal from "sweetalert2";
 import axios from "axios";
 import "../components/GlobalVariable"
-
-(Modal, ProductDetail, EditProduct).setAppElement();
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -152,57 +146,13 @@ const Products = () => {
             <div className="card-header pb-0">
               <div className="row">
                 <div className="col-6 d-flex align-items-center">
-                  <h6 className="mb-0">Payment Method</h6>
+                  <h6 className="mb-0">Product Table</h6>
                 </div>
                 <div className="col-6 text-end">
                   <a className="btn bg-gradient-dark mb-0"onClick={() => setModalIsOpen(true)  & handleEdit(null)}><i className="fas fa-plus"></i>&nbsp;&nbsp;Add New Product</a>
                 </div>
               </div>
             </div>
-      
-      {/* MODAL PRODUCT DETAIL BILA LIST PRODUCT DI KLIK AKAN MUNCUL DETAIL PRODUCT */}
-      <ProductDetail
-        isOpen={descModalIsOpen}
-        ariaHideApp={false}
-        style={{
-          content: {
-            top: "50px",
-            left: "250px",
-            right: "40px",
-            bottom: "40px",
-          },
-        }}
-      >
-        <button
-          onClick={() => setdescModalIsOpen(false)}
-          style={{ float: "right" }}
-          className="button-ud"
-        >
-          <FontAwesomeIcon
-            icon={faWindowClose}
-            size="2x"
-            style={{ color: "red" }}
-          />
-        </button>
-        <section className="product-detail">
-          <div className="left-column">
-            <Image
-              src={userEdit.image}
-              alt="A image of product"
-              width={400}
-              height={450}
-            />
-          </div>
-
-          <div className="right-column">
-            <div className="product-description">
-              <span>{userEdit.category}</span>
-              <h1 style={{ textAlign: "justify" }}>{userEdit.title}</h1>
-              <p style={{ textAlign: "justify" }}>{userEdit.description}</p>
-            </div>
-          </div>
-        </section>
-      </ProductDetail>
 
       <div className="Modal">
         {/* MODAL TAMBAH PRODUCT */}
@@ -340,7 +290,7 @@ const Products = () => {
                   }
                 })
                 .map((product,idx) => (
-                    <tr>
+                    <tr key={product.encProductId}> 
                        <td className="align-middle text-center text-sm">
                           <p className="text-xs font-weight-bold mb-0">{idx + 1}</p>
                       </td>

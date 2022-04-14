@@ -20,7 +20,7 @@ import "../components/GlobalVariable"
 const ProductDetail = () => {
     const dispatch = useDispatch();
     const allProductsData = useSelector((state) => state.Products);
-    const { loading, error, products } = allProductsData;
+    const { loading, error, product } = allProductsData;
 
     const router = useRouter();
     const {pid}  = router.query;
@@ -29,12 +29,13 @@ const ProductDetail = () => {
         dispatch(getById(pid));
       }, []);
 
+
   return (
         <div className="container-fluid py-4">      
         <div className="row">
         <div className="col-md-4">
             <div className="card">
-            <img className="card-img" src={global.apiurl + "Data/" + products.Product_image} />
+            <img className="card-img" src={global.apiurl + "Data/" + product.Product_image} />
             </div>
         </div>
         <div className="col-md-8">

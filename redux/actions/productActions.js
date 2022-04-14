@@ -1,6 +1,7 @@
 import {
   ADD_PRODUCTS,
   EDIT_PRODUCTS,
+  GET_BY_ID_PRODUCTS,
   DELETE_PRODUCTS,
   GET_PRODUCTS,
   PRODUCTS_ERROR,
@@ -89,10 +90,9 @@ export const getById = (id) => async (dispatch) => {
     })
       .then((response) => {
         dispatch({
-          type: GET_PRODUCTS,
+          type: GET_BY_ID_PRODUCTS,
           payload: response.data.objData,
         });
-        console.log(response.data.objData);
       });
   } catch (error) {
     dispatch({

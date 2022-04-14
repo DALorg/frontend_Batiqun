@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/dist/client/router";
+import Link from 'next/link'
 // // import Cookies from "js-cookie";
 // import { logoutUser } from "../../redux/actions/loginActions";
 import { useState } from "react";
@@ -31,22 +32,24 @@ const Navsidebar = () => {
           <div className="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a onClick={(e) => router.push("../Dashboard")} className= {router.pathname === "/Dashboard"
-                    ? "nav-link active"
-                    : "nav-link"
-                  }
-                >
-                  <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                  <FontAwesomeIcon icon={faChartLine} className="text-sm opacity-10" />
-                  </div>
-                  <span className="nav-link-text ms-1">Dashboard</span>
-              </a>
+                <Link href="/">
+                  <a className= {router.pathname === "/"
+                      ? "nav-link active"
+                      : "nav-link"
+                    }
+                  >
+                    <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                    <FontAwesomeIcon icon={faChartLine} className="text-sm opacity-10" />
+                    </div>
+                    <span className="nav-link-text ms-1">Dashboard</span>
+                </a>
+                </Link>
               </li>
               <li className="nav-item mt-3">
                 <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Products Table</h6>
               </li>
               <li className="nav-item">
-                <a onClick={(e) => router.push("../Product")} className= {router.pathname === "/Products"
+              <Link href="/Product"><a className= {router.pathname === "/Product"
                       ? "nav-link active"
                       : "nav-link"
                     }
@@ -56,6 +59,7 @@ const Navsidebar = () => {
                     </div>
                     <span className="nav-link-text ms-1"> Products</span>
                 </a>
+              </Link>
               </li>
               <li className="nav-item mt-3">
                 <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
