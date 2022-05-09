@@ -1,4 +1,5 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -1965,7 +1966,8 @@ progress {
 
   .col-xl-8 {
     flex: 0 0 auto;
-    width: 66.666667%;
+    /* width: 90%;
+    justify-content: center; */
   }
 
   .col-xl-9 {
@@ -2698,7 +2700,7 @@ progress {
 
 .form-control {
   display: block;
-  width: 100%;
+  width: 80%;
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 400;
@@ -7978,6 +7980,10 @@ fieldset:disabled .btn {
   vertical-align: middle !important;
 }
 
+.align-middle2 {
+  padding: 10 px;
+}
+
 .align-bottom {
   vertical-align: bottom !important;
 }
@@ -9800,6 +9806,29 @@ fieldset:disabled .btn {
   padding-bottom: 0 !important;
 }
 
+.bg-login{
+  background-color: #C7AF9B;
+}
+
+.btnconnect{
+  background-color: #9B6B43;
+  color: #000;
+}
+
+.coba-geser{
+  margin-top: 80px;
+  background-color: #DDD1C7;
+}
+.textnih{
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  
+  line-height: 90px;
+  color: #000000;
+}
+
 .py-1 {
   padding-top: 0.25rem !important;
   padding-bottom: 0.25rem !important;
@@ -9818,6 +9847,8 @@ fieldset:disabled .btn {
 .py-4 {
   padding-top: 1.5rem !important;
   padding-bottom: 1.5rem !important;
+  width: 83%;
+  margin-left: 17%;
 }
 
 .py-5 {
@@ -20339,6 +20370,9 @@ fieldset:disabled .btn {
   background-color: #344767;
   border-color: #344767;
 }
+.btn.addnew{
+  background-color: ;
+}
 
 .btn-dark .btn.bg-outline-dark,
 .btn.bg-gradient-dark .btn.bg-outline-dark {
@@ -22290,8 +22324,8 @@ hr.horizontal.gray-light {
 
 .navbar-vertical.navbar-expand-xs .navbar-nav .nav .nav-link {
   padding-top: calc($navbar-vertical-nav-link-padding-y / 1.5);
-  padding-bottom: calc($navbar-vertical-nav-link-padding-y / 1.5);
-  padding-left: 15px;
+  padding-bottom:calc($navbar-vertical-nav-link-padding-y / 1.5);
+  padding-left: 15 px;
 }
 
 .navbar-vertical.navbar-expand-xs .navbar-nav .nav .nav-link>span.sidenav-normal {

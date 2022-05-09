@@ -59,7 +59,7 @@ const Navsidebar = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a onClick={(e) => router.push("../history")} className= {router.pathname === "/history"
+                <a onClick={(e) => router.push("../History")} className= {router.pathname === "/History"
                       ? "nav-link active"
                       : "nav-link"
                     }
@@ -74,7 +74,7 @@ const Navsidebar = () => {
                 <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
               </li> */}
               <li className="nav-item">
-                <a onClick={(e) => router.push("../Users")} className= {router.pathname === "/Users"
+                <a onClick={(e) => router.push("../Profile")} className= {router.pathname === "/Profile"
                       ? "nav-link active"
                       : "nav-link"
                     }
@@ -82,10 +82,10 @@ const Navsidebar = () => {
                     <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <FontAwesomeIcon icon={faUsers} className="text-sm opacity-10" />
                     </div>
-                    <span className="nav-link-text ms-1">Users</span>
+                    <span className="nav-link-text ms-1">Profile</span>
                 </a>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a onClick={(e) => router.push("../Role")} className= {router.pathname === "/Role"
                       ? "nav-link active"
                       : "nav-link"
@@ -96,15 +96,15 @@ const Navsidebar = () => {
                     </div>
                     <span className="nav-link-text ms-1">Role</span>
                 </a>
-              </li>
-              <li className="nav-item">
+              </li> */}
+              {/* <li className="nav-item">
                 <a className="nav-link " href="../pages/sign-up.html">
                   <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i className="ni ni-collection text-info text-sm opacity-10"></i>
                   </div>
                   <span className="nav-link-text ms-1">Sign Up</span>
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </aside>
