@@ -1,0 +1,91 @@
+<div class="col-xl-8 order-xl-1">
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Edit profile </h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form>
+                {/* <h6 class="heading-small text-muted mb-4">User information</h6> */}
+                <div class="pl-lg-4">
+                <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-first-name">Full name</label>
+                        <input
+                        type="input"
+                        class="form-control"
+                        placeholder="enter your name"
+                        name="username"
+                        onChange={handleChange}
+                        // value={userInput.username}
+                      />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-last-name">Username</label>
+                        <input
+                        type="input"
+                        class="form-control"
+                        placeholder="enter username"
+                        name="username"
+                        onChange={handleChange}
+                        value={userInput.username}
+                      />
+                      </div>
+                    </div>
+                </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-username">Username</label>
+                        <input
+                        type="input"
+                        class="form-control"
+                        placeholder="enter username"
+                        name="username"
+                        onChange={handleChange}
+                        value={userInput.username}
+                      />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">Email address</label>
+                        <input
+                        type="input"
+                        class="form-control"
+                        placeholder="enter email"
+                        name="email"
+                        onChange={handleChange}
+                        value={userInput.email}
+                      />
+                      </div>
+                    </div>
+                  </div> 
+                </div>
+                
+                <hr class="my-4" />
+                {/* <!-- Description --> */}
+                <div class="pl-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Bio</label>
+                    <textarea maxLength="100"
+                        type="input"
+                        class="form-control"
+                        placeholder="Tell your description!"
+                        name="bio"
+                        onChange={handleChange}
+                        value={userInput.bio}
+                      />
+                  </div>
+                </div>
+              </form>
+            </div>
+            </div>
+            </div>
+          </div>
