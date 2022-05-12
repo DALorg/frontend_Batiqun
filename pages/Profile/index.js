@@ -4,8 +4,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import "../components/GlobalVariable"
 import Layout from "../components/Layout";
-
-
+import {requireAuthentication} from "../requireAuthentication"
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -169,3 +168,7 @@ const Profile = () => {
     }
 
     export default Profile;
+
+    export const getServerSideProps = requireAuthentication(context => {
+      return {props: {}}
+  })
