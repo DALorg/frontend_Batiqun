@@ -148,7 +148,7 @@ const Products = () => {
 
        <Layout></Layout>
        
-        <div className="card mb-4">
+        {/* <div className="card mb-4">
             <div className="card-header pb-0">
               <div className="row">
                 <div className="col-6 d-flex">
@@ -156,7 +156,7 @@ const Products = () => {
                 </div>
               </div>
             </div>
-        </div>
+        </div> */}
    
       <div className="row">
         <div className="col-12">
