@@ -1,7 +1,15 @@
 import Head from 'next/head'
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
+import { LoginUser } from '../redux/actions/loginActions';
+import "./components/GlobalVariable"
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const allLoginData = useSelector((state) => state.Logins);
+  const { loading, error, userdata } = allLoginData;
 
   function setCookie(cname,cvalue,exdays) {
     const d = new Date();
@@ -31,7 +39,7 @@ export default function Login() {
     if (user != "") {
     } else {
        if (retValue != "" && retValue != null) {
-         setCookie("ethAddress", retValue, 30);
+         setCookie("ethAddress", retValue, 3);
        }
     }
   }
@@ -85,7 +93,19 @@ export default function Login() {
     </section>
     )
     }else{
-      checkCookie(user.get('ethAddress'));
-      window.location.replace('/')
+      axios({
+        url: global.apiurl + 'api/user/LoginUser',
+        method: 'POST',
+        data: {        
+          objRequestData: {
+          TokenId: user.get('ethAddress')
+      }}  
+      }).then((res)=>{
+        setCookie("UserData", res.data.objData.access_token, 3);
+        res.data.objData.encRole.RoleName
+        setCookie("UserRole", res.data.objData.encRole[0].RoleName, 3);
+        checkCookie(user.get('ethAddress'));
+        setTimeout(function(){window.location.replace('/')}, 5000);
+      })
     }
 }

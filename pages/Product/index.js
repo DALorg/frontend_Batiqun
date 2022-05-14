@@ -17,7 +17,7 @@ import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 import Swal from "sweetalert2";
 import axios from "axios";
 import "../components/GlobalVariable"
-import Layout from "../components/Layout";
+import { Table } from "reactstrap";
 import Navsidebar from "../components/Navsidebar";
 
 const Products = () => {
@@ -271,8 +271,7 @@ const Products = () => {
       </Modal>
       </div>
       <div className="card-body px-0 pt-0 pb-2">
-        <div className="table-responsive p-0">
-          <table className="table align-items-center">
+          <Table className="table table-responsive p-0 align-items-center">
             <thead>
               <tr>
                 <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
@@ -370,12 +369,11 @@ const Products = () => {
                     </tr>
                     ))} 
                   </tbody>
-                </table>
+                </Table>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
          
   );
