@@ -1,6 +1,6 @@
 import Navsidebar from "./Navsidebar";
 
-const Layout = ({ logout, children }) => {
+const Layout = ({ children }) => {
   return (
     <body className="g-sidenav-show bg-gray-100">
       <Navsidebar/>

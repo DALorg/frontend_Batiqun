@@ -3,17 +3,15 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
+import Cookies from "js-cookie";
 import { LoginUser } from '../redux/actions/loginActions';
 import "./components/GlobalVariable"
 
 export default function Login() {
-  const dispatch = useDispatch();
-  const allLoginData = useSelector((state) => state.Logins);
-  const { loading, error, userdata } = allLoginData;
 
   function setCookie(cname,cvalue,exdays) {
     const d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    d.setTime(d.getTime() + (exdays*60*60*1000));
     let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
@@ -34,7 +32,7 @@ export default function Login() {
     return "";
   }
   
-  function checkCookie(retValue) {
+  function checkCookie(retValue, onSuccess) {
     let user = getCookie("ethAddress");
     if (user != "") {
     } else {
@@ -42,6 +40,7 @@ export default function Login() {
          setCookie("ethAddress", retValue, 3);
        }
     }
+    onSuccess(window.location.replace('/'));
   }
 
   const {
@@ -103,10 +102,16 @@ export default function Login() {
       }}  
       }).then((res)=>{
         setCookie("UserData", res.data.objData.access_token, 3);
-        res.data.objData.encRole.RoleName
         setCookie("UserRole", res.data.objData.encRole[0].RoleName, 3);
-        checkCookie(user.get('ethAddress'));
-        setTimeout(function(){window.location.replace('/')}, 5000);
+        axios({
+          url: global.apiurl + 'api/user/GetUserKTPStatus/' + user.get('ethAddress'),
+          method: 'GET'
+        }).then((result)=>{
+          setCookie('UsrKTPstatus', result.data.bitSuccess, 3);
+          checkCookie(user.get('ethAddress'));
+        })
       })
+
+
     }
 }

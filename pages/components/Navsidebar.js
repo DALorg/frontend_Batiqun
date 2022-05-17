@@ -6,6 +6,8 @@ import { useMoralis } from "react-moralis";
 // import { logoutUser } from "../../redux/actions/loginActions";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./GlobalVariable";
+import Link from 'next/link'
 
 import {
   faImages,
@@ -22,8 +24,19 @@ const Navsidebar = () => {
     // const dispatch = useDispatch();
     const router = useRouter();
 
+    function deleteAllCookies() {
+      var cookies = document.cookie.split(";");
+  
+      for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i];
+          var eqPos = cookie.indexOf("=");
+          var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      }
+  }
+
     function logoff() {
-      document.cookie = "ethAddress=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      deleteAllCookies();
       logout();
       window.location.replace('/Login');
     }
@@ -33,7 +46,11 @@ const Navsidebar = () => {
           <div className="sidenav-header">
             <i className="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             <a className="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
+<<<<<<< HEAD
               <img src="/logo.png" className="navbar-brand-img h-100 mx-auto" alt="main_logo"/>
+=======
+              <img src={global.logo} className="navbar-brand-img h-100 mx-auto" alt="main_logo"/>
+>>>>>>> Branch_Arpan
             </a>
           </div>
           <hr className="horizontal dark mt-0"/>
@@ -55,7 +72,8 @@ const Navsidebar = () => {
                 <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Products Table</h6>
               </li> */}
               <li className="nav-item">
-                <a onClick={(e) => router.push("../Product")} className= {router.pathname.includes("/Product")
+              <Link href="/Product" passHref>
+                <a className= {router.pathname.includes("/Product")
                       ? "nav-link active"
                       : "nav-link"
                     }
@@ -65,6 +83,7 @@ const Navsidebar = () => {
                     </div>
                     <span className="nav-link-text ms-1"> Products</span>
                 </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <a onClick={(e) => router.push("../History")} className= {router.pathname === "/History"
@@ -82,7 +101,7 @@ const Navsidebar = () => {
                 <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
               </li>
               <li className="nav-item">
-                <a onClick={(e) => router.push("../Profile")} className= {router.pathname === "/Profile"
+                <a onClick={(e) => router.push("../Profile")} className= {router.pathname.includes("/Profile")
                       ? "nav-link active"
                       : "nav-link"
                     }

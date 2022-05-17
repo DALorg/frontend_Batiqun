@@ -11,6 +11,9 @@ function MyApp({ Component, pageProps }) {
         appId={process.env.NEXT_PUBLIC_APP_ID}
         serverUrl={process.env.NEXT_PUBLIC_SERVER_URL}
       >
+        <Script src="https://batiqunapi.azurewebsites.net/Data/js/core/popper.min.js"/>
+        <Script src="https://batiqunapi.azurewebsites.net/Data/js/core/bootstrap.min.js"/>
+        <Script src="https://batiqunapi.azurewebsites.net/Data/argon-dashboard.min.js"/>
         <Component {...pageProps} />
       </MoralisProvider>
     </Provider>
