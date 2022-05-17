@@ -7,6 +7,7 @@ import {
   GET_BY_ID_PRODUCTS
 } from "../reducers/types";
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 export const getProducts = () => async (dispatch) => {
   try {
@@ -53,14 +54,17 @@ export const getById = (id) => async (dispatch) => {
   }
 };
 
-export const addProduct = (objRequestData) => async (dispatch) => {
+export const addProduct = (objRequestData, token) => async (dispatch) => {
   try {
     var testResp = {
         objRequestData
     };
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
     debugger;
     await axios
-      .post(`https://batiqunapi.azurewebsites.net/api/product/savedata`, testResp)
+      .post(`https://batiqunapi.azurewebsites.net/api/product/MintProduct`, testResp, config)
       .then((response) => {
         dispatch({
           type: ADD_PRODUCTS,
@@ -77,10 +81,17 @@ export const addProduct = (objRequestData) => async (dispatch) => {
   }
 };
 
-export const editProduct = (product) => async (dispatch) => {
+export const editProduct = (objRequestData, token) => async (dispatch) => {
   try {
+    var testResp = {
+        objRequestData
+    };
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    debugger;
     await axios
-      .put(`https://fakestoreapi.com/products/${product.id}`, product)
+      .post(`https://batiqunapi.azurewebsites.net/api/product/savedata`, testResp, config)
       .then((response) => {
         dispatch({
           type: EDIT_PRODUCTS,
@@ -93,6 +104,7 @@ export const editProduct = (product) => async (dispatch) => {
       type: PRODUCTS_ERROR,
       payload: error,
     });
+    console.log(error);
   }
 };
 

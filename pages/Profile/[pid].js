@@ -8,16 +8,17 @@ import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import { getUsers } from "../../redux/actions/userActions";
 
-const Profile = () => {
+const ProfileDetail = () => {
     const dispatch = useDispatch();
     const allProfileData = useSelector((state) => state.Users);
     const { loading, error, user } = allProfileData;
 
-    useEffect(() => {
-      dispatch(getUsers(Cookies.get('ethAddress'), Cookies.get('UserData')));
-    }, []);
+    const router = useRouter();
+    const {pid}  = router.query;
 
-    const router = useRouter()
+    useEffect(() => {
+        dispatch(getUsers(pid.toString(), Cookies.get('UserData')));
+    }, []);
 
     return (
           <div className="container-fluid py-4">
@@ -156,7 +157,7 @@ const Profile = () => {
         )
     }
 
-    export default Profile;
+    export default ProfileDetail;
 
     export const getServerSideProps = requireAuthentication(context => {
       const { req, res } = context;

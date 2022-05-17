@@ -1966,8 +1966,7 @@ progress {
 
   .col-xl-8 {
     flex: 0 0 auto;
-    /* width: 90%;
-    justify-content: center; */
+    width: 66.666667%;
   }
 
   .col-xl-9 {
@@ -2700,7 +2699,7 @@ progress {
 
 .form-control {
   display: block;
-  width: 80%;
+  width: 100%;
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 400;
@@ -5642,7 +5641,7 @@ fieldset:disabled .btn {
 }
 
 .card-header:first-child {
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 1rem;
 }
 
 .card-footer {
@@ -7134,6 +7133,36 @@ fieldset:disabled .btn {
   border-left-color: #000;
 }
 
+.bg-login{
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+  background-color: #C7AF9B;
+}
+.img-login{
+  width: 80%;
+  margin-top: 15px;
+}
+.bg-card{
+  background-color: #DDD1C7;
+}
+.textnih{
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  color: #000000;
+  /* padding: 10px; */
+  justify-content: center;
+  margin-top: 30px;
+}
+.btnConnect{
+  width: 300px;
+  height: 65px;
+  margin-top: 25px;
+  background: #9B6B43;
+  border-radius: 8px;
+}
+
 .tooltip-inner {
   max-width: 200px;
   padding: 0.25rem 0.5rem;
@@ -7979,10 +8008,6 @@ fieldset:disabled .btn {
 
 .align-middle {
   vertical-align: middle !important;
-}
-
-.align-middle2 {
-  padding: 10 px;
 }
 
 .align-bottom {
@@ -9805,29 +9830,6 @@ fieldset:disabled .btn {
 .py-0 {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-}
-
-.bg-login{
-  background-color: #C7AF9B;
-}
-
-.btnconnect{
-  background-color: #9B6B43;
-  color: #000;
-}
-
-.coba-geser{
-  margin-top: 80px;
-  background-color: #DDD1C7;
-}
-.textnih{
-  font-family: 'Open Sans', sans-serif;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 18px;
-  
-  line-height: 90px;
-  color: #000000;
 }
 
 .py-1 {
@@ -14481,6 +14483,27 @@ fieldset:disabled .btn {
     border-left: 0 !important;
   }
 
+    .card-profile-image
+  {
+      position: relative;
+  }
+  .card-profile-image img
+  {
+      position: absolute;
+      left: 50%;
+
+      max-width: 113px;
+
+      transition: all .15s ease; 
+      transform: translate(-50%, -50%) scale(1);
+
+      border: 3px solid #fff;
+      border-radius: .375rem;
+  }
+  .card-profile-image img:hover
+  {
+      transform: translate(-50%, -50%) scale(1.03);
+  }
   .w-lg-0 {
     width: 0% !important;
   }
@@ -20371,9 +20394,6 @@ fieldset:disabled .btn {
   background-color: #344767;
   border-color: #344767;
 }
-.btn.addnew{
-  background-color: ;
-}
 
 .btn-dark .btn.bg-outline-dark,
 .btn.bg-gradient-dark .btn.bg-outline-dark {
@@ -22325,8 +22345,8 @@ hr.horizontal.gray-light {
 
 .navbar-vertical.navbar-expand-xs .navbar-nav .nav .nav-link {
   padding-top: calc($navbar-vertical-nav-link-padding-y / 1.5);
-  padding-bottom:calc($navbar-vertical-nav-link-padding-y / 1.5);
-  padding-left: 15 px;
+  padding-bottom: calc($navbar-vertical-nav-link-padding-y / 1.5);
+  padding-left: 15px;
 }
 
 .navbar-vertical.navbar-expand-xs .navbar-nav .nav .nav-link>span.sidenav-normal {
