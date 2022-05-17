@@ -1,16 +1,10 @@
 import React, { useEffect, useState, setState } from "react";
+import {requireAuthentication} from "../requireAuthentication"
 import { useDispatch, useSelector } from "react-redux";
 import {
   getById,
 } from "../../redux/actions/productActions";
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTrash,
-  faPen,
-  faWindowClose,
-  faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import Layout from "../components/Layout";
 import Swal from "sweetalert2";
 import { useRouter } from 'next/router'
 import axios from "axios";
@@ -34,7 +28,7 @@ const ProductDetail = () => {
         <div className="container-fluid py-4">    
         <title>Product</title>  
         <link rel="icon" href="/icon.png" />
-
+        <Layout></Layout>
         <div className="row">
         <div className="col-md-4">
             <div className="card">
@@ -124,3 +118,7 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+
+export const getServerSideProps = requireAuthentication(context => {
+    return {props: {}}
+})

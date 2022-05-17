@@ -11,7 +11,7 @@ export default function userReducer(state = initialState, action) {
     case GET_USERS:
       return {
         ...state,
-        users: action.payload,
+        user: action.payload,
         loading: false,
       };
 

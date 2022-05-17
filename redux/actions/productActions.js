@@ -4,6 +4,7 @@ import {
   DELETE_PRODUCTS,
   GET_PRODUCTS,
   PRODUCTS_ERROR,
+  GET_BY_ID_PRODUCTS
 } from "../reducers/types";
 import axios from "axios";
 
@@ -20,6 +21,29 @@ export const getProducts = () => async (dispatch) => {
       payload: res.data.objData,
     });
     console.log(res.data.objData);
+  } catch (error) {
+    dispatch({
+      type: PRODUCTS_ERROR,
+      payload: error,
+    });
+    console.log(error);
+  }
+};
+
+export const getById = (id) => async (dispatch) => {
+  try {
+    await axios.post(`https://batiqunapi.azurewebsites.net/api/product/get`, 
+    {      
+      objRequestData: {
+        ProductId: id
+      }
+    })
+      .then((response) => {
+        dispatch({
+          type: GET_BY_ID_PRODUCTS,
+          payload: response.data.objData,
+        });
+      });
   } catch (error) {
     dispatch({
       type: PRODUCTS_ERROR,

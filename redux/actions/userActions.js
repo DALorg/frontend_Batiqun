@@ -5,15 +5,23 @@ import {
   USERS_ERROR,
 } from "../reducers/types";
 import axios from "axios";
+import "../../styles/GlobalVariable"
 
-export const getUsers = () => async (dispatch) => {
+export const getUsers = (id, token) => async (dispatch) => {
   try {
-    const res = await axios.get(`https://fakestoreapi.com/users`);
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    const res = await axios.post(global.apiurl + `api/user/GetUserByToken`, {      
+      objRequestData: {
+        TokenId: id
+      }
+    }, config);
     dispatch({
       type: GET_USERS,
-      payload: res.data,
+      payload: res.data.objData,
     });
-    console.log(res.data);
+    console.log(res.data.objData);
   } catch (error) {
     dispatch({
       type: USERS_ERROR,

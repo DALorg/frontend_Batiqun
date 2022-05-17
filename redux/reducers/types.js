@@ -1,5 +1,6 @@
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const PRODUCTS_ERROR = "PRODUCTS_ERROR";
+export const GET_BY_ID_PRODUCTS = "GET_BY_ID_PRODUCTS";
 export const ADD_PRODUCTS = "ADD_PRODUCTS";
 export const EDIT_PRODUCTS = "EDIT_PRODUCTS";
 export const DELETE_PRODUCTS = "DELETE_PRODUCTS";
@@ -11,3 +12,7 @@ export const USERS_ERROR = "USERS_ERROR";
 
 export const GET_CARTS = "GET_CARTS";
 export const CARTS_ERROR = "CARTS_ERROR";
+
+export const LOGIN_ADMIN = "LOGIN_ADMIN";
+export const LOGIN_USERS = "LOGIN_USERS";
+export const LOGIN_ERROR = "LOGIN_ERROR";

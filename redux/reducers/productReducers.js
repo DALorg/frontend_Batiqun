@@ -4,6 +4,7 @@ import {
   DELETE_PRODUCTS,
   GET_PRODUCTS,
   PRODUCTS_ERROR,
+  GET_BY_ID_PRODUCTS
 } from "./types";
 
 const initialState = {
@@ -18,6 +19,13 @@ export default function productReducer(state = initialState, action) {
       return {
         ...state,
         products: action.payload,
+        loading: false,
+      };
+      
+    case GET_BY_ID_PRODUCTS:
+      return {
+        ...state,
+        product: action.payload,
         loading: false,
       };
 

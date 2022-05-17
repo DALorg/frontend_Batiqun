@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/dist/client/router";
+import { useMoralis } from "react-moralis";
 // // import Cookies from "js-cookie";
 // import { logoutUser } from "../../redux/actions/loginActions";
 import { useState } from "react";
@@ -9,18 +10,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faImages,
   faUsers,
-  faUserTie,
-  fafaChartLine,
+  faPowerOff,
   faChartLine,
   faUserClock,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Navsidebar = () => {
+  const {
+    logout
+  } = useMoralis()
     // const dispatch = useDispatch();
     const router = useRouter();
 
+    function logoff() {
+      document.cookie = "ethAddress=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      logout();
+      window.location.replace('/Login');
+    }
+
     return (
-        <>
         <aside className="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
           <div className="sidenav-header">
             <i className="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -47,7 +55,7 @@ const Navsidebar = () => {
                 <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Products Table</h6>
               </li> */}
               <li className="nav-item">
-                <a onClick={(e) => router.push("../Product")} className= {router.pathname === "/Product"
+                <a onClick={(e) => router.push("../Product")} className= {router.pathname.includes("/Product")
                       ? "nav-link active"
                       : "nav-link"
                     }
@@ -70,9 +78,9 @@ const Navsidebar = () => {
                     <span className="nav-link-text ms-1"> History</span>
                 </a>
               </li>
-              {/* <li className="nav-item mt-3">
+              <li className="nav-item mt-3">
                 <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
-              </li> */}
+              </li>
               <li className="nav-item">
                 <a onClick={(e) => router.push("../Profile")} className= {router.pathname === "/Profile"
                       ? "nav-link active"
@@ -85,30 +93,18 @@ const Navsidebar = () => {
                     <span className="nav-link-text ms-1">Profile</span>
                 </a>
               </li>
-              {/* <li className="nav-item">
-                <a onClick={(e) => router.push("../Role")} className= {router.pathname === "/Role"
-                      ? "nav-link active"
-                      : "nav-link"
-                    }
+              <li className="nav-item">
+                <a onClick={logoff} className= "nav-link"
                   >
                     <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon icon={faUserTie} className="text-sm opacity-10" />
+                    <FontAwesomeIcon icon={faPowerOff} className="text-sm opacity-10" />
                     </div>
-                    <span className="nav-link-text ms-1">Role</span>
+                    <span className="nav-link-text ms-1">Logout</span>
                 </a>
-              </li> */}
-              {/* <li className="nav-item">
-                <a className="nav-link " href="../pages/sign-up.html">
-                  <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                    <i className="ni ni-collection text-info text-sm opacity-10"></i>
-                  </div>
-                  <span className="nav-link-text ms-1">Sign Up</span>
-                </a>
-              </li> */}
+              </li>
             </ul>
           </div>
         </aside>
-    </>
   );
 };
 
