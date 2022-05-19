@@ -99,7 +99,7 @@ const ProfileDetail = () => {
                             <img src="/curved-10.jpg" className="img-fluid border-radius-lg"/>
                           </a>
                         </div>
-                      
+
                         <div className="card-body pt-2">
                           <span className="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2">House</span>
                           <a href="javascript:;" className="card-title h5 d-block text-darker">
@@ -127,7 +127,7 @@ const ProfileDetail = () => {
                             <img src="/curved-11.jpg" className="img-fluid border-radius-lg"/>
                           </a>
                         </div>
-                      
+
                         <div className="card-body pt-2">
                           <span className="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2">House</span>
                           <a href="javascript:;" className="card-title h5 d-block text-darker">
