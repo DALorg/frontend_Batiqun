@@ -74,7 +74,7 @@ const ProfileDetail = () => {
                     {user.txtFullName == null ? "Unnamed": user.txtFullName }
                     </h5>
                     <div className="h6 font-weight-300">
-                      {user.TokenId}
+                      {user.ethAddress}
                     </div>
                   </div>
                   <br/>

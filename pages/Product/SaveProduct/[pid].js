@@ -50,12 +50,14 @@ const EditProducts = () => {
   const [userEdit, setUserEdit] = useState({
     ProductId: product.encProductId,
     Nama_Product: product.Nama_Product,
-    TokenID: Cookies.get('ethAddress'),
+    ethAddress: Cookies.get('ethAddress'),
+    mintedAddress: product.mintedAddress,
+    TokenID: product.TokenID,
     Product_image: product.Nama_Product,
     intFavorites: product.intFavorites,
     bitApprove: product.bitApprove,
     Harga: product.Harga,
-    file: "",
+    file: product.file,
   });
 
   const handleUpdate = (e) => {
@@ -79,6 +81,8 @@ const EditProducts = () => {
         editProduct({
           ProductId: userEdit.ProductId,
           Nama_Product: userEdit.Nama_Product,
+          ethAddress: userEdit.ethAddress,
+          mintedAddress: userEdit.mintedAddress,
           TokenID: userEdit.TokenID,
           Product_image: res.data.objData,
           intFavorites: userEdit.intFavorites,
@@ -167,14 +171,14 @@ const EditProducts = () => {
                 </div>
                 <div className="col-lg-6">
                   <div className="form-group">
-                  <label for="example-text-input" className="form-control-label">TokenID</label>
+                  <label for="example-text-input" className="form-control-label">Eth Address</label>
                     <input
                         type="input"
                         className="form-control"
-                        placeholder="TokenID"
-                        name="TokenID"
+                        placeholder="ethAddress"
+                        name="ethAddress"
                         onChange={handleChangeEdit}
-                        value={userEdit.TokenID}
+                        value={userEdit.ethAddress}
                         disabled
                       />
                   </div>

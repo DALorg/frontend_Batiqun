@@ -98,7 +98,7 @@ export default function Login() {
         method: 'POST',
         data: {        
           objRequestData: {
-          TokenId: user.get('ethAddress')
+            ethAddress: user.get('ethAddress')
       }}  
       }).then((res)=>{
         setCookie("UserData", res.data.objData.access_token, 3);

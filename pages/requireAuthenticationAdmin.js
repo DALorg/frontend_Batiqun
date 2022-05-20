@@ -18,7 +18,7 @@ export function requireAuthenticationAdmin(gssp) {
                 }
             };
         }else if (token === global.admin || token === global.superadmin){
-            if(KTPstatus == true){
+            if(KTPstatus == "true"){
                 return await gssp(context); // Continue on to call `getServerSideProps` logic
             }else{
                 return {

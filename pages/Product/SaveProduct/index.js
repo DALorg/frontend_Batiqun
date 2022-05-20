@@ -44,11 +44,14 @@ const AddProducts = () => {
   const [userEdit, setUserEdit] = useState({
     ProductId: "7Tk$K9N2nJIPW1BkBiCjpA__",
     Nama_Product: "",
-    TokenID: Cookies.get('ethAddress'),
+    ethAddress: Cookies.get('ethAddress'),
+    mintedAddress: Cookies.get('ethAddress'),
+    TokenID: "",
     Product_image: "",
     intFavorites: 0,
     bitApprove: "",
     Harga: 0,
+    Description: "",
     file: "",
   });
 
@@ -73,11 +76,14 @@ const AddProducts = () => {
         addProduct({
           ProductId: userEdit.ProductId,
           Nama_Product: userEdit.Nama_Product,
+          ethAddress: userEdit.ethAddress,
+          mintedAddress: userEdit.mintedAddress,
           TokenID: userEdit.TokenID,
           Product_image: res.data.objData,
           intFavorites: userEdit.intFavorites,
           bitApprove: userEdit.bitApprove,
           Harga: userEdit.Harga,
+          Description: userEdit.Description
         }, Cookies.get("UserData"))
       );
       Swal.fire(
@@ -161,14 +167,14 @@ const AddProducts = () => {
                 </div>
                 <div className="col-lg-6">
                   <div className="form-group">
-                  <label for="example-text-input" className="form-control-label">TokenID</label>
+                  <label for="example-text-input" className="form-control-label">Eth Address</label>
                     <input
                         type="input"
                         className="form-control"
-                        placeholder="TokenID"
-                        name="TokenID"
+                        placeholder="ethAddress"
+                        name="ethAddress"
                         onChange={handleChangeEdit}
-                        value={userEdit.TokenID}
+                        value={userEdit.ethAddress}
                         disabled
                       />
                   </div>
@@ -194,12 +200,14 @@ const AddProducts = () => {
             {/* <!-- Description --> */}
             <div className="pl-lg-4">
               <div className="form-group">
-                <label className="form-control-label">Bio</label>
+                <label className="form-control-label">Description</label>
                 <textarea maxLength="100"
                     type="input"
                     className="form-control"
-                    placeholder="Tell your description!"
-                    name="bio"
+                    placeholder="Tell your product description!"
+                    name="Description"
+                    onChange={handleChangeEdit}
+                    value={userEdit.Description}
                   />
               </div>
             </div>

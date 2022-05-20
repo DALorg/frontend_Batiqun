@@ -10,7 +10,7 @@ import {
       const res = await axios.post(`https://batiqunapi.azurewebsites.net/api/user/LoginAdmin`, 
       {      
         objRequestData: {
-            TokenId: id
+          ethAddress: id
         }
       });
       dispatch({
@@ -32,7 +32,7 @@ import {
       const res = await axios.post(`https://batiqunapi.azurewebsites.net/api/user/LoginUser`, 
       {      
         objRequestData: {
-            TokenId: id
+          ethAddress: id
         }
       });
       dispatch({

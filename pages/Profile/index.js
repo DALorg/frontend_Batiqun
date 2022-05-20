@@ -6,18 +6,30 @@ import {requireAuthentication} from "../requireAuthentication"
 import Navsidebar from "../components/Navsidebar";
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
-import { getUsers } from "../../redux/actions/userActions";
+import { getProfile, getUsers } from "../../redux/actions/userActions";
 
 const Profile = () => {
     const dispatch = useDispatch();
     const allProfileData = useSelector((state) => state.Users);
     const { loading, error, user } = allProfileData;
 
-    useEffect(() => {
-      dispatch(getUsers(Cookies.get('ethAddress'), Cookies.get('UserData')));
-    }, []);
-
     const router = useRouter()
+    const {isCreated, isFav}  = router.query;
+
+    var created = false
+    var favorite = false
+
+    if(isCreated){
+      created = true
+    }
+
+    if(isFav){
+      favorite = true
+    }
+
+    useEffect(() => {
+      dispatch(getProfile(Cookies.get('ethAddress'), Cookies.get('UserData'), created, favorite));
+    }, []);
 
     return (
           <div className="container-fluid py-4">
@@ -76,19 +88,19 @@ const Profile = () => {
                       {user.txtFullName == null ? "Unnamed": user.txtFullName }
                     </h5>
                     <div className="h6 font-weight-300">
-                      {user.TokenId}
+                      {user.ethAddress}
                     </div>
                   </div>
                   <br/>
                   <div className="row" align="center">
                     <div className="col-lg">
-                      <a href="#"><i className="fa-solid fa-rectangle-history"></i> Collections</a>
+                      <a href="./Profile"><i className="fa-solid fa-rectangle-history"></i> Collections</a>
                     </div>
                     <div className="col-lg">
-                      <a href="#"><i className="fa-solid fa-plus"></i> Created</a>
+                      <a href="./Profile?isCreated=true"><i className="fa-solid fa-plus"></i> Created</a>
                     </div>
                     <div className="col-lg">
-                      <a href="#">Favorites</a>
+                      <a href="./Profile?isFav=true">Favorites</a>
                     </div>
                   </div>
 

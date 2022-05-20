@@ -25,7 +25,7 @@ const ProductDetail = () => {
         dispatch(getById(pid));
       }, []);
 
-      const ProductTokenId = product.TokenID;
+      const ProductethAddress = product.ethAddress;
 
   return (
       <>
@@ -58,9 +58,9 @@ const ProductDetail = () => {
                 <h1 className="text-uppercase">{product.Harga + " ETH"}</h1>
                 <br></br>
                 <p className="text-uppercase text-sm">Current Owner</p>
-                <Link href={{ pathname: '/Profile/[pid]', query: { pid: ProductTokenId },}}>
+                <Link href={{ pathname: '/Profile/[pid]', query: { pid: ProductethAddress },}}>
                     <a>
-                    <h5>{ProductTokenId?.substring(0, 7) + "..." + ProductTokenId?.substring(ProductTokenId?.length - 7)}</h5>
+                    <h5>{ProductethAddress?.substring(0, 7) + "..." + ProductethAddress?.substring(ProductethAddress?.length - 7)}</h5>
                     </a>
                 </Link>
             </div>
@@ -90,18 +90,18 @@ const ProductDetail = () => {
                         <p className="text-xs font-weight-bold mb-0">{pa.txtStatus}</p>
                     </td>
                     <td className="align-middle text-center text-sm">
-                    <Link href={{ pathname: '/Profile/[pid]', query: { pid: pa.TokenId_From },}}>
+                    <Link href={{ pathname: '/Profile/[pid]', query: { pid: pa.ethAddress_From },}}>
                     <a>
-                    <p className="text-xs font-weight-bold mb-0">{pa.TokenId_From?.substring(0, 7) + "..." + pa.TokenId_From?.substring(pa.TokenId_From?.length - 7)}</p>
+                    <p className="text-xs font-weight-bold mb-0">{pa.ethAddress_From?.substring(0, 7) + "..." + pa.ethAddress_From?.substring(pa.ethAddress_From?.length - 7)}</p>
                     </a>
                     </Link>
                     </td>
                     <td className="align-middle text-center text-sm">
-                    {pa.TokenId_To === pa.TokenId_From ? 
+                    {pa.ethAddress_To === pa.ethAddress_From ? 
                     <p className="text-xs font-weight-bold mb-0">-</p>
-                    :<Link href={{ pathname: '/Profile/[pid]', query: { pid: pa.TokenId_To },}}>
+                    :<Link href={{ pathname: '/Profile/[pid]', query: { pid: pa.ethAddress_To },}}>
                     <a>
-                    <p className="text-xs font-weight-bold mb-0">{pa.TokenId_To?.substring(0, 7) + "..." + pa.TokenId_To?.substring(pa.TokenId_To?.length - 7)}</p>
+                    <p className="text-xs font-weight-bold mb-0">{pa.ethAddress_To?.substring(0, 7) + "..." + pa.ethAddress_To?.substring(pa.ethAddress_To?.length - 7)}</p>
                     </a>
                     </Link>}
                     </td>

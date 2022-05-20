@@ -12,9 +12,34 @@ export const getUsers = (id, token) => async (dispatch) => {
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
-    const res = await axios.post(global.apiurl + `api/user/GetUserByToken`, {      
+    const res = await axios.post(global.apiurl + `api/user/GetUserByethAddress`, {      
       objRequestData: {
-        TokenId: id
+        ethAddress: id
+      }
+    }, config);
+    dispatch({
+      type: GET_USERS,
+      payload: res.data.objData,
+    });
+    console.log(res.data.objData);
+  } catch (error) {
+    dispatch({
+      type: USERS_ERROR,
+      payload: error,
+    });
+  }
+};
+
+export const getProfile = (id, token, isCreated, isFav) => async (dispatch) => {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    const res = await axios.post(global.apiurl + `api/user/GetProfileByethAddress`, {      
+      objRequestData: {
+        ethAddress: id,
+        bitCreated: isCreated,
+        bitFav: isFav
       }
     }, config);
     dispatch({
