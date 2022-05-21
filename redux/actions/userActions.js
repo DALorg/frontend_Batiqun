@@ -30,14 +30,17 @@ export const getUsers = (id, token) => async (dispatch) => {
   }
 };
 
-export const getProfile = (id, token, isCreated, isFav) => async (dispatch) => {
+export const getProfile = (id, currentid, token, isCreated, isFav, Page, Length) => async (dispatch) => {
   try {
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
     const res = await axios.post(global.apiurl + `api/user/GetProfileByethAddress`, {      
       objRequestData: {
+        intPage: Page,
+        intLength: Length,
         ethAddress: id,
+        CurrentethAddress: currentid,
         bitCreated: isCreated,
         bitFav: isFav
       }

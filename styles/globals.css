@@ -26667,4 +26667,41 @@ pre[class*="language-"] {
   }
 }
 
+
+.link{
+  display: inline-block;
+  margin-block: 2px;
+  text-decoration : none;
+  color: #344767;
+  position : relative;
+}
+
+.link::after{
+  content: '';
+  width: 100%;
+  height: 1px;
+  background-color : #344767;
+  border-radius : 4px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
+}
+
+.link:hover{
+  color : #344767;
+}
+
+.link:hover::after{
+  transform : scaleX(1);
+}
+
+.link.active{
+  border-bottom: 1px solid #344767;
+  display: inline-block;
+}
+
+
 /*# sourceMappingURL=dashboard-free.css.map */
