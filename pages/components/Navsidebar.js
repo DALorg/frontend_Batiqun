@@ -33,12 +33,12 @@ const Navsidebar = () => {
           var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
           document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
       }
+      window.location.replace('/Login');
   }
 
     function logoff() {
       deleteAllCookies();
       logout();
-      window.location.replace('/Login');
     }
 
     return (
@@ -82,7 +82,8 @@ const Navsidebar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <a onClick={(e) => router.push("../History")} className= {router.pathname === "/History"
+              <Link href="/Bills" passHref>
+                <a className= {router.pathname === "/Bills"
                       ? "nav-link active"
                       : "nav-link"
                     }
@@ -90,8 +91,9 @@ const Navsidebar = () => {
                     <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <FontAwesomeIcon icon={faUserClock} className="text-sm opacity-10" />
                     </div>
-                    <span className="nav-link-text ms-1"> History</span>
+                    <span className="nav-link-text ms-1"> Bills</span>
                 </a>
+                </Link>
               </li>
               <li className="nav-item mt-3">
                 <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>

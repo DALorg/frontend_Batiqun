@@ -6,8 +6,20 @@ import { useMoralis } from "react-moralis";
 import Cookies from "js-cookie";
 import { LoginUser } from '../redux/actions/loginActions';
 import "./components/GlobalVariable"
+import Swal from 'sweetalert2';
 
 export default function Login() {
+
+  function deleteAllCookies() {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
 
   function setCookie(cname,cvalue,exdays) {
     const d = new Date();
@@ -59,6 +71,11 @@ export default function Login() {
     }
   }
   if(!isAuthenticated) {
+    if(Cookies.get("UsrKTPstatus") != null || Cookies.get("ethAddress") != null 
+    || Cookies.get("UserData")!=null || Cookies.get("UserRole") != null)
+    {
+      deleteAllCookies();
+    }
 
     return(
       <div className="container-fluid bg-login">
@@ -111,6 +128,29 @@ export default function Login() {
           checkCookie(user.get('ethAddress'));
         })
       })
+      let timerInterval
+      return(
+        Swal.fire({
+          title: 'Fetching Some Cookies!',
+          html: 'I will close in <b></b> milliseconds.',
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+          }
+        })
+    )
 
 
     }

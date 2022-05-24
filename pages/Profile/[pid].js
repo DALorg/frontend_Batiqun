@@ -165,7 +165,7 @@ const ProfileDetail = () => {
                     <div className="col-md-3">
                       <div className="card mt-4">
                         <div className="card-header p-0 mx-3 mt-3 position-relative z-index-1">
-                          <a href="javascript:;" className="d-block">
+                          <a href={"/Product/" + pa.encProductId} className="d-block">
                             <img src={global.apiurl + "Data/" + pa.Product_image} className="border-radius-lg" width="100%" height="290px" style={{objectFit: "contain"}}/>
                           </a>
                         </div>
@@ -173,7 +173,7 @@ const ProfileDetail = () => {
                         <br/>
                         <div className="row">
                         <div className="col-lg-9">                          
-                        <a href="javascript:;" className="card-title h5 d-block text-darker">
+                        <a href={"/Product/" + pa.encProductId} className="card-title h5 d-block text-darker">
                             {pa.Nama_Product}
                           </a>
                         </div>
@@ -189,8 +189,8 @@ const ProfileDetail = () => {
                         <div className="row">
                         <div className="col-lg-6">
                               {pa.isFavProduct == true
-                                ? <a href="#" onClick={handleFav(pa.encProductId)}><i class="fa-solid fa-heart"></i>  {pa.intFavorites} </a>
-                                : <a href="#" onClick={handleFav(pa.encProductId)}><i class="fa-regular fa-heart"></i> {pa.intFavorites} </a>
+                                ? <a href="#" onClick={handleFav(pa.encProductId)}><i className="fa-solid fa-heart"></i>  {pa.intFavorites} </a>
+                                : <a href="#" onClick={handleFav(pa.encProductId)}><i className="fa-regular fa-heart"></i> {pa.intFavorites} </a>
                               }
                             
                         </div>
@@ -204,7 +204,11 @@ const ProfileDetail = () => {
                     ))}
                   </div>
                   <br/>
-                  <Custompaginations PageNow={Pagess} TotalDisplayed={TotalDisplayed} TotalProduct={user.TotalProduct} isRouterQuery={created || favorite ? true : false}/>
+                  {
+                    user.Products != null ?
+                    <Custompaginations PageNow={Pagess} TotalDisplayed={TotalDisplayed} TotalProduct={user.TotalProduct} isRouterQuery={created || favorite ? true : false}/>
+                    : null
+                  }
                   </div>
                 </div>
               </div>

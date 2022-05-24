@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import { getProfile, getUsers } from "../../redux/actions/userActions";
 import axios from "axios";
 import Custompaginations from "../components/Pagination";
+import Link from "next/dist/client/link";
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -83,15 +84,19 @@ const Profile = () => {
                 </div>
                 <div className="card-header text-center border-0 pt-0 pt-lg-2 pb-4 pb-lg-3">
                   <div className="row">
-                    <div className="col-lg-11"></div>
-                    <div className="col-lg-1">
+                    <div className="col-lg-6">
                       <div className="d-flex justify-content-between">
+                        <Link href={{ pathname: '/Product/SaveProduct'}}>
+                          <a className="btn bg-gradient-dark mb-0"><i className="fas fa-plus"></i>&nbsp;&nbsp;Add New Product</a>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="col-lg-6 text-end">
                         <a onClick={() => {
                             router.push({
                               pathname: './Profile/EditProfile'
                             })
-                          }} href="javascript:;" className="btn btn-sm btn-dark float-right mb-0 d-none d-lg-block"><i className="fa fa-cog py-2"></i></a>
-                      </div>
+                          }} href="javascript:;" className="btn btn-sm btn-dark mb-0"><i className="fa fa-cog py-2"></i></a>
                     </div>
                   </div>
                 </div>
@@ -150,7 +155,7 @@ const Profile = () => {
                     <div className="col-md-3">
                       <div className="card mt-4">
                         <div className="card-header p-0 mx-3 mt-3 position-relative z-index-1">
-                          <a href="javascript:;" className="d-block">
+                          <a href={"/Product/" + pa.encProductId} className="d-block">
                             <img src={global.apiurl + "Data/" + pa.Product_image} className="border-radius-lg" width="100%" height="290px" style={{objectFit: "contain"}}/>
                           </a>
                         </div>
@@ -158,7 +163,7 @@ const Profile = () => {
                         <br/>
                         <div className="row">
                         <div className="col-lg-9">                          
-                        <a href="javascript:;" className="card-title h5 d-block text-darker">
+                        <a href={"/Product/" + pa.encProductId} className="card-title h5 d-block text-darker">
                             {pa.Nama_Product}
                           </a>
                         </div>
@@ -189,7 +194,11 @@ const Profile = () => {
                     ))}
                   </div>
                   <br/>
-                  <Custompaginations PageNow={Pagess} TotalDisplayed={TotalDisplayed} TotalProduct={user.TotalProduct} isRouterQuery={created || favorite ? true : false}/>
+                  {
+                    user.Products != null ?
+                    <Custompaginations PageNow={Pagess} TotalDisplayed={TotalDisplayed} TotalProduct={user.TotalProduct} isRouterQuery={created || favorite ? true : false}/>
+                    : null
+                  } 
                 </div>
               </div>
             </div>

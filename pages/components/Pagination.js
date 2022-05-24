@@ -7,6 +7,11 @@ var Pages = PageNow;
 var LastPages = parseInt(TotalProduct)/parseInt(TotalDisplayed);
 var LastPage = Math.ceil(LastPages);    
 
+var text = [];
+for (let i = 1; i <= LastPage; i++) {
+  text.push(i) + "<br>";
+}
+
 const NextPage = (e) => {
     e.preventDefault();
     Pages = parseInt(Pages) + 1;
@@ -31,6 +36,19 @@ const PrevPage = (e) => {
   }
 }
 
+const GoTo = (paagee) => {
+    return function (e){
+    e.preventDefault();
+    if(isRouterQuery){
+      let text = window.location.href;
+      let test = text.replace("&Page=" + PageNow, "");
+      setTimeout(location.href = test + "&Page=" + paagee, 1000);
+    }else{
+      setTimeout(location.href = "?Page=" + paagee, 1000);
+    }
+  }
+}
+
   return (
     <nav aria-label="Page navigation example mt-4">
     <ul className="pagination">
@@ -43,7 +61,12 @@ const PrevPage = (e) => {
             <span className="sr-only">Previous</span>
         </a>
         </li>
-        <li className={PageNow == LastPage || PageNow != 0
+        {text?.map((PageNum) => (
+          PageNow == PageNum
+            ? <li class="page-item active"><a class="page-link" onClick={GoTo(PageNum)} href="javascript:;">{PageNum}</a></li>
+            : <li class="page-item"><a class="page-link" onClick={GoTo(PageNum)} href="javascript:;">{PageNum}</a></li>
+        ))}
+        <li className={PageNow == LastPage || PageNow == 0
                       ? "page-item disabled"
                       : "page-item"
                     }>

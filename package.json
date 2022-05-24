@@ -21,6 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "moda": "^2.0.0",
     "modal": "^1.2.0",
+    "moment": "^2.29.3",
     "moralis": "^1.7.0",
     "next": "^12.1.6",
     "react": "^17.0.2",
@@ -34,7 +35,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "sass": "^1.51.0",
-    "sweetalert2": "^11.4.13"
+    "sweetalert2": "^11.4.13",
+    "web3": "^1.7.3"
   },
   "devDependencies": {
     "eslint": "8.15.0",

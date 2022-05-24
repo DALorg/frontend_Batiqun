@@ -16,3 +16,7 @@ export const CARTS_ERROR = "CARTS_ERROR";
 export const LOGIN_ADMIN = "LOGIN_ADMIN";
 export const LOGIN_USERS = "LOGIN_USERS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
+
+export const GET_PA = "GET_PA";
+export const EDIT_PA = "EDIT_PA";
+export const PA_ERROR = "PA_ERROR";

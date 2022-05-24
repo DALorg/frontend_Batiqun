@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from 'next/router'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { requireAuthenticationAdmin } from "../../requireAuthenticationAdmin";
 import Cookies from 'js-cookie';
 import {
-  getProducts,
-  deleteProduct,
   addProduct,
 } from "../../../redux/actions/productActions";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTrash,
-  faPen,
-  faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
 import Swal from "sweetalert2";
 import axios from "axios";
 import "../../components/GlobalVariable"

@@ -1,22 +1,26 @@
 import React, { useEffect, useState, setState } from "react";
 import {requireAuthentication} from "../requireAuthentication"
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getById,
-} from "../../redux/actions/productActions";
+import { getById } from "../../redux/actions/productActions";
 import Swal from "sweetalert2";
 import { useRouter } from 'next/router'
 import "../components/GlobalVariable"
 import Navsidebar from "../components/Navsidebar";
 import Navbarz from "../components/navbars";
-import { Table } from "reactstrap";
 import Link from "next/dist/client/link";
-
+import { useMoralisFile, useWeb3Transfer } from "react-moralis";
+import Cookies from 'js-cookie';
+import TransferButton from "../components/Product-Component/TransferButton";
+import IC_Table from "../components/Product-Component/ItemActivities";
+import BuyButton from "../components/Product-Component/BuyButton";
+import MintButton from "../components/Product-Component/MintButton";
+import TransferAfterBuyButton from "../components/Product-Component/TransferAfterBuy";
+import SellButton from "../components/Product-Component/SellButton";
 
 const ProductDetail = () => {
     const dispatch = useDispatch();
     const allProductsData = useSelector((state) => state.Products);
-    const { loading, error, product } = allProductsData;
+    const { loading,error, product } = allProductsData;
 
     const router = useRouter();
     const {pid}  = router.query;
@@ -27,6 +31,8 @@ const ProductDetail = () => {
 
       const ProductethAddress = product.ethAddress;
 
+      const currentUser = Cookies.get("ethAddress");
+
   return (
       <>
     <body className="g-sidenav-show   bg-gray-100">
@@ -36,7 +42,7 @@ const ProductDetail = () => {
         <Navbarz LastPage="Product" CurrentPage="Product Detail"></Navbarz>
         <div className="container-fluid py-1 px-3">    
         <title>Product</title>  
-        <link rel="icon" href="/icon.png" />
+        <link rel="icon" href={global.icon} />
         <div className="row">
         <div className="col-md-4">
             <div className="card">
@@ -46,8 +52,33 @@ const ProductDetail = () => {
         <div className="col-md-8">
             <div className="card">
             <div className="card-header pb-0">
-                <div className="d-flex align-items-center">
-                <h5 className="mb-0">Product Details</h5>
+            <div className="row">
+                <div className="col-6 d-flex align-items-center">
+                  <h6 className="mb-0">Product Detail</h6>
+                </div>
+                <div className="col-6 text-end">
+                  {product.bitApprove == true && currentUser == product.ethAddress && product.bitMintedStatus == false ? 
+                  <MintButton product={product}/>
+                  : null}
+                  &nbsp;
+                  {product.TokenID != null && product.bitMintedStatus == true && product.txtStatus != "Bought" && product.txtStatus != "Selling" 
+                  && currentUser == product.ethAddress  ? 
+                  <SellButton product={product}/>
+                  : null}
+                  &nbsp;
+                  {product.TokenID != null && product.bitMintedStatus == true && product.txtStatus != "Bought"  
+                  && currentUser == product.ethAddress? 
+                  <TransferButton ProductData={product}/>
+                  : null}
+                  &nbsp;
+                  {product.TokenID != null && product.bitMintedStatus == true && product.txtStatus == "Selling"  ? 
+                  <BuyButton product={product} />
+                  : null}
+                  &nbsp;
+                  {product.txtStatus == "Bought" && currentUser == product.ethAddress ? 
+                  <TransferAfterBuyButton ProductData={product} />
+                  : null}
+                </div>
                 </div>
             </div>
             <div className="card-body">
@@ -74,44 +105,7 @@ const ProductDetail = () => {
                 </div>
             </div>
             <div className="card-body">
-            <Table className="table table-responsive p-0 align-items-center">
-            <thead>
-              <tr>
-                <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Event</th>
-                <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">From</th>
-                <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">To</th>
-                <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-            {product.Product_Activities?.map((pa,idx) => (
-                <tr key={product.encProductId}> 
-                    <td className="align-middle text-center text-sm">
-                        <p className="text-xs font-weight-bold mb-0">{pa.txtStatus}</p>
-                    </td>
-                    <td className="align-middle text-center text-sm">
-                    <Link href={{ pathname: '/Profile/[pid]', query: { pid: pa.ethAddress_From },}}>
-                    <a>
-                    <p className="text-xs font-weight-bold mb-0">{pa.ethAddress_From?.substring(0, 7) + "..." + pa.ethAddress_From?.substring(pa.ethAddress_From?.length - 7)}</p>
-                    </a>
-                    </Link>
-                    </td>
-                    <td className="align-middle text-center text-sm">
-                    {pa.ethAddress_To === pa.ethAddress_From ? 
-                    <p className="text-xs font-weight-bold mb-0">-</p>
-                    :<Link href={{ pathname: '/Profile/[pid]', query: { pid: pa.ethAddress_To },}}>
-                    <a>
-                    <p className="text-xs font-weight-bold mb-0">{pa.ethAddress_To?.substring(0, 7) + "..." + pa.ethAddress_To?.substring(pa.ethAddress_To?.length - 7)}</p>
-                    </a>
-                    </Link>}
-                    </td>
-                    <td className="align-middle text-center text-sm">
-                        <p className="text-xs font-weight-bold mb-0">{pa.Tgl_Penjualan}</p>
-                    </td>
-                </tr>
-            ))}
-                </tbody>
-            </Table>
+                <IC_Table ProductData={product}/>
             </div>
             </div>
         </div>

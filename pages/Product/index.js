@@ -3,44 +3,34 @@ import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from "react-redux";
 import {requireAuthentication} from "../requireAuthentication"
 import Cookies from 'js-cookie';
+import Moralis from 'moralis'
 import {
   getProducts,
   deleteProduct,
   addProduct,
+  ApproveProduct,
+  RejectProduct,
 } from "../../redux/actions/productActions";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTrash,
-  faPen,
-  faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 import Swal from "sweetalert2";
-import axios from "axios";
 import "../components/GlobalVariable"
 import { Table } from "reactstrap";
 import Navsidebar from "../components/Navsidebar";
 import Link from "next/dist/client/link";
+import { useMoralis, useMoralisFile } from "react-moralis";
+import Web3 from "web3";
+import ProductTable from "../components/Product-Component/ProductTable";
 
 const Products = () => {
   const dispatch = useDispatch();
   const allProductsData = useSelector((state) => state.Products);
   const { loading, error, products } = allProductsData;
 
-  // MODAL
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [descModalIsOpen, setdescModalIsOpen] = useState(false);
-
   // LOAD DATA
   useEffect(() => {
     dispatch(getProducts());
   }, []);
 
-  // SEARCH TITLE
-  const [inputSearch, setInputSearch] = useState("");
-
-  const router = useRouter()
-
+  const router = useRouter();
 
   return (
 
@@ -66,86 +56,13 @@ const Products = () => {
                 </div>
               </div>
             </div>
-      <div className="card-body px-0 pt-0 pb-2">
-          <Table className="table table-responsive p-0 align-items-center">
-            <thead>
-              <tr>
-                <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
-                <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product Image</th>
-                <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product Name</th>
-                <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                <th className="text-secondary opacity-7"></th>
-              </tr>
-            </thead>
-            <tbody>
-                {loading
-            ? "Loading..."
-            : error
-            ? error.message
-            : products
-                .filter((product) => {
-                  if (inputSearch === "") {
-                    return product;
-                  } else if (
-                    product.Nama_Product
-                      .toLowerCase()
-                      .includes(inputSearch.toLowerCase())
-                  ) {
-                    return product;
-                  }
-                })
-                .map((product,idx) => (
-                    <tr key={product.encProductId}> 
-                       <td className="align-middle text-center text-sm">
-                          <p className="text-xs font-weight-bold mb-0">{idx + 1}</p>
-                      </td>
-                      <td className="align-middle text-center text-sm">
-                          <img className="avatar" src={global.apiurl + "Data/" + product.Product_image} width="10%" />
-                      </td>
-                      <td className="align-middle text-center text-sm">
-                            <h6 className="mb-0 text-sm">{product.Nama_Product}</h6>
-                      </td>
-                      <td className="align-middle text-center text-sm">
-                        <span className="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                      <td className="text-right">
-                        <div className="dropdown">
-                          <button className="btn btn-link text-secondary mb-0" aria-haspopup="true" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i className="fa fa-ellipsis-v text-xs"></i>
-                          </button>
-                          <div className="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a onClick={() => {router.push({
-                              pathname: './Product/[pid]',
-                              query: { pid: product.encProductId },
-                            })
-                            }} className="dropdown-item">Product Details</a>
-                            <Link href={{ pathname: '/Product/SaveProduct/[pid]', query: { pid: product.encProductId },}}>
-                              <a className="dropdown-item" href="#">Edit Products</a>
-                            </Link>
-                            <a onClick={() =>
-                            dispatch(
-                              deleteProduct(product.encProductId),
-                              Swal.fire(
-                                "Berhasil Menghapus!",
-                                "Product " +
-                                  product.Nama_Product +
-                                  " Berhasil di Hapus!",
-                                "success"
-                              )
-                            )
-                            } className="dropdown-item" href="#">Delete Product</a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    ))} 
-                  </tbody>
-                </Table>
-              </div>
+            <div className="card-body px-0 pt-0 pb-2">
+              <ProductTable ProductData={products} error={error} loading={loading}/>
             </div>
           </div>
         </div>
       </div>
+    </div>
          
   );
 };
