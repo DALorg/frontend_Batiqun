@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 import { SellProduct } from "../../../redux/actions/productActions";
 import Web3 from "web3";
 import Swal from "sweetalert2";
+import "../GlobalVariable";
 
 const web3 = new Web3(Web3.givenProvider)
 
@@ -93,7 +94,7 @@ const AddProdButton = ({ profile }) => {
 
   return (
     <>
-    {!profile.NIK && !profile.NIK_Photo ?
+    {!profile.NIK && !profile.NIK_Photo && profile.txtRoleName != global.superadmin || profile.txtRoleName != global.admin ?
      <a className="btn bg-dark text-white mb-0" data-bs-toggle="modal" data-bs-target="#modal-form"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add Product</a> 
     : <a className="btn bg-dark text-white mb-0" href="/Product/SaveProduct"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add Product</a> 
     }
