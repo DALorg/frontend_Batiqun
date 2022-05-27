@@ -64,7 +64,7 @@ export const addProduct = (objRequestData, token) => async (dispatch) => {
     };
     debugger;
     await axios
-      .post(`https://batiqunapi.azurewebsites.net/api/product/MintProduct`, testResp, config)
+      .post(`https://batiqunapi.azurewebsites.net/api/product/CreateProduct`, testResp, config)
       .then((response) => {
         dispatch({
           type: ADD_PRODUCTS,

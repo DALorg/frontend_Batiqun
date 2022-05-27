@@ -20,3 +20,7 @@ export const LOGIN_ERROR = "LOGIN_ERROR";
 export const GET_PA = "GET_PA";
 export const EDIT_PA = "EDIT_PA";
 export const PA_ERROR = "PA_ERROR";
+
+export const GET_VERIFY = "GET_VERIFY";
+export const VERIFY_ADMIN = "VERIFY_ADMIN";
+export const VERIFY_ERROR = "VERIFY_ERROR";

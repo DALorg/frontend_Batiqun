@@ -15,11 +15,27 @@ const MintButton = ({ product }) => {
     const dispatch = useDispatch();
     const currentUser = Cookies.get("ethAddress");
 
-    const {saveFile} = useMoralisFile()
+    const {saveFile} = useMoralisFile();
+    let timerInterval;
 
       const ApproveMint =  (Prodlist) => {
         return async function (e){
         e.preventDefault()
+        Swal.fire({
+          title: 'Loading, Please Wait!',
+          html: 'I will close in <b></b> milliseconds.',
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        })
         let metadata = {
           name: Prodlist.Nama_Product,
           description : Prodlist.Description,
@@ -50,12 +66,13 @@ const MintButton = ({ product }) => {
                   TransactionHash: TransactionHash,
                   bitComplete:true,
                   bitSent: true
-                  }, Cookies.get("UserData")),
-                Swal.fire(
-                  "Minted!",
-                  "Your product has been Minted!",
-                  "success"
-                )
+                  }, Cookies.get("UserData"))
+              )
+              
+              Swal.fire(
+                "Minted!",
+                "Your product has been Minted!",
+                "success"
               )
           }
         })

@@ -4,11 +4,13 @@ import productReducer from "./productReducers";
 import userReducer from "./userReducers";
 import loginReducer from "./loginReducers";
 import paReducer from "./paReducers";
+import verifyReducer from "./verifyReducers";
 
 export default combineReducers({
   Products: productReducer,
   Users: userReducer,
   // Carts: cartReducer,
   Logins: loginReducer,
-  Pas: paReducer
+  Pas: paReducer,
+  Verifs: verifyReducer
 });
