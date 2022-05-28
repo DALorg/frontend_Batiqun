@@ -53,7 +53,8 @@ const Navsidebar = () => {
           <div className="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a onClick={(e) => router.push("../")} className= {router.pathname === "/"
+                <Link href="/" passHref>
+                <a className= {router.pathname.includes("/Dashboard")
                     ? "nav-link active"
                     : "nav-link"
                   }
@@ -63,6 +64,7 @@ const Navsidebar = () => {
                   </div>
                   <span className="nav-link-text ms-1">Dashboard</span>
               </a>
+              </Link>
               </li>
               {/* <li className="nav-item mt-3">
                 <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Products Table</h6>
@@ -99,7 +101,8 @@ const Navsidebar = () => {
                 <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
               </li>
               <li className="nav-item">
-                <a onClick={(e) => router.push("../Profile")} className= {router.pathname.includes("/Profile")
+                <Link href="/Profile" passHref>
+                <a className= {router.pathname.includes("/Profile")
                       ? "nav-link active"
                       : "nav-link"
                     }
@@ -109,6 +112,7 @@ const Navsidebar = () => {
                     </div>
                     <span className="nav-link-text ms-1">Profile</span>
                 </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <a onClick={logoff} className= "nav-link"

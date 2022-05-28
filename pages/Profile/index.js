@@ -84,7 +84,7 @@ const Profile = () => {
                 </div>
                 <div className="card-header text-center border-0 pt-0 pt-lg-2 pb-4 pb-lg-3">
                   <div className="row">
-                    <div className="col-lg-6">
+                    <div className="col-lg-6 text-end">
                       <div className="d-flex justify-content-between">
                         <Link href={{ pathname: '/Product/SaveProduct'}}>
                           <a className="btn bg-gradient-dark mb-0"><i className="fas fa-plus"></i>&nbsp;&nbsp;Add New Product</a>
