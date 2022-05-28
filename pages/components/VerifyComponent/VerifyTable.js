@@ -2,14 +2,13 @@ import React from "react";
 // reactstrap components
 import { Table } from "reactstrap";
 import Link from "next/dist/client/link";
-import { PayUser } from "../../../redux/actions/productActions";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import Cookies from 'js-cookie';
-import Moralis from 'moralis';
-import { useState } from "react";
+import { VerifAdmin } from "../../../redux/actions/verifyAction";
+import "../GlobalVariable";
 
-const ProductActivityTable = ({ ProductData, loading, error }) => {
+const VerifyTable = ({ ProductData, loading, error }) => {
 
   const dispatch = useDispatch();
 
@@ -17,49 +16,12 @@ const ProductActivityTable = ({ ProductData, loading, error }) => {
 
   const currentUser = Cookies.get("ethAddress");
 
-  let timerInterval;
-
   const Transfer = (param) =>{
     return async function (e){
     e.preventDefault();
     try {
-      await Moralis.enableWeb3();
-      Swal.fire({
-        title: 'Loading, Please Wait!',
-        html: 'I will close in <b></b> milliseconds.',
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading()
-          const b = Swal.getHtmlContainer().querySelector('b')
-          timerInterval = setInterval(() => {
-            b.textContent = Swal.getTimerLeft()
-          }, 100)
-        },
-        willClose: () => {
-          clearInterval(timerInterval)
-        }
-      })
+      await dispatch(VerifAdmin( param.ethAddress ,Cookies.get("UserData")));
 
-      const options = {
-        type: "native",
-        amount: Moralis.Units.ETH(String(param.Value)) ,
-        receiver : param.ethAddress_To,
-      };
-
-      let result = await Moralis.transfer(options) ;
-        console.log(result);
-        dispatch(PayUser({
-          Product_ActivityID: param.encProduct_ActivityID,
-          ProductId: param.encProductId,
-          ethAddress_To: param.ethAddress_To,
-          ethAddress_From: currentUser,
-          Tgl_Penjualan: "2021-09-23",
-          Value: param.Value,
-          TransactionHash: result.hash,
-          bitComplete:true,
-          bitSent: true
-    },Cookies.get("UserData")))
-    Swal.close();
     } catch (error){
       console.log(error)
     }
@@ -89,22 +51,22 @@ const ProductActivityTable = ({ ProductData, loading, error }) => {
                           <p className="text-xs font-weight-bold mb-0">{idx + 1}</p>
                       </td>
                       <td className="align-middle text-center text-sm">
-                      <Link href={{ pathname: '/Profile/[pid]', query: { pid: product.ethAddress_To },}}>
+                      <Link href={{ pathname: '/Profile/[pid]', query: { pid: product.ethAddress },}}>
                         <a>
-                          <h6 className="mb-0 text-sm">{product.ethAddress_To?.substring(0, 7) + "..." + product.ethAddress_To?.substring(product.ethAddress_To?.length - 7)}</h6>
+                          <h6 className="mb-0 text-sm">{product.ethAddress?.substring(0, 7) + "..." + product.ethAddress?.substring(product.ethAddress?.length - 7)}</h6>
                         </a>
                       </Link>
                       </td>
                       <td className="align-middle text-center text-sm">
-                            <h6 className="mb-0 text-sm">{product.Value}</h6>
+                            <h6 className="mb-0 text-sm">{product.NIK}</h6>
                       </td>
-                      {product.bitSent ? 
+                      {product.txtRoleName == global.admin ||  product.txtRoleName == global.superadmin ? 
                       <td className="align-middle text-center text-sm">
-                        <span className="badge badge-sm bg-gradient-success">Sent</span>
+                        <span className="badge badge-sm bg-gradient-success">Already an Admin</span>
                       </td>
                       :                       
                       <td className="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-danger">Not Sented Yet</span>
+                        <span class="badge badge-sm bg-gradient-danger">Not Admin</span>
                       </td>}
                       <td className="text-right">
                         <div className="dropdown">
@@ -112,8 +74,8 @@ const ProductActivityTable = ({ ProductData, loading, error }) => {
                             <i className="fa fa-ellipsis-v text-xs"></i>
                           </button>
                           <div className="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            {!product.bitSent
-                                ? <a onClick={Transfer(product)} className="dropdown-item" href="#"><i class="fa-solid fa-thumbs-up"></i> &nbsp; Sent ETH</a>
+                            {product.txtRoleName != global.admin 
+                                ? <a onClick={Transfer(product)} className="dropdown-item" href="#"><i class="fa-solid fa-thumbs-up"></i> &nbsp; Verify Admin</a>
                                 : null
                             }
                           </div>
@@ -127,4 +89,4 @@ const ProductActivityTable = ({ ProductData, loading, error }) => {
     );
   }
   
-  export default ProductActivityTable;
+  export default VerifyTable;

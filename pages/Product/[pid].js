@@ -86,7 +86,9 @@ const ProductDetail = () => {
                 <h1 className="text-uppercase">{product.Nama_Product}</h1>
                 <br></br>
                 <p className="text-uppercase text-sm">Current Price</p>
-                <h1 className="text-uppercase">{product.Harga + " ETH"}</h1>
+                {product.Harga ?
+                <>                 
+                <h1 className="text-uppercase">{product.Harga + " ETH"}</h1></>: <h1>Currently not for sale!</h1> }
                 <br></br>
                 <p className="text-uppercase text-sm">Current Owner</p>
                 <Link href={{ pathname: '/Profile/[pid]', query: { pid: ProductethAddress },}}>

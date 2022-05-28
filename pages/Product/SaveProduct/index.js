@@ -74,7 +74,7 @@ const AddProducts = () => {
           Product_image: res.data.objData,
           intFavorites: userEdit.intFavorites,
           bitApprove: userEdit.bitApprove,
-          Harga: userEdit.Harga,
+          Harga: null,
           Description: userEdit.Description
         }, Cookies.get("UserData"))
       );
@@ -169,20 +169,6 @@ const AddProducts = () => {
                         value={userEdit.ethAddress}
                         disabled
                       />
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="form-group">
-                  <label for="example-text-input" className="form-control-label">Price</label>
-                  <div class="input-group input-group-alternative mb-4">
-                        <input class="form-control" 
-                        placeholder="Price" 
-                        name="Harga"
-                        type="number"
-                        onChange={handleChangeEdit}
-                        value={userEdit.Harga}/>
-                        <span class="input-group-text"><i class="fa-brands fa-ethereum"></i></span>
-                    </div>
                   </div>
                 </div>
               </div> 
