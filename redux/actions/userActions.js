@@ -3,6 +3,7 @@ import {
   DELETE_USERS,
   GET_USERS,
   USERS_ERROR,
+  EDIT_USERS,
 } from "../reducers/types";
 import axios from "axios";
 import "../../styles/GlobalVariable"
@@ -58,10 +59,17 @@ export const getProfile = (id, currentid, token, isCreated, isFav, Page, Length)
   }
 };
 
-export const addUsers = (user) => async (dispatch) => {
+export const addUsers = (objRequestData, token) => async (dispatch) => {
   try {
+    var testResp = {
+      objRequestData
+    };
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    debugger;
     await axios
-      .post(`https://fakestoreapi.com/users`, user)
+      .post(`https://batiqunapi.azurewebsites.net/api/user/savedata`, testResp, config)
       .then((response) => {
         dispatch({
           type: ADD_USERS,
@@ -74,7 +82,35 @@ export const addUsers = (user) => async (dispatch) => {
       type: USERS_ERROR,
       payload: error,
     });
+    console.log(error);
   }
+};
+
+export const editUser = (objRequestData, token) => async (dispatch) => {
+  try {
+    var testResp = {
+      objRequestData
+    };
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    debugger;
+    await axios
+    .post(`https://batiqunapi.azurewebsites.net/api/user/savedata`, testResp, config)
+    .then((response) => {
+      dispatch({
+        type: EDIT_USERS,
+        payload: response.data,
+      });
+      console.log(response);
+    });
+} catch (error) {
+  dispatch({
+    type: USERS_ERROR,
+    payload: error,
+  });
+  console.log(error);
+}
 };
 
 export const deleteUsers = (id) => async (dispatch) => {
