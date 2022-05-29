@@ -123,7 +123,10 @@ const EditProfile = () => {
           <img src="/default-bg.png" 
           alt="Image placeholder" 
           className="card-img-top"/>
-          
+          <Button>
+
+          </Button>
+
             <div className="row justify-content-center">
               <div className="col-2 col-lg-2 order-lg-2">
                 <div className="mt-n4 mt-lg-n7 mb-4 mb-lg-0">
