@@ -59,52 +59,34 @@ export const getProfile = (id, currentid, token, isCreated, isFav, Page, Length)
   }
 };
 
-export const addUsers = (objRequestData, token) => async (dispatch) => {
-  try {
-    var testResp = {
-      objRequestData
-    };
-    const config = {
-      headers: { Authorization: `Bearer ${token}` }
-    };
-    debugger;
-    await axios
-      .post(`https://batiqunapi.azurewebsites.net/api/user/savedata`, testResp, config)
-      .then((response) => {
-        dispatch({
-          type: ADD_USERS,
-          payload: response.data,
-        });
-        console.log(response);
-      });
-  } catch (error) {
-    dispatch({
-      type: USERS_ERROR,
-      payload: error,
-    });
-    console.log(error);
-  }
-};
 
-export const editUser = (objRequestData, token) => async (dispatch) => {
+export const editUser = (id, token, Fullname, Email, Username, Password, ethAddress, CreatedBy, CreatedDate, UpdateBy, UpdateDate, NIK, NikPhoto) => async (dispatch) => {
   try {
-    var testResp = {
-      objRequestData
-    };
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
-    debugger;
-    await axios
-    .post(`https://batiqunapi.azurewebsites.net/api/user/savedata`, testResp, config)
-    .then((response) => {
+    const res = await axios.post(global.apiurl + `api/user/savedata`, {
+      objRequestData: {
+        intUserId: id,
+        txtFullName: Fullname,
+        txtEmail: Email,
+        txtUsername: Username,
+        txtPassword: Password,
+        ethAddress: ethAddress,
+        txtCreatedBy: CreatedBy,
+        dtmCreatedDate: CreatedDate,
+        txtUpdateBy: UpdateBy,
+        dtmUpdateDate: UpdateDate,
+        NIK: NIK,
+        NIK_Photo: NikPhoto
+      }
+    }, config);
       dispatch({
         type: EDIT_USERS,
-        payload: response.data,
+        payload: res.data.objData,
       });
-      console.log(response);
-    });
-} catch (error) {
+      console.log(res.data.objData);
+    } catch (error) {
   dispatch({
     type: USERS_ERROR,
     payload: error,
@@ -129,5 +111,32 @@ export const deleteUsers = (id) => async (dispatch) => {
       type: USERS_ERROR,
       payload: error,
     });
+  }
+};
+
+export const addUsers = (objRequestData, token) => async (dispatch) => {
+  try {
+    var testResp = {
+      objRequestData
+    };
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    debugger;
+    await axios
+      .post(`https://batiqunapi.azurewebsites.net/api/user/savedata`, testResp, config)
+      .then((response) => {
+        dispatch({
+          type: ADD_USERS,
+          payload: response.data,
+        });
+        console.log(response);
+      });
+  } catch (error) {
+    dispatch({
+      type: USERS_ERROR,
+      payload: error,
+    });
+    console.log(error);
   }
 };

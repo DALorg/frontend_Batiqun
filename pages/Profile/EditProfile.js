@@ -31,10 +31,10 @@ const EditProfile = () => {
     };
 
     const router = useRouter()
-    const {pid} = router.query;
+    const {FullName, Email, NIK} = router.query;
 
     useEffect(() => {
-      dispatch(getUsers(Cookies.get('ethAddress'), Cookies.get('UserData')));
+      dispatch(editUser(Cookies.get('ethAddress'), Cookies.get('UserData'), FullName, Email, NIK));
     }, []);
 
     const [userEdit, setUserEdit] = useState({
@@ -108,7 +108,10 @@ const EditProfile = () => {
       });
     };
 
+    
+
     return (
+
         <div className="container-fluid py-4">
           <Head>
             <title>Edit Profile</title>
@@ -117,23 +120,47 @@ const EditProfile = () => {
           </Head>
         <Navsidebar></Navsidebar>
 
+      <div className="container-fluid mt--6">
       <div className="row">
-        <div className="col-md-12">
-          <div className="card card-profile">
-          <img src="/default-bg.png" 
-          alt="Image placeholder" 
-          className="card-img-top"/>
-          <Button>
-
-          </Button>
-
+        <div className="col-lg-4">
             <div className="row justify-content-center">
-              <div className="col-2 col-lg-2 order-lg-2">
-                <div className="mt-n4 mt-lg-n7 mb-4 mb-lg-0">
-                  <a href="javascript:;">
-                    <img src="/curved11.jpg" className="rounded-circle img-fluid border border-2 border-white"/>
-                  </a>
+              <h5 className="mb-0">Add Profile Picture</h5>
+                  <img src="/curved11.jpg" alt="profile_pict" className="rounded-circle edit"/>
+                  <input type="file" accept="image/*" name="image-upload" id="input" className="upload_pict"
+                  // onChange={this.imageHandler} 
+                  />
+                  <div className="label">
+                  <label className="image-upload" htmlFor="input">
+                    <i className="material-icons">add_a_photo</i>
+                    Choose profile picture
+                  </label>
+                  </div>
+            </div>
+            <div className="row justify-content-center">
+              <h5 className="mb-0">Add Banner Picture</h5>
+              <div className="card-profile">
+                <img src="/header.jpg" alt="bannerPict" className="card-img-top" />
+                <input type="file" accept="image/*" name="image-upload" className="upload_pict"
+                // onChange={}
+                />
+                <div className="label1">
+                  <label className="image-upload" htmlFor="input">
+                    <i className="material-icons">add_a_photo</i>
+                    Choose profile picture
+                  </label>
+                  </div>
+              </div>
+            </div>
+        </div>
+
+        <div className="col-lg-8">
+          <div className="card">
+            <div className="card-header">
+              <div className="row align-items-center">
+                <div className="col-8">
+                  <h3 className="mb-0">Edit profile </h3>
                 </div>
+                
               </div>
             </div>
 
@@ -141,6 +168,17 @@ const EditProfile = () => {
               <form>
                 <h6 className="heading-small text-muted mb-4">User information</h6>
                 <div className="pl-lg-4">
+                    <div className="col-lg-6">
+                      <div className="form-group" style={{ display: "none" }}>
+                        <input
+                        type="input"
+                        className="form-control"
+                        placeholder="id"
+                        name="id" disabled
+                        value={userEdit.enc_intUserId}
+                      />
+                      </div>
+                    </div>
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="form-group">
@@ -148,7 +186,7 @@ const EditProfile = () => {
                         <input
                         type="input"
                         className="form-control"
-                        placeholder="enter your name"
+                        placeholder= {user.txtFullName}
                         name="fullname" required
                         onChange={handleChangeEdit}
                         value={userEdit.txtFullName}
@@ -164,7 +202,7 @@ const EditProfile = () => {
                         placeholder="enter your email"
                         name="email" required
                         onChange={handleChangeEdit}
-                        value={userEdit.txtEmail}
+                        value={user.txtEmail}
                       />
                       </div>
                     </div>
@@ -179,7 +217,7 @@ const EditProfile = () => {
                         placeholder="enter password"
                         name="password" required
                         onChange={handleChangeEdit}
-                        value={userEdit.txtPassword}
+                        value={user.txtPassword}
                       />
                       </div>
                     </div> 
@@ -223,7 +261,7 @@ const EditProfile = () => {
                         name="email" required
                         minLength="16"
                         onChange={handleChangeEdit}
-                        value={userEdit.NIK}
+                        value={user.NIK}
                       />
                       </div>
                     </div>
@@ -244,7 +282,7 @@ const EditProfile = () => {
                         placeholder="@example"
                         name="twitter" 
                         onChange={handleChangeEdit}
-                        value={userEdit.Twitter}
+                        value={user.Twitter}
                       />
                       </div>
                     </div>
@@ -257,7 +295,7 @@ const EditProfile = () => {
                         placeholder="@example"
                         name="instagram"
                         onChange={handleChangeEdit}
-                        value={userEdit.Instagram}
+                        value={user.Instagram}
                       />
                       </div>
                     </div>
@@ -270,7 +308,7 @@ const EditProfile = () => {
                         placeholder="www@example.id"
                         name="website"
                         onChange={handleChangeEdit}
-                        value={userEdit.Website}
+                        value={user.Website}
                       />
                       </div>
                     </div>
@@ -300,6 +338,7 @@ const EditProfile = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
       </div>
         )

@@ -1,5 +1,6 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -95,6 +96,12 @@ hr {
   opacity: 0.25;
 }
 
+.upload_pict{
+  display: none;
+}
+.banner{
+  border-radius: 10px;
+}
 hr:not([size]) {
   height: 1px;
 }
@@ -5686,18 +5693,35 @@ fieldset:disabled .btn {
   height: 250px;
 }
 
-.card-img,
-.card-img-top {
+.card-img{
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
 }
-
+.card-img-top{
+  border-radius: 1rem;
+}
 .card-img,
 .card-img-bottom {
   border-bottom-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
 }
 
+.image-upload{
+  margin: 10px;
+  width: 200px;
+	height: 40px;
+  color: white;
+  border-radius: 10px;
+  background-color: #5e72e4;
+  text-align: center;
+  cursor: pointer;
+}
+.label{
+  margin-left: 10em;
+}
+.label1{
+  margin-left: 5em;
+}
 .card-group>.card {
   margin-bottom: 0.75rem;
 }
@@ -10455,6 +10479,29 @@ fieldset:disabled .btn {
 .rounded-circle,
 .avatar.rounded-circle img {
   border-radius: 50% !important;
+}
+
+.edit{
+  width: 60%;
+}
+
+.overlay {
+  position: absolute; 
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+.edit:hover .overlay {
+  opacity: 1;
 }
 
 .rounded-pill {
