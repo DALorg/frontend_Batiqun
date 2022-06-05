@@ -60,32 +60,20 @@ export const getProfile = (id, currentid, token, isCreated, isFav, Page, Length)
 };
 
 
-export const editUser = (id, token, Fullname, Email, Username, Password, ethAddress, CreatedBy, CreatedDate, UpdateBy, UpdateDate, NIK, NikPhoto) => async (dispatch) => {
+export const editUser = (objRequestData, token ) => async (dispatch) => {
   try {
+    var testResp = {
+      objRequestData
+  };
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
-    const res = await axios.post(global.apiurl + `api/user/savedata`, {
-      objRequestData: {
-        intUserId: id,
-        txtFullName: Fullname,
-        txtEmail: Email,
-        txtUsername: Username,
-        txtPassword: Password,
-        ethAddress: ethAddress,
-        txtCreatedBy: CreatedBy,
-        dtmCreatedDate: CreatedDate,
-        txtUpdateBy: UpdateBy,
-        dtmUpdateDate: UpdateDate,
-        NIK: NIK,
-        NIK_Photo: NikPhoto
-      }
-    }, config);
+    const res = await axios.post(global.apiurl + `api/user/savedata`, testResp, config);
       dispatch({
         type: EDIT_USERS,
-        payload: res.data.objData,
+        payload: res.data,
       });
-      console.log(res.data.objData);
+      console.log(res.data);
     } catch (error) {
   dispatch({
     type: USERS_ERROR,

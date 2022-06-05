@@ -30,27 +30,25 @@ const EditProfile = () => {
       setUserEdit(data);
     };
 
-    const router = useRouter()
-    const {FullName, Email, NIK} = router.query;
 
     useEffect(() => {
-      dispatch(editUser(Cookies.get('ethAddress'), Cookies.get('UserData'), FullName, Email, NIK));
+      dispatch(getUsers(Cookies.get('ethAddress'), Cookies.get('UserData')));
     }, []);
 
     const [userEdit, setUserEdit] = useState({
-      intUserId: user.enc_intUserId,
+      intUserId: user.encUserId,
       txtFullName: user.txtFullName,
-      txtPassword: user.txtPassword,
       txtEmail: user.txtEmail,
-      Bio: user.Bio,
-      Profile_Baner: user.Profile_Baner,
-      Profile_Image: user.Profile_Image,
-      NIK_Photo: user.NIK_Photo,
-      TokenID: Cookies.get('ethAddress'),
-      Twitter: user.Twitter,
-      Instagram: user.Instagram,
-      Website: user.Website,
-      NIK: user.NIK,
+      txtUsername:user.txtUsername,
+      txtPassword:user.txtPassword,
+      ethAddress:user.ethAddress,
+      txtCreatedBy: "user",
+      dtmCreatedDate: "2022-06-05",
+      txtUpdatedBy: "user",
+      dtmUpdatedDate:"2022-06-05",
+      NIK:user.NIK,
+      NIK_Photo:user.NIK_Photo,
+      file:"",
     });
 
     const handleUpdate = (e) => {
@@ -69,20 +67,19 @@ const EditProfile = () => {
 
         dispatch(
           editUser({
-            intUserId: userEdit.enc_intUserId,
-            txtFullName: userEdit.txtFullName,
-            txtPassword: userEdit.txtPassword,
-            txtEmail: userEdit.txtEmail,
-            Bio: userEdit.Bio,
-            Profile_Baner: userEdit.Profile_Baner,
-            Profile_Image: userEdit.Profile_Image,
-            NIK_Photo: userEdit.NIK_Photo,
-            TokenID: Cookies.get('ethAddress'),
-            Twitter: userEdit.Twitter,
-            Instagram: userEdit.Instagram,
-            Website: userEdit.Website,
-            NIK: userEdit.NIK,
-          }, Cookies.get("UserData"))
+          intUserId: userEdit.intUserId,
+          txtFullName: userEdit.txtFullName,
+          txtEmail: userEdit.txtEmail,
+          txtUsername:userEdit.txtUsername,
+          txtPassword:userEdit.txtPassword,
+          ethAddress:userEdit.ethAddress,
+          txtCreatedBy: "user",
+          dtmCreatedDate: "2022-06-05",
+          txtUpdatedBy: "user",
+          dtmUpdatedDate:"2022-06-05",
+          NIK: parseInt(userEdit.NIK),
+          NIK_Photo:res.data.objData,
+          }, Cookies.get('UserData'))
         );
         Swal.fire(
           "Berhasil Update Profile!",
@@ -94,17 +91,16 @@ const EditProfile = () => {
       setUserEdit({
         intUserId: "",
         txtFullName: "",
-        txtPassword: "",
         txtEmail: "",
-        Bio: "",
-        Profile_Baner: "",
-        Profile_Image: "",
-        NIK_Photo:"",
+        txtPassword: "",
+        ethAddress:Cookies.get('ethAddress'),
+        txtCreatedBy:"user",
+        dtmCreatedDate:"2022-06-05",
+        txtUpdatedBy: "user",
+        dtmUpdatedDate:"2022-06-05",
         NIK:"",
-        TokenID: Cookies.get('ethAddress'),
-        Twitter: "",
-        Instagram: "",
-        Website: "",
+        NIK_Photo:"",
+        // TokenID: Cookies.get('ethAddress'),
       });
     };
 
@@ -168,17 +164,7 @@ const EditProfile = () => {
               <form>
                 <h6 className="heading-small text-muted mb-4">User information</h6>
                 <div className="pl-lg-4">
-                    <div className="col-lg-6">
-                      <div className="form-group" style={{ display: "none" }}>
-                        <input
-                        type="input"
-                        className="form-control"
-                        placeholder="id"
-                        name="id" disabled
-                        value={userEdit.enc_intUserId}
-                      />
-                      </div>
-                    </div>
+                    
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="form-group">
@@ -186,8 +172,8 @@ const EditProfile = () => {
                         <input
                         type="input"
                         className="form-control"
-                        placeholder= {user.txtFullName}
-                        name="fullname" required
+                        placeholder= "enter your name"
+                        name="txtFullName" required
                         onChange={handleChangeEdit}
                         value={userEdit.txtFullName}
                       />
@@ -200,9 +186,9 @@ const EditProfile = () => {
                         type="email"
                         className="form-control"
                         placeholder="enter your email"
-                        name="email" required
+                        name="txtEmail" required
                         onChange={handleChangeEdit}
-                        value={user.txtEmail}
+                        value={userEdit.txtEmail}
                       />
                       </div>
                     </div>
@@ -215,9 +201,9 @@ const EditProfile = () => {
                         type="password"
                         className="form-control"
                         placeholder="enter password"
-                        name="password" required
+                        name="txtPassword" required
                         onChange={handleChangeEdit}
-                        value={user.txtPassword}
+                        value={userEdit.txtPassword}
                       />
                       </div>
                     </div> 
@@ -228,9 +214,9 @@ const EditProfile = () => {
                         <input
                         type="input"
                         className="form-control"
-                        name="token ID"
+                        name="ethAddress"
                         onChange={handleChangeEdit}
-                        value={user.ethAddress}
+                        value={userEdit.ethAddress}
                         disabled
                       />
                       </div>
@@ -245,7 +231,7 @@ const EditProfile = () => {
                         type="file"
                         className="form-control"
                         placeholder="choose file"
-                        name="KTP"
+                        name="file"
                         onChange={handleFile}
                         required
                       />
@@ -258,10 +244,10 @@ const EditProfile = () => {
                         type="number"
                         className="form-control"
                         placeholder="enter your id number"
-                        name="email" required
-                        minLength="16"
+                        name="NIK" required
+                        // minLength="16" 
                         onChange={handleChangeEdit}
-                        value={user.NIK}
+                        value={userEdit.NIK}
                       />
                       </div>
                     </div>
@@ -281,7 +267,7 @@ const EditProfile = () => {
                         className="form-control"
                         placeholder="@example"
                         name="twitter" 
-                        onChange={handleChangeEdit}
+                        // onChange={handleChangeEdit}
                         value={user.Twitter}
                       />
                       </div>
@@ -294,7 +280,7 @@ const EditProfile = () => {
                         className="form-control"
                         placeholder="@example"
                         name="instagram"
-                        onChange={handleChangeEdit}
+                        // onChange={handleChangeEdit}
                         value={user.Instagram}
                       />
                       </div>
@@ -307,7 +293,7 @@ const EditProfile = () => {
                         className="form-control"
                         placeholder="www@example.id"
                         name="website"
-                        onChange={handleChangeEdit}
+                        // onChange={handleChangeEdit}
                         value={user.Website}
                       />
                       </div>
@@ -324,7 +310,7 @@ const EditProfile = () => {
                         className="form-control"
                         placeholder="write about you"
                         name="bio" required
-                        onChange={handleChangeEdit}
+                        // onChange={handleChangeEdit}
                         value={userEdit.Bio}
                       />
                   </div>
