@@ -13,6 +13,8 @@ import "../../components/GlobalVariable"
 import { Table } from "reactstrap";
 import Navsidebar from "../../components/Navsidebar";
 import Head from "next/dist/shared/lib/head";
+import Link from "next/dist/client/link";
+
 
 const AddProducts = () => {
   const dispatch = useDispatch();
@@ -195,9 +197,22 @@ const AddProducts = () => {
                   />
               </div>
             </div>
-            <Button onClick={handleUpdate} color="primary" type="button">
-                    Save changes
-            </Button>
+
+                <div className="row">
+                    <div className="col-lg-6 text-end">
+                      <div className="d-flex justify-content-between">
+                        <Link href={{ pathname: '/Profile'}}>
+                          <a className="btn bg-red mb-0">Cancel</a>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="col-lg-6 text-end">
+                    <Button onClick={handleUpdate} color="primary" type="button">
+                        Save changes
+                    </Button>
+                    </div>
+                </div>
+            
           </form>
         </div>
         </div>

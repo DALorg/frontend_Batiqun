@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import "./components/GlobalVariable"
 
 export function requireAuthenticationAdmin(gssp) {
@@ -17,10 +18,15 @@ export function requireAuthenticationAdmin(gssp) {
                     statusCode: 302
                 }
             };
-        }else if (token === global.admin || token === global.superadmin){
+        }else if (token === global.admin || token === global.superadmin || token === global.seller){
             if(KTPstatus == "true"){
                 return await gssp(context); // Continue on to call `getServerSideProps` logic
             }else{
+                Swal.fire(
+                    "Silahkan lengkapi profile",
+                    "Isi NIK sesuai dengan KTP anda",
+                    "warning"
+                );
                 return {
                     redirect: {
                         destination: '/Profile/EditProfile',

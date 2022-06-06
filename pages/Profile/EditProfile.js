@@ -10,6 +10,7 @@ import { editUser, getUsers } from "../../redux/actions/userActions";
 import axios from "axios";
 import Head from "next/head";
 import { Button } from "reactstrap";
+import Link from "next/dist/client/link";
 
 const EditProfile = () => {
     const dispatch = useDispatch();
@@ -256,8 +257,7 @@ const EditProfile = () => {
                 <hr className="my-4" />
                 {/* <!-- Address --> */}
                 <h6 className="heading-small text-muted mb-4">Contact information</h6>
-                <div className="pl-lg-4">
-                  
+                <div className="pl-lg-4">               
                   <div className="row">
                     <div className="col-lg-4">
                       <div className="form-group">
@@ -300,8 +300,7 @@ const EditProfile = () => {
                     </div>
                   </div>
                 </div>
-                {/* <hr className="my-4" />
-                <h6 className="heading-small text-muted mb-4">About me</h6> */}
+                
                 <div className="pl-lg-4">
                   <div className="form-group">
                     <label className="form-control-label">About me</label>
@@ -316,9 +315,22 @@ const EditProfile = () => {
                   </div>
                 </div>
                 
-                <Button onClick={handleUpdate} color="primary" type="button">
-                    Save changes
-                </Button>
+                <div className="row">
+                    <div className="col-lg-6 text-end">
+                      <div className="d-flex justify-content-between">
+                        <Link href={{ pathname: '/Profile'}}>
+                          <a className="btn bg-red mb-0">Cancel</a>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="col-lg-6 text-end">
+                      <Button onClick={handleUpdate} color="primary" type="button">
+                        Save changes
+                      </Button>
+                    </div>
+                </div>
+
+                
 
               </form>
             </div>

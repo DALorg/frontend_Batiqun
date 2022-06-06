@@ -20453,6 +20453,11 @@ fieldset:disabled .btn {
   border-color: #344767;
 }
 
+.btn.bg-red{
+  background-color: #dd1e25;
+  color: white;
+}
+
 .btn-dark .btn.bg-outline-dark,
 .btn.bg-gradient-dark .btn.bg-outline-dark {
   border: 1px solid #344767;
