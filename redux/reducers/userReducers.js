@@ -3,6 +3,7 @@ import { ADD_USERS, DELETE_USERS, GET_USERS, USERS_ERROR, EDIT_USERS } from "./t
 const initialState = {
   users: [],
   user: {},
+  bitSuccessEdit: null,
   loading: true,
 };
 
@@ -11,7 +12,7 @@ export default function userReducer(state = initialState, action) {
     case GET_USERS:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.objData,
         loading: false,
       };
 
@@ -30,6 +31,7 @@ export default function userReducer(state = initialState, action) {
           ? (user = action.payload)
           : user
         ),
+        bitSuccessEdit: action.payload.bitSuccess,
         loading: false,
       };
 

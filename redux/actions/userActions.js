@@ -20,7 +20,7 @@ export const getUsers = (id, token) => async (dispatch) => {
     }, config);
     dispatch({
       type: GET_USERS,
-      payload: res.data.objData,
+      payload: res.data,
     });
     console.log(res.data.objData);
   } catch (error) {
@@ -48,7 +48,7 @@ export const getProfile = (id, currentid, token, isCreated, isFav, Page, Length)
     }, config);
     dispatch({
       type: GET_USERS,
-      payload: res.data.objData,
+      payload: res.data,
     });
     console.log(res.data.objData);
   } catch (error) {
