@@ -23,10 +23,38 @@ const EditProfile = () => {
       setUserEdit(data);
     };
 
-    const handleFile = (e) => {
+    const handleFileKTP = (e) => {
       let data = { ...userEdit };
       let file = e.target.files[0];
-      data[e.target.name] = file;
+      var extension = file.type;
+      var extension_value= extension.replace("image/", ".");
+      var blob = file.slice(0, file.size, extension); 
+      let newFile = new File([blob], 'KTP' + extension_value, {type: extension});
+      data[e.target.name] = newFile;
+
+      setUserEdit(data);
+    };
+
+    const handleFilePP = (e) => {
+      let data = { ...userEdit };
+      let file = e.target.files[0];
+      var extension = file.type;
+      var extension_value= extension.replace("image/", ".");
+      var blob = file.slice(0, file.size, extension); 
+      let newFile = new File([blob], 'PP' + extension_value, {type: extension});
+      data[e.target.name] = newFile;
+
+      setUserEdit(data);
+    };
+
+    const handleFileBanner = (e) => {
+      let data = { ...userEdit };
+      let file = e.target.files[0];
+      var extension = file.type;
+      var extension_value= extension.replace("image/", ".");
+      var blob = file.slice(0, file.size, extension); 
+      let newFile = new File([blob], 'Banner' + extension_value, {type: extension});
+      data[e.target.name] = newFile;
 
       setUserEdit(data);
     };
@@ -48,14 +76,22 @@ const EditProfile = () => {
       dtmUpdatedDate:"2022-06-05",
       NIK:user.NIK,
       NIK_Photo:user.NIK_Photo,
+      Profile_Baner:user.Profile_Baner,
+      Profile_Image: user.Profile_Image,
+      Bio: user.Bio,
+      Twitter: user.Twitter,
+      Instagram:user.Instagram,
+      Website: user.Website,
       file:"",
+      file_banner:"",
+      file_profile:""
     });
 
     const handleUpdate = (e) => {
       e.preventDefault();
       Swal.fire({
         title: 'Loading, Please Wait!',
-        html: 'I will close in <b></b> milliseconds.',
+        html: 'I will close in milliseconds.',
         allowOutsideClick: false,
         didOpen: () => {
           Swal.showLoading()
@@ -63,15 +99,15 @@ const EditProfile = () => {
       });
       let file = userEdit.file;
       let formData = new FormData();
-      formData.append('image', file);
+      formData.append('KTP', file);
+      formData.append('PP', userEdit.file_profile);
+      formData.append('Banner', userEdit.file_banner);
 
       axios({
         url: global.apiurl + 'api/user/uploadfile',
         method: 'POST',
         data: formData
       }).then((res)=>{
-        console.log(res.data.objData);
-
         dispatch(
           editUser({
           intUserId: userEdit.intUserId,
@@ -80,30 +116,21 @@ const EditProfile = () => {
           txtUsername:userEdit.txtUsername,
           txtPassword:userEdit.txtPassword,
           ethAddress:userEdit.ethAddress,
+          NIK: userEdit.NIK,
+          NIK_Photo: res.data.objData.KTP,
+          Profile_Baner:res.data.objData.BannerImage,
+          Profile_Image:res.data.objData.PPimage,
+          Bio: userEdit.Bio,
+          Twitter: userEdit.Twitter,
+          Instagram:userEdit.Instagram,
+          Website: userEdit.Website,
           txtCreatedBy: "user",
           dtmCreatedDate: "2022-06-05",
           txtUpdatedBy: "user",
-          dtmUpdatedDate:"2022-06-05",
-          NIK: parseInt(userEdit.NIK),
-          NIK_Photo:res.data.objData,
+          dtmUpdatedDate:"2022-06-05"
           }, Cookies.get('UserData'))
         );
       })
-
-      setUserEdit({
-        intUserId: "",
-        txtFullName: "",
-        txtEmail: "",
-        txtPassword: "",
-        ethAddress:Cookies.get('ethAddress'),
-        txtCreatedBy:"user",
-        dtmCreatedDate:"2022-06-05",
-        txtUpdatedBy: "user",
-        dtmUpdatedDate:"2022-06-05",
-        NIK:"",
-        NIK_Photo:"",
-        // TokenID: Cookies.get('ethAddress'),
-      });
     };
 
     if(bitSuccessEdit == true){
@@ -113,6 +140,25 @@ const EditProfile = () => {
         "success"
       ).then(function() {
         bitSuccessEdit = null;
+        setUserEdit({
+          intUserId: "",
+          txtFullName: "",
+          txtEmail: "",
+          txtPassword: "",
+          ethAddress:Cookies.get('ethAddress'),
+          txtCreatedBy:"user",
+          dtmCreatedDate:"2022-06-05",
+          txtUpdatedBy: "user",
+          dtmUpdatedDate:"2022-06-05",
+          NIK:"",
+          NIK_Photo:"",
+          Profile_Baner:"",
+          Profile_Image:"",
+          Bio: "",
+          Twitter: "",
+          Instagram:"",
+          Website: ""
+        });
     });
     }else if(bitSuccessEdit == false){
         Swal.fire(
@@ -149,8 +195,8 @@ const EditProfile = () => {
             </div>
             <div className="card-body text-center">
                   <img src="/curved11.jpg" alt="profile_pict" className="rounded-circle edit"/>
-                  <input type="file" accept="image/*" name="image-upload" id="input" className="upload_pict"
-                  // onChange={this.imageHandler} 
+                  <input type="file" accept="image/*" name="file_profile" id="input" className="form-control-label"
+                  onChange={handleFilePP} 
                   />
                   <div className="label">
                   <label className="image-upload" htmlFor="input">
@@ -171,13 +217,13 @@ const EditProfile = () => {
             </div>
               <div className="card-profile">
                 <img src="/header.jpg" alt="bannerPict" className="card-img-top" />
-                <input type="file" accept="image/*" name="image-upload" className="upload_pict"
-                // onChange={}
+                <input type="file" accept="image/*" name="file_banner" className="form-control-label"
+                onChange={handleFileBanner}
                 />
                 <div className="label1">
                   <label className="image-upload" htmlFor="input">
                     <i className="material-icons">add_a_photo</i>
-                    Choose profile picture
+                    Choose Banner
                   </label>
                   </div>
               </div>
@@ -267,7 +313,7 @@ const EditProfile = () => {
                         className="form-control"
                         placeholder="choose file"
                         name="file"
-                        onChange={handleFile}
+                        onChange={handleFileKTP}
                         required
                       />
                       </div>
@@ -301,9 +347,9 @@ const EditProfile = () => {
                         type="input"
                         className="form-control"
                         placeholder="@example"
-                        name="twitter" 
-                        // onChange={handleChangeEdit}
-                        value={user.Twitter}
+                        name="Twitter" 
+                        onChange={handleChangeEdit}
+                        value={userEdit.Twitter}
                       />
                       </div>
                     </div>
@@ -314,9 +360,9 @@ const EditProfile = () => {
                         type="input"
                         className="form-control"
                         placeholder="@example"
-                        name="instagram"
-                        // onChange={handleChangeEdit}
-                        value={user.Instagram}
+                        name="Instagram"
+                        onChange={handleChangeEdit}
+                        value={userEdit.Instagram}
                       />
                       </div>
                     </div>
@@ -326,10 +372,10 @@ const EditProfile = () => {
                         <input
                         type="input"
                         className="form-control"
-                        placeholder="www@example.id"
-                        name="website"
-                        // onChange={handleChangeEdit}
-                        value={user.Website}
+                        placeholder="www.example.id"
+                        name="Website"
+                        onChange={handleChangeEdit}
+                        value={userEdit.Website}
                       />
                       </div>
                     </div>
@@ -344,8 +390,8 @@ const EditProfile = () => {
                         type="input"
                         className="form-control"
                         placeholder="write about you"
-                        name="bio" required
-                        // onChange={handleChangeEdit}
+                        name="Bio" required
+                        onChange={handleChangeEdit}
                         value={userEdit.Bio}
                       />
                   </div>
