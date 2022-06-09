@@ -20,6 +20,7 @@ export default function productReducer(state = initialState, action) {
       return {
         ...state,
         products: action.payload,
+        bitSuccessEdit: null,
         loading: false,
       };
       
@@ -27,6 +28,7 @@ export default function productReducer(state = initialState, action) {
       return {
         ...state,
         product: action.payload,
+        bitSuccessEdit: null,
         loading: false,
       };
 

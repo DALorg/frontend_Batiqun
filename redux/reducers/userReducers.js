@@ -13,6 +13,7 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload.objData,
+        bitSuccessEdit: null,
         loading: false,
       };
 

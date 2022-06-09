@@ -66,7 +66,7 @@ const AddProducts = () => {
     //UPLOAD IMAGE
     let file = userEdit.file;
     let formData = new FormData();
-    formData.append('image', file);
+    formData.append('Product', file);
 
     axios({
       url: global.apiurl + 'api/user/uploadfile',
@@ -82,7 +82,7 @@ const AddProducts = () => {
           ethAddress: userEdit.ethAddress,
           mintedAddress: userEdit.mintedAddress,
           TokenID: userEdit.TokenID,
-          Product_image: res.data.objData,
+          Product_image: res.data.objData.ProductImage,
           intFavorites: userEdit.intFavorites,
           bitApprove: userEdit.bitApprove,
           Harga: null,
