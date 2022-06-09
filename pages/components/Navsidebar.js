@@ -8,13 +8,14 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./GlobalVariable";
 import Link from 'next/link'
-
+import Cookies from 'js-cookie';
 import {
   faImages,
   faUsers,
   faPowerOff,
   faChartLine,
   faUserClock,
+  faHandHoldingDollar
 } from "@fortawesome/free-solid-svg-icons";
 
 const Navsidebar = () => {
@@ -54,10 +55,7 @@ const Navsidebar = () => {
             <ul className="navbar-nav">
               <li className="nav-item">
                 <Link href="/" passHref>
-                <a className= {router.pathname.includes("/Dashboard")
-                    ? "nav-link active"
-                    : "nav-link"
-                  }
+                <a className= {router.pathname.includes("/Dashboard") ? "nav-link active" : "nav-link"}
                 >
                   <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                   <FontAwesomeIcon icon={faChartLine} className="text-sm opacity-10" />
@@ -69,13 +67,11 @@ const Navsidebar = () => {
               {/* <li className="nav-item mt-3">
                 <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Products Table</h6>
               </li> */}
+              { Cookies.get("UserRole") == global.superadmin ? 
+              <>
               <li className="nav-item">
               <Link href="/Product" passHref>
-                <a className= {router.pathname.includes("/Product")
-                      ? "nav-link active"
-                      : "nav-link"
-                    }
-                  >
+                <a className= {router.pathname.includes("/Product") ? "nav-link active" : "nav-link" }>
                     <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <FontAwesomeIcon icon={faImages} className="text-sm opacity-10" />
                     </div>
@@ -85,28 +81,32 @@ const Navsidebar = () => {
               </li>
               <li className="nav-item">
               <Link href="/Bills" passHref>
-                <a className= {router.pathname === "/Bills"
-                      ? "nav-link active"
-                      : "nav-link"
-                    }
-                  >
+                <a className= {router.pathname === "/Bills" ? "nav-link active" : "nav-link" }>
                     <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                    <FontAwesomeIcon icon={faUserClock} className="text-sm opacity-10" />
+                    <FontAwesomeIcon icon={faHandHoldingDollar} className="text-sm opacity-10" />
                     </div>
                     <span className="nav-link-text ms-1"> Bills</span>
                 </a>
+              </Link>
+              </li>
+              <li className="nav-item">
+              <Link href="/VerifyAdmin" passHref>
+                <a className= {router.pathname === "/VerifyAdmin" ? "nav-link active" : "nav-link" }>
+                    <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                    <FontAwesomeIcon icon={faUserClock} className="text-sm opacity-10" />
+                    </div>
+                    <span className="nav-link-text ms-1"> Verify Admin</span>
+                </a>
                 </Link>
               </li>
+              </>
+              : null }
               <li className="nav-item mt-3">
                 <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
               </li>
               <li className="nav-item">
                 <Link href="/Profile" passHref>
-                <a className= {router.pathname.includes("/Profile")
-                      ? "nav-link active"
-                      : "nav-link"
-                    }
-                  >
+                <a className= {router.pathname.includes("/Profile") ? "nav-link active" : "nav-link"}>
                     <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <FontAwesomeIcon icon={faUsers} className="text-sm opacity-10" />
                     </div>

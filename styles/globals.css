@@ -5579,6 +5579,18 @@ fieldset:disabled .btn {
   color: #fff;
 }
 
+.card-headline{
+  background-color: #c2a58d;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 0 solid rgba(0, 0, 0, 0.125);
+  border-radius: 1rem;
+}
+
 .card {
   position: relative;
   display: flex;
@@ -9285,6 +9297,10 @@ fieldset:disabled .btn {
   margin-bottom: 1.5rem !important;
 }
 
+.mb--4 {
+  margin-bottom: 2rem !important;
+}
+
 .mb-5 {
   margin-bottom: 3rem !important;
 }
@@ -10333,7 +10349,7 @@ fieldset:disabled .btn {
 }
 
 .bg-primary {
-  background-color: #5e72e4 !important;
+  background-color: #9b6b43 !important
 }
 
 .bg-secondary {
@@ -22072,7 +22088,7 @@ hr.horizontal.gray-light {
 }
 
 .bg-default {
-  background-color: #172b4d;
+  background-color: #c2a58d;
 }
 
 .card.card-profile-bottom {

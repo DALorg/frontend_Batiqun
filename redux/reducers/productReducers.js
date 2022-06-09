@@ -10,6 +10,7 @@ import {
 const initialState = {
   products: [],
   product: {},
+  bitSuccessEdit: null,
   loading: true,
 };
 
@@ -33,6 +34,7 @@ export default function productReducer(state = initialState, action) {
       return {
         ...state,
         products: state.products.concat(action.payload),
+        bitSuccessEdit: action.payload.bitSuccess,
         loading: false,
       };
 
