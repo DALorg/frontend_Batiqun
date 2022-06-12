@@ -25,3 +25,6 @@ export const PA_ERROR = "PA_ERROR";
 export const GET_VERIFY = "GET_VERIFY";
 export const VERIFY_ADMIN = "VERIFY_ADMIN";
 export const VERIFY_ERROR = "VERIFY_ERROR";
+
+export const GET_DASHBOARD = "GET_DASHBOARD";
+export const DASHBOARD_ERROR = "DASHBOARD_ERROR";

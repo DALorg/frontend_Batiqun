@@ -51,7 +51,8 @@ const Navsidebar = () => {
             </a>
           </div>
           <hr className="horizontal dark mt-0"/>
-          <div className="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+          <div >
+          {/* className="collapse navbar-collapse  w-auto " id="sidenav-collapse-main"> */}
             <ul className="navbar-nav">
               <li className="nav-item">
                 <Link href="/" passHref>

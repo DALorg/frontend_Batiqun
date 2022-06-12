@@ -5728,11 +5728,9 @@ fieldset:disabled .btn {
   text-align: center;
   cursor: pointer;
 }
-.label{
-  margin-left: 10em;
-}
+
 .label1{
-  margin-left: 5em;
+  margin-left: 9em;
 }
 .card-group>.card {
   margin-bottom: 0.75rem;
@@ -7177,6 +7175,7 @@ fieldset:disabled .btn {
   padding-bottom: 1.5rem !important;
   background-color: #C7AF9B;
 }
+
 .img-login{
   width: 80%;
   margin-top: 15px;

@@ -5,6 +5,7 @@ import userReducer from "./userReducers";
 import loginReducer from "./loginReducers";
 import paReducer from "./paReducers";
 import verifyReducer from "./verifyReducers";
+import dashboardReducer from "./dashboardReducer";
 
 export default combineReducers({
   Products: productReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   // Carts: cartReducer,
   Logins: loginReducer,
   Pas: paReducer,
-  Verifs: verifyReducer
+  Verifs: verifyReducer,
+  Dashboards: dashboardReducer,
 });

@@ -79,6 +79,7 @@ const EditProfile = () => {
       NIK_Photo:user.NIK_Photo,
       Profile_Baner:user.Profile_Baner,
       Profile_Image: user.Profile_Image,
+      // Profile_Image: "/curved11.jpg"
       Bio: user.Bio,
       Twitter: user.Twitter,
       Instagram:user.Instagram,
@@ -189,44 +190,42 @@ const EditProfile = () => {
             <div className="card-header">
               <div className="row align-items-center">
                 <div className="col-8">
-                  <h3 className="mb-0">Edit profile picture</h3>
+                  <h4 className="mb-0">Edit profile picture</h4>
                 </div>
                 
               </div>
             </div>
             <div className="card-body text-center">
                   <img src="/curved11.jpg" alt="profile_pict" className="rounded-circle edit"/>
-                  <input type="file" accept="image/*" name="file_profile" id="input" className="form-control-label"
-                  onChange={handleFilePP} 
+                  <input type="file" accept="image/*" name="file_profile" 
+                  id="input" className="form-control-label" 
+                  onChange={handleFilePP} style={{display: 'none'}} 
                   />
-                  <div className="label">
                   <label className="image-upload" htmlFor="input">
                     <i className="material-icons">add_a_photo</i> &nbsp;
                     Choose profile picture
                   </label>
-                  </div>
             </div>
             </div>
             <div className="card mt-3">
             <div className="card-header">
               <div className="row align-items-center">
                 <div className="col-8">
-                  <h3 className="mb-0">Edit Banner picture</h3>
+                  <h4 className="mb-0">Edit Banner picture</h4>
                 </div>
                 
               </div>
             </div>
               <div className="card-profile">
                 <img src="/header.jpg" alt="bannerPict" className="card-img-top" />
-                <input type="file" accept="image/*" name="file_banner" className="form-control-label"
-                onChange={handleFileBanner}
+                <input type="file" accept="image/*" name="file_banner" 
+                id="input" className="form-control-label"
+                onChange={handleFileBanner} style={{display: "none"}}
                 />
-                <div className="label1">
-                  <label className="image-upload" htmlFor="input">
+                  <label className="image-upload label1" htmlFor="input">
                     <i className="material-icons">add_a_photo</i>
-                    Choose Banner
+                    &nbsp; Choose Banner
                   </label>
-                  </div>
               </div>
             </div>
         </div>
@@ -328,6 +327,7 @@ const EditProfile = () => {
                         placeholder="enter your id number"
                         name="NIK" required
                         // minLength="16" 
+                        // maxLength="16"
                         onChange={handleChangeEdit}
                         value={userEdit.NIK}
                       />

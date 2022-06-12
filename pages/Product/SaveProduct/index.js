@@ -169,6 +169,7 @@ const AddProducts = () => {
                               className="form-control"
                               name="file"
                               onChange={handleFile}
+                              required
                             />
                   </div>
                 </div>
@@ -182,7 +183,7 @@ const AddProducts = () => {
                         type="input"
                         className="form-control"
                         placeholder="Nama Product"
-                        name="Nama_Product"
+                        name="Nama_Product" required
                         onChange={handleChangeEdit}
                         value={userEdit.Nama_Product}
                       />
@@ -214,7 +215,7 @@ const AddProducts = () => {
                     type="input"
                     className="form-control"
                     placeholder="Tell your product description!"
-                    name="Description"
+                    name="Description" required
                     onChange={handleChangeEdit}
                     value={userEdit.Description}
                   />
