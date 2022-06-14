@@ -91,15 +91,6 @@ const Profile = () => {
                   </div>
                 </div>
 
-                {SalesData?.Growth < 0 ? <> 
-                    <span className="text-warning mr-2"> 
-                    <i className="fas fa-arrow-down text-warning mr-3" />&nbsp;{SalesData?.Growth} 
-                    </span> </>
-                     : <> 
-                    <span className="text-success mr-2"> 
-                     <i className="fa fa-arrow-up"></i>&nbsp;{SalesData?.Growth}
-                     </span> </> } 
-
                 <div className="card-header text-center border-0 pt-0 pt-lg-2 pb-4 pb-lg-3">
                   <div className="row">
                     <div className="col-lg-6 text-end">
