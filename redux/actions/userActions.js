@@ -31,7 +31,8 @@ export const getUsers = (id, token) => async (dispatch) => {
   }
 };
 
-export const getProfile = (id, currentid, token, isCreated, isFav, Page, Length) => async (dispatch) => {
+export const getProfile = (id, currentid, token, isCreated, 
+  isFav, Page, Length) => async (dispatch) => {
   try {
     const config = {
       headers: { Authorization: `Bearer ${token}` }

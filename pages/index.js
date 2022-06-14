@@ -1,10 +1,32 @@
 import Head from "next/head";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CardBody } from "reactstrap";
+import { getDashboard } from "../redux/actions/dashboardAction";
 import Layout from "./components/Layout";
 import Navsidebar from "./components/Navsidebar";
+import {Bar, Line} from "react-chartjs-2";
+import Chart from 'chart.js/auto';
+import BarChart from "chartjs";
+
+const index = (props) => {
+  const dispatch = useDispatch();
+  const allData = useSelector((state) => state.Dashboards);
+  const {loading, error, dashboard }= allData;
+  console.log(dashboard);
+
+  const ProductData = dashboard.TotalProduct;
+  const UserData = dashboard.TotalUser;
+  const SalesData = dashboard.TotalSales;
+  const ChartData = dashboard.UserChart;
+  const SalesChartData = dashboard.SalesChart;
 
 
-export default function Home() {
-  
+  //Load Data
+  useEffect(() => {
+    dispatch(getDashboard());
+  },[]);
+
       return (
         <div>
           <Head>
@@ -32,14 +54,24 @@ export default function Home() {
                   <div className="row">
                     <div className="col">
                       <h5 className="card-title text-uppercase text-muted mb-0">Total Product</h5>
-                      <span className="h2 font-weight-bold mb-0">350,897</span>
+                      <span className="h2 font-weight-bold mb-0">{ProductData?.TotalData}</span>
                     </div>
                     <div className="col-auto">
                         <i className="material-icons">local_mall</i>
                     </div>
                     <p className="mt-3 mb-0 text-sm">
-                      <span className="text-success mr-2"><i className="fa fa-arrow-up"></i> 3.48%</span>
-                      <span className="text-nowrap">Since last month</span>
+
+                    {ProductData?.Growth < 0 ? <> 
+                    <span className="text-warning mr-2"> 
+                    <i className="fas fa-arrow-down text-warning mr-3" />&nbsp;{ProductData?.Growth} 
+                    </span> </>
+                     : <> 
+
+                    <span className="text-success mr-2"> 
+                     <i className="fa fa-arrow-up"></i>&nbsp;{ProductData?.Growth}
+                    </span> </> } 
+                     
+                     <span className="text-nowrap">&nbsp;Since last month</span>
                     </p>
                   </div>
                 </div>
@@ -52,15 +84,24 @@ export default function Home() {
                   <div className="row">
                     <div className="col">
                       <h5 className="card-title text-uppercase text-muted mb-0">New users</h5>
-                      <span className="h2 font-weight-bold mb-0">2,356</span>
+                      <span className="h2 font-weight-bold mb-0">{UserData?.TotalData}</span>
                     </div>
                     <div className="col-auto">
                         <i className="material-icons">assignment_ind</i>
                     </div>
                   </div>
                   <p className="mt-3 mb-0 text-sm">
-                    <span className="text-success mr-2"><i className="fa fa-arrow-up"></i> 3.48%</span>
-                    <span className="text-nowrap">Since last month</span>
+
+                    {UserData?.Growth < 0 ? <> 
+                    <span className="text-warning mr-2"> 
+                    <i className="fas fa-arrow-down text-warning mr-3" />&nbsp;{UserData?.Growth} 
+                    </span> </>
+                     : <> 
+                    <span className="text-success mr-2"> 
+                     <i className="fa fa-arrow-up"></i>&nbsp;{UserData?.Growth}
+                     </span> </> } 
+
+                    <span className="text-nowrap">&nbsp;Since last month</span>
                   </p>
                 </div>
               </div>
@@ -71,15 +112,24 @@ export default function Home() {
                   <div className="row">
                     <div className="col">
                       <h5 className="card-title text-uppercase text-muted mb-0">Sales</h5>
-                      <span className="h2 font-weight-bold mb-0">924</span>
+                      <span className="h2 font-weight-bold mb-0">{SalesData?.TotalData}</span>
                     </div>
                     <div className="col-auto">
                         <i className="material-icons">local_grocery_store</i>
                     </div>
                   </div>
                   <p className="mt-3 mb-0 text-sm">
-                    <span className="text-success mr-2"><i className="fa fa-arrow-up"></i> 3.48%</span>
-                    <span className="text-nowrap">Since last month</span>
+
+                    {SalesData?.Growth < 0 ? <> 
+                    <span className="text-warning mr-2"> 
+                    <i className="fas fa-arrow-down text-warning mr-3" />&nbsp;{SalesData?.Growth} 
+                    </span> </>
+                     : <> 
+                    <span className="text-success mr-2"> 
+                     <i className="fa fa-arrow-up"></i>&nbsp;{SalesData?.Growth}
+                     </span> </> } 
+
+                    <span className="text-nowrap">&nbsp;Since last month</span>
                   </p>
                 </div>
               </div>
@@ -89,20 +139,34 @@ export default function Home() {
     <div class="container-fluid mt--6">
       <div class="row">
         <div class="col-xl-6">
-          <div class="card bg-default">
+          <div class="card">
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
-                  <h6 class="text-white text-uppercase ls-1 mb-1">Overview</h6>
-                  <h5 class="h3 text-white mb-0">Sales value</h5>
+                  <h6 class="text-uppercase ls-1 mb-1">Overview</h6>
+                  <h5 class="h3 mb-0">Sales value</h5>
                 </div>
               </div>
             </div>
+            <CardBody>
             <div class="card-body">
               <div class="chart">
-                <canvas id="chart-sales-dark" class="chart-canvas"></canvas>
+                <Bar
+                  data={{
+                    labels : SalesChartData?.map((data) => data.Month),
+                    datasets : [
+                     {
+                       label: "Sales Value",
+                       data: SalesChartData?.map((data) => data.TotalData),
+                       backgroundColor: ["#9b6b43", "#c2a58d"], 
+                    
+                     },
+                   ],
+                   }}
+                />
               </div>
             </div>
+            </CardBody>
           </div>
         </div>
         <div class="col-xl-6">
@@ -115,11 +179,25 @@ export default function Home() {
                 </div>
               </div>
             </div>
+            <CardBody>
             <div class="card-body">
               <div class="chart">
-                <canvas id="chart-bars" class="chart-canvas"></canvas>
+                <Bar
+                  data={{
+                    labels : ChartData?.map((data) => data.Month),
+                    datasets : [
+                     {
+                       label: "Total Order",
+                       data: ChartData?.map((data) => data.TotalData),
+                       backgroundColor: ["#c2a58d", "#9b6b43"], 
+                     },
+                   ],
+                   }}
+
+                />
               </div>
             </div>
+            </CardBody>
           </div>
         </div>
       </div>
@@ -132,3 +210,5 @@ export default function Home() {
         </div>
       );
 }
+
+export default index;

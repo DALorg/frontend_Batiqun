@@ -22,14 +22,9 @@ export function requireAuthenticationAdmin(gssp) {
             if(KTPstatus == "true"){
                 return await gssp(context); // Continue on to call `getServerSideProps` logic
             }else{
-                Swal.fire(
-                    "Silahkan lengkapi profile",
-                    "Isi NIK sesuai dengan KTP anda",
-                    "warning"
-                );
                 return {
                     redirect: {
-                        destination: '/Profile/EditProfile',
+                        destination: '/Profile/EditProfile?errors=405',
                         statusCode: 302
                     }
                 };

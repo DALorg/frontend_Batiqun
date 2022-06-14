@@ -10,7 +10,6 @@ import dashboardReducer from "./dashboardReducer";
 export default combineReducers({
   Products: productReducer,
   Users: userReducer,
-  // Carts: cartReducer,
   Logins: loginReducer,
   Pas: paReducer,
   Verifs: verifyReducer,

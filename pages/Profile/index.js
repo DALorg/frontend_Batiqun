@@ -83,11 +83,22 @@ const Profile = () => {
                   <div className="col-2 col-lg-2 order-lg-2">
                     <div className="mt-n4 mt-lg-n7 mb-4 mb-lg-0">
                       <a href="javascript:;">
-                        <img src="/curved11.jpg" className="rounded-circle img-fluid border border-2 border-white"/>
+                        <img src=
+                        {global.apiurl+"Data/"+user.Product_image} 
+                        className="rounded-circle img-fluid border border-2 border-white"/>
                       </a>
                     </div>
                   </div>
                 </div>
+
+                {SalesData?.Growth < 0 ? <> 
+                    <span className="text-warning mr-2"> 
+                    <i className="fas fa-arrow-down text-warning mr-3" />&nbsp;{SalesData?.Growth} 
+                    </span> </>
+                     : <> 
+                    <span className="text-success mr-2"> 
+                     <i className="fa fa-arrow-up"></i>&nbsp;{SalesData?.Growth}
+                     </span> </> } 
 
                 <div className="card-header text-center border-0 pt-0 pt-lg-2 pb-4 pb-lg-3">
                   <div className="row">

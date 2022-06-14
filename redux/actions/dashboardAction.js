@@ -1,20 +1,20 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import "../../styles/GlobalVariable"
 import { DASHBOARD_ERROR, GET_DASHBOARD } from "../reducers/types";
 
-export const getDashboard = (id, token) => async (dispatch) => {
+export const getDashboard = () => async (dispatch) => {
     try {
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-        const res = await axios.post(global.apiurl + `/api/Leaderboard/Dashboard`,{
-            objRequestData: {
-                ethAddress: id
-            }
-        }, config);
+       
+        const res = await axios.get(global.apiurl + `/api/Leaderboard/Dashboard`);
+        // {
+        //    objRequestData: {
+        //     access_token: Cookies.get("UserData")
+        //    }
+        // }, config);
         dispatch({
             type: GET_DASHBOARD,
-            payload: res.data,
+            payload: res.data.objData,
         });
         console.log(res.data.objData);
     } catch (error) {
@@ -22,5 +22,6 @@ export const getDashboard = (id, token) => async (dispatch) => {
             type: DASHBOARD_ERROR,
             payload: error,
         });
+        console.log(error);
     }
 };

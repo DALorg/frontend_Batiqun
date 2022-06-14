@@ -12,7 +12,7 @@ export default function dashboardReducer(state = initialState, action){
         case GET_DASHBOARD:
             return {
                 ...state,
-                dashboard: action.payload.objData,
+                dashboard: action.payload,
                 bitSuccessEdit: null,
                 loading: false,
             };

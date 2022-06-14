@@ -18,6 +18,17 @@ const EditProfile = () => {
     const allProfileData = useSelector((state) => state.Users);
     const { loading, error, user, bitSuccessEdit } = allProfileData;
 
+    const router = useRouter()
+    const {errors}  = router.query;
+
+    if(errors==405){
+      Swal.fire(
+        "Silahkan lengkapi profile",
+        "Isi NIK sesuai dengan KTP anda",
+        "warning"
+    );
+    }
+
     const handleChangeEdit = (e) => {
       let data = { ...userEdit};
       data[e.target.name] = e.target.value;
@@ -79,7 +90,6 @@ const EditProfile = () => {
       NIK_Photo:user.NIK_Photo,
       Profile_Baner:user.Profile_Baner,
       Profile_Image: user.Profile_Image,
-      // Profile_Image: "/curved11.jpg"
       Bio: user.Bio,
       Twitter: user.Twitter,
       Instagram:user.Instagram,
