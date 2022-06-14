@@ -17,6 +17,8 @@ const Profile = () => {
     const allProfileData = useSelector((state) => state.Users);
     const { loading, error, user } = allProfileData;
 
+    const Profile_Image = user.Profile_Image;
+
     const router = useRouter()
     const {isCreated, isFav, Page}  = router.query;
 
@@ -42,6 +44,7 @@ const Profile = () => {
     useEffect(() => {
       dispatch(getProfile(Cookies.get('ethAddress'),Cookies.get('ethAddress'), Cookies.get('UserData'), created, favorite, Pagess, TotalDisplayed));
     }, []);
+
 
 
     const handleFav = (ProductId) => {
@@ -78,13 +81,19 @@ const Profile = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="card card-profile mt-3">
-                <img src="/default-bg.png" alt="Image placeholder" className="card-img-top"/>
+                <img src=
+                {user.Profile_Baner == null ?
+                  "https://img.freepik.com/free-photo/black-wall-texture-background-banner-blank-dark-gradient-studio-room-chalkboard_28629-594.jpg"                   
+                  :  user.Profile_Baner} 
+                alt="Image placeholder" className="card-img-top"/>
                 <div className="row justify-content-center">
                   <div className="col-2 col-lg-2 order-lg-2">
                     <div className="mt-n4 mt-lg-n7 mb-4 mb-lg-0">
                       <a href="javascript:;">
                         <img src=
-                        {global.apiurl+"Data/"+user.Product_image} 
+                        {user.Profile_Image == null ?
+                          "https://t4.ftcdn.net/jpg/01/18/03/35/360_F_118033506_uMrhnrjBWBxVE9sYGTgBht8S5liVnIeY.jpg"
+                            : user.Profile_Image }
                         className="rounded-circle img-fluid border border-2 border-white"/>
                       </a>
                     </div>

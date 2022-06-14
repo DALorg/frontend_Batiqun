@@ -202,11 +202,14 @@ const EditProfile = () => {
                 <div className="col-8">
                   <h4 className="mb-0">Edit profile picture</h4>
                 </div>
-                
               </div>
             </div>
             <div className="card-body text-center">
-                  <img src="/curved11.jpg" alt="profile_pict" className="rounded-circle edit"/>
+                <img src=
+                 {user.Profile_Image == null ?
+                  "https://t4.ftcdn.net/jpg/01/18/03/35/360_F_118033506_uMrhnrjBWBxVE9sYGTgBht8S5liVnIeY.jpg"
+                    : user.Profile_Image }
+                  alt="profile_pict" className="rounded-circle edit"/>
                   <input type="file" accept="image/*" name="file_profile" 
                   id="input" className="form-control-label" 
                   onChange={handleFilePP} style={{display: 'none'}} 
@@ -217,17 +220,22 @@ const EditProfile = () => {
                   </label>
             </div>
             </div>
+
+
             <div className="card mt-3">
             <div className="card-header">
               <div className="row align-items-center">
                 <div className="col-8">
                   <h4 className="mb-0">Edit Banner picture</h4>
                 </div>
-                
               </div>
             </div>
               <div className="card-profile">
-                <img src="/header.jpg" alt="bannerPict" className="card-img-top" />
+                <img src=
+                {user.Profile_Baner == null ?
+                  "https://img.freepik.com/free-photo/black-wall-texture-background-banner-blank-dark-gradient-studio-room-chalkboard_28629-594.jpg"                   
+                  :  user.Profile_Baner}
+                alt="bannerPict" className="card-img-top" />
                 <input type="file" accept="image/*" name="file_banner" 
                 id="input" className="form-control-label"
                 onChange={handleFileBanner} style={{display: "none"}}
@@ -247,7 +255,6 @@ const EditProfile = () => {
                 <div className="col-8">
                   <h3 className="mb-0">Edit profile </h3>
                 </div>
-                
               </div>
             </div>
 
@@ -420,9 +427,6 @@ const EditProfile = () => {
                       </Button>
                     </div>
                 </div>
-
-                
-
               </form>
             </div>
           </div>

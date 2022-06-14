@@ -32,6 +32,16 @@ const Products = () => {
   }, []);
 
   const router = useRouter();
+  const {errors}  = router.query;
+
+  if(errors==405){
+    Swal.fire(
+      "Silahkan lengkapi profile",
+      "Isi NIK sesuai dengan KTP anda",
+      "warning"
+  );
+  }
+
 
   return (
     <>

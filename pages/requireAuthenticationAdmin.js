@@ -18,7 +18,7 @@ export function requireAuthenticationAdmin(gssp) {
                     statusCode: 302
                 }
             };
-        }else if (token === global.admin || token === global.superadmin || token === global.seller){
+        }else if (token === global.admin || token === global.superadmin){
             if(KTPstatus == "true"){
                 return await gssp(context); // Continue on to call `getServerSideProps` logic
             }else{
