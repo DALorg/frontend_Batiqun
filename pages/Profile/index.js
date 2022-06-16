@@ -18,6 +18,7 @@ const Profile = () => {
     const { loading, error, user } = allProfileData;
 
     const Profile_Image = user.Profile_Image;
+    console.log(user.Profile_Image);
 
     const router = useRouter()
     const {isCreated, isFav, Page}  = router.query;
@@ -84,7 +85,7 @@ const Profile = () => {
                 <img src=
                 {user.Profile_Baner == null ?
                   "https://img.freepik.com/free-photo/black-wall-texture-background-banner-blank-dark-gradient-studio-room-chalkboard_28629-594.jpg"                   
-                  :  user.Profile_Baner} 
+                  :  global.apiurl + "Data/" + user.Profile_Baner} 
                 alt="Image placeholder" className="card-img-top"/>
                 <div className="row justify-content-center">
                   <div className="col-2 col-lg-2 order-lg-2">
@@ -93,7 +94,7 @@ const Profile = () => {
                         <img src=
                         {user.Profile_Image == null ?
                           "https://t4.ftcdn.net/jpg/01/18/03/35/360_F_118033506_uMrhnrjBWBxVE9sYGTgBht8S5liVnIeY.jpg"
-                            : user.Profile_Image }
+                            : global.apiurl + "Data/" + user.Profile_Image }
                         className="rounded-circle img-fluid border border-2 border-white"/>
                       </a>
                     </div>

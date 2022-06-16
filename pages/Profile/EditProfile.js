@@ -21,6 +21,8 @@ const EditProfile = () => {
     const router = useRouter()
     const {errors}  = router.query;
 
+    console.log(user.Profile_Baner);
+
     if(errors==405){
       Swal.fire(
         "Silahkan lengkapi profile",
@@ -120,6 +122,10 @@ const EditProfile = () => {
         method: 'POST',
         data: formData
       }).then((res)=>{
+        // var coba = userEdit.NIK_Photo;
+        // if(userEdit.NIK_Photo = null) {
+        //   coba = user.NIK_Photo
+        // }
         dispatch(
           editUser({
           intUserId: userEdit.intUserId,
@@ -208,7 +214,8 @@ const EditProfile = () => {
                 <img src=
                  {user.Profile_Image == null ?
                   "https://t4.ftcdn.net/jpg/01/18/03/35/360_F_118033506_uMrhnrjBWBxVE9sYGTgBht8S5liVnIeY.jpg"
-                    : user.Profile_Image }
+                    : global.apiurl + "Data/" + user.Profile_Image }
+
                   alt="profile_pict" className="rounded-circle edit"/>
                   <input type="file" accept="image/*" name="file_profile" 
                   id="input" className="form-control-label" 
@@ -234,13 +241,14 @@ const EditProfile = () => {
                 <img src=
                 {user.Profile_Baner == null ?
                   "https://img.freepik.com/free-photo/black-wall-texture-background-banner-blank-dark-gradient-studio-room-chalkboard_28629-594.jpg"                   
-                  :  user.Profile_Baner}
+                  :  global.apiurl + "Data/" + user.Profile_Baner}
+
                 alt="bannerPict" className="card-img-top" />
                 <input type="file" accept="image/*" name="file_banner" 
-                id="input" className="form-control-label"
+                id="input2" className="form-control-label"
                 onChange={handleFileBanner} style={{display: "none"}}
                 />
-                  <label className="image-upload label1" htmlFor="input">
+                  <label className="image-upload label1" htmlFor="input2">
                     <i className="material-icons">add_a_photo</i>
                     &nbsp; Choose Banner
                   </label>
@@ -262,7 +270,9 @@ const EditProfile = () => {
               <form>
                 <h6 className="heading-small text-muted mb-4">User information</h6>
                 <div className="pl-lg-4">
-                    
+                    <input type="hidden" name="txtUsername" value={user.txtUsername} 
+                        onChange={handleChangeEdit}
+                        ></input>
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="form-group">
@@ -273,7 +283,7 @@ const EditProfile = () => {
                         placeholder= "enter your name"
                         name="txtFullName" required
                         onChange={handleChangeEdit}
-                        value={userEdit.txtFullName}
+                        value={user.txtFullName}
                       />
                       </div>
                     </div>
@@ -286,7 +296,7 @@ const EditProfile = () => {
                         placeholder="enter your email"
                         name="txtEmail" required
                         onChange={handleChangeEdit}
-                        value={userEdit.txtEmail}
+                        value={user.txtEmail}
                       />
                       </div>
                     </div>
@@ -301,7 +311,7 @@ const EditProfile = () => {
                         placeholder="enter password"
                         name="txtPassword" required
                         onChange={handleChangeEdit}
-                        value={userEdit.txtPassword}
+                        value={user.txtPassword}
                       />
                       </div>
                     </div> 
@@ -314,7 +324,7 @@ const EditProfile = () => {
                         className="form-control"
                         name="ethAddress"
                         onChange={handleChangeEdit}
-                        value={userEdit.ethAddress}
+                        value={user.ethAddress}
                         disabled
                       />
                       </div>
@@ -346,7 +356,7 @@ const EditProfile = () => {
                         // minLength="16" 
                         // maxLength="16"
                         onChange={handleChangeEdit}
-                        value={userEdit.NIK}
+                        value={user.NIK}
                       />
                       </div>
                     </div>
@@ -366,7 +376,7 @@ const EditProfile = () => {
                         placeholder="@example"
                         name="Twitter" 
                         onChange={handleChangeEdit}
-                        value={userEdit.Twitter}
+                        value={user.Twitter}
                       />
                       </div>
                     </div>
@@ -379,7 +389,7 @@ const EditProfile = () => {
                         placeholder="@example"
                         name="Instagram"
                         onChange={handleChangeEdit}
-                        value={userEdit.Instagram}
+                        value={user.Instagram}
                       />
                       </div>
                     </div>
@@ -392,7 +402,7 @@ const EditProfile = () => {
                         placeholder="www.example.id"
                         name="Website"
                         onChange={handleChangeEdit}
-                        value={userEdit.Website}
+                        value={user.Website}
                       />
                       </div>
                     </div>
@@ -408,7 +418,7 @@ const EditProfile = () => {
                         placeholder="write about you"
                         name="Bio" required
                         onChange={handleChangeEdit}
-                        value={userEdit.Bio}
+                        value={user.Bio}
                       />
                   </div>
                 </div>
