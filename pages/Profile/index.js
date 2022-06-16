@@ -17,9 +17,6 @@ const Profile = () => {
     const allProfileData = useSelector((state) => state.Users);
     const { loading, error, user } = allProfileData;
 
-    const Profile_Image = user.Profile_Image;
-    console.log(user.Profile_Image);
-
     const router = useRouter()
     const {isCreated, isFav, Page}  = router.query;
 

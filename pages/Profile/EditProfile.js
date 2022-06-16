@@ -21,8 +21,6 @@ const EditProfile = () => {
     const router = useRouter()
     const {errors}  = router.query;
 
-    console.log(user.Profile_Baner);
-
     if(errors==405){
       Swal.fire(
         "Silahkan lengkapi profile",
@@ -78,27 +76,21 @@ const EditProfile = () => {
     }, []);
 
     const [userEdit, setUserEdit] = useState({
-      intUserId: user.encUserId,
       txtFullName: user.txtFullName,
       txtEmail: user.txtEmail,
-      txtUsername:user.txtUsername,
-      txtPassword:user.txtPassword,
-      ethAddress:user.ethAddress,
+      txtPassword: user.txtPassword,
       txtCreatedBy: "user",
       dtmCreatedDate: "2022-06-05",
       txtUpdatedBy: "user",
       dtmUpdatedDate:"2022-06-05",
       NIK:user.NIK,
-      NIK_Photo:user.NIK_Photo,
-      Profile_Baner:user.Profile_Baner,
-      Profile_Image: user.Profile_Image,
       Bio: user.Bio,
       Twitter: user.Twitter,
       Instagram:user.Instagram,
       Website: user.Website,
-      file:"",
-      file_banner:"",
-      file_profile:""
+      file:null,
+      file_banner:null,
+      file_profile:null
     });
 
     const handleUpdate = (e) => {
@@ -122,26 +114,75 @@ const EditProfile = () => {
         method: 'POST',
         data: formData
       }).then((res)=>{
-        // var coba = userEdit.NIK_Photo;
-        // if(userEdit.NIK_Photo = null) {
-        //   coba = user.NIK_Photo
-        // }
+        var NIKS = userEdit.NIK;
+        var Fulname = userEdit.txtFullName;
+        var mails = userEdit.txtEmail;
+        var NIK_phot = userEdit.file;
+        var ppss = userEdit.file_profile;
+        var banne = userEdit.file_banner;
+        var bias = userEdit.Bio;
+        var twtr = userEdit.Twitter;
+        var we3 = userEdit.Website;
+        var insta = userEdit.Instagram;
+        var pws=userEdit.txtPassword;
+        if(NIK_phot == null) {
+          NIK_phot = user.NIK_Photo
+        }
+        if(NIKS == null){
+          NIKS = user.NIK
+        }
+        if(Fulname == null){
+          Fulname = user.txtFullName
+        }
+        if(mails == null){
+          mails = user.txtEmail
+        }
+        if(pws == null){
+          pws = user.txtPassword
+        }
+        if(twtr == null){
+          twtr = user.Twitter
+        }
+        if(bias == null){
+          bias = user.Bio
+        }
+        if(insta == null){
+          insta = user.Instagram
+        }
+        if(we3 == null){
+          we3 = user.Website
+        }
+        if(NIK_phot == null){
+          NIK_phot == user.NIK_Photo
+        }else{
+          NIK_phot = res.data.objData.KTP
+        }
+        if(ppss==null){
+          ppss=user.Profile_Image
+        }else{
+          ppss=res.data.objData.PPimage
+        }
+        if(banne==null){
+          banne=user.Profile_Baner
+        }else{
+          banne=res.data.objData.BannerImage
+        }
         dispatch(
           editUser({
-          intUserId: userEdit.intUserId,
-          txtFullName: userEdit.txtFullName,
-          txtEmail: userEdit.txtEmail,
-          txtUsername:userEdit.txtUsername,
-          txtPassword:userEdit.txtPassword,
-          ethAddress:userEdit.ethAddress,
-          NIK: userEdit.NIK,
-          NIK_Photo: res.data.objData.KTP,
-          Profile_Baner:res.data.objData.BannerImage,
-          Profile_Image:res.data.objData.PPimage,
-          Bio: userEdit.Bio,
-          Twitter: userEdit.Twitter,
-          Instagram:userEdit.Instagram,
-          Website: userEdit.Website,
+          intUserId: user.encUserId,
+          txtFullName: Fulname,
+          txtEmail: mails,
+          txtUsername:user.txtUsername,
+          txtPassword:pws,
+          ethAddress: user.ethAddress,
+          NIK: NIKS,
+          NIK_Photo: NIK_phot,
+          Profile_Baner:banne,
+          Profile_Image:ppss,
+          Bio: bias,
+          Twitter: twtr,
+          Instagram:insta,
+          Website: we3,
           txtCreatedBy: "user",
           dtmCreatedDate: "2022-06-05",
           txtUpdatedBy: "user",
@@ -158,25 +199,6 @@ const EditProfile = () => {
         "success"
       ).then(function() {
         bitSuccessEdit = null;
-        setUserEdit({
-          intUserId: "",
-          txtFullName: "",
-          txtEmail: "",
-          txtPassword: "",
-          ethAddress:Cookies.get('ethAddress'),
-          txtCreatedBy:"user",
-          dtmCreatedDate:"2022-06-05",
-          txtUpdatedBy: "user",
-          dtmUpdatedDate:"2022-06-05",
-          NIK:"",
-          NIK_Photo:"",
-          Profile_Baner:"",
-          Profile_Image:"",
-          Bio: "",
-          Twitter: "",
-          Instagram:"",
-          Website: ""
-        });
     });
     }else if(bitSuccessEdit == false){
         Swal.fire(
@@ -270,9 +292,6 @@ const EditProfile = () => {
               <form>
                 <h6 className="heading-small text-muted mb-4">User information</h6>
                 <div className="pl-lg-4">
-                    <input type="hidden" name="txtUsername" value={user.txtUsername} 
-                        onChange={handleChangeEdit}
-                        ></input>
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="form-group">
