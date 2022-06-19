@@ -74,6 +74,13 @@ const MintButton = ({ product }) => {
                 "Your product has been Minted!",
                 "success"
               )
+          },
+          onError:async (error) => {
+            Swal.fire(
+              "Oops...",
+              "Something went wrong!",
+              "error"
+            )
           }
         })
         }

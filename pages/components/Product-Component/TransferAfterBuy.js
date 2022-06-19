@@ -30,7 +30,7 @@ const TransferAfterBuyButton = ({ ProductData }) => {
               clearInterval(timerInterval)
             }
           })
-          await fetch().then((result)=>{   
+          await fetch().then(function(result){   
           console.log(result);        
           dispatch(TransferAfterBuy({
               Product_ActivityID2: ProductData.Product_Activities[0].encProduct_ActivityID,
@@ -46,7 +46,14 @@ const TransferAfterBuyButton = ({ ProductData }) => {
           },Cookies.get("UserData")
           ))
         Swal.close();
-      })
+      }, function(error) {
+        // Common error handling
+        Swal.fire(
+          "Oops...",
+          "Something went wrong!",
+          "error"
+        )
+    })
         } catch (error){
           console.log(error)
         }
