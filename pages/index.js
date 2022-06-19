@@ -63,12 +63,14 @@ const index = (props) => {
 
                     {ProductData?.Growth < 0 ? <> 
                     <span className="text-warning mr-2"> 
-                    <i className="fas fa-arrow-down text-warning mr-3" />&nbsp;{ProductData?.Growth} 
+                    <i className="fas fa-arrow-down text-warning mr-3" />&nbsp;{ProductData?.Growth} &nbsp;
+                    <i className="fas fa-percent text-warning mr-3" />
                     </span> </>
                      : <> 
 
                     <span className="text-success mr-2"> 
-                     <i className="fa fa-arrow-up"></i>&nbsp;{ProductData?.Growth}
+                     <i className="fa fa-arrow-up"></i>&nbsp;{ProductData?.Growth} &nbsp;
+                     <i className="fas fa-percent mr-3" />
                     </span> </> } 
                      
                      <span className="text-nowrap">&nbsp;Since last month</span>
@@ -94,7 +96,8 @@ const index = (props) => {
 
                     {UserData?.Growth < 0 ? <> 
                     <span className="text-warning mr-2"> 
-                    <i className="fas fa-arrow-down text-warning mr-3" />&nbsp;{UserData?.Growth} 
+                    <i className="fas fa-arrow-down text-warning mr-3" />&nbsp;{UserData?.Growth} &nbsp;
+                     <i className="fas fa-percent text-warning mr-3" />
                     </span> </>
                      : <> 
                     <span className="text-success mr-2"> 
