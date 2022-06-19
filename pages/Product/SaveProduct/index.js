@@ -226,12 +226,12 @@ const AddProducts = () => {
                     <div className="col-lg-6 text-end">
                       <div className="d-flex justify-content-between">
                         <Link href={{ pathname: '/Profile'}}>
-                          <a className="btn bg-red mb-0">Cancel</a>
+                          <a className="btn bg-cancel mb-0">Cancel</a>
                         </Link>
                       </div>
                     </div>
                     <div className="col-lg-6 text-end">
-                    <Button onClick={handleUpdate} color="primary" type="button">
+                    <Button onClick={handleUpdate} className="btn bg-button mb-0" type="button">
                         Save changes
                     </Button>
                     </div>

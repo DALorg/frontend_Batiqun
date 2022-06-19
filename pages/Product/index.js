@@ -65,7 +65,7 @@ const Products = () => {
                 </div>
                 <div className="col-6 text-end">
                   <Link href={{ pathname: '/Product/SaveProduct'}}>
-                    <a className="btn bg-gradient-dark mb-0"><i className="fas fa-plus"></i>&nbsp;&nbsp;Add New Product</a>
+                    <a className="btn bg-button mb-0"><i className="fas fa-plus"></i>&nbsp;&nbsp;Add New Product</a>
                   </Link>
                 </div>
               </div>

@@ -103,7 +103,7 @@ const Profile = () => {
                     <div className="col-lg-6 text-end">
                       <div className="d-flex justify-content-between">
                         <Link href={{ pathname: '/Product/SaveProduct'}}>
-                          <a className="btn bg-gradient-dark mb-0"><i className="fas fa-plus"></i>&nbsp;&nbsp;Add New Product</a>
+                          <a className="btn bg-button mb-0"><i className="fas fa-plus"></i>&nbsp;&nbsp;Add New Product</a>
                         </Link>
                       </div>
                     </div>
@@ -112,7 +112,7 @@ const Profile = () => {
                             router.push({
                               pathname: './Profile/EditProfile'
                             })
-                          }} href="javascript:;" className="btn btn-sm btn-dark mb-0"><i className="fa fa-cog py-2"></i></a>
+                          }} href="javascript:;" className="btn bg-button mb-0"><i className="fa fa-cog py-1"></i>&nbsp;&nbsp;Edit Profile</a>
                     </div>
                   </div>
                 </div>

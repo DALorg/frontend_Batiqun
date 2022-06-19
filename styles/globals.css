@@ -5724,7 +5724,7 @@ fieldset:disabled .btn {
 	height: 40px;
   color: white;
   border-radius: 10px;
-  background-color: #5e72e4;
+  background-color: #132b3b;
   text-align: center;
   cursor: pointer;
 }
@@ -20468,8 +20468,13 @@ fieldset:disabled .btn {
   border-color: #344767;
 }
 
-.btn.bg-red{
-  background-color: #dd1e25;
+.btn.bg-cancel{
+  background-color: #d3d3d3;
+  color: black;
+}
+
+.bg-button{
+  background-color: #132b3b;
   color: white;
 }
 
@@ -22421,11 +22426,6 @@ hr.horizontal.gray-light {
   border-radius: 0.25rem;
 }
 
-.navbar-vertical.navbar-expand-xs .navbar-nav .nav .nav-link {
-  padding-top: calc($navbar-vertical-nav-link-padding-y / 1.5);
-  padding-bottom: calc($navbar-vertical-nav-link-padding-y / 1.5);
-  padding-left: 15px;
-}
 
 .navbar-vertical.navbar-expand-xs .navbar-nav .nav .nav-link>span.sidenav-normal {
   transition: all 0.1s ease 0s;
@@ -22521,11 +22521,6 @@ hr.horizontal.gray-light {
     border-radius: 0.25rem;
   }
 
-  .navbar-vertical.navbar-expand-sm .navbar-nav .nav .nav-link {
-    padding-top: calc($navbar-vertical-nav-link-padding-y / 1.5);
-    padding-bottom: calc($navbar-vertical-nav-link-padding-y / 1.5);
-    padding-left: 15px;
-  }
 
   .navbar-vertical.navbar-expand-sm .navbar-nav .nav .nav-link>span.sidenav-normal {
     transition: all 0.1s ease 0s;
@@ -22622,11 +22617,6 @@ hr.horizontal.gray-light {
     border-radius: 0.25rem;
   }
 
-  .navbar-vertical.navbar-expand-md .navbar-nav .nav .nav-link {
-    padding-top: calc($navbar-vertical-nav-link-padding-y / 1.5);
-    padding-bottom: calc($navbar-vertical-nav-link-padding-y / 1.5);
-    padding-left: 15px;
-  }
 
   .navbar-vertical.navbar-expand-md .navbar-nav .nav .nav-link>span.sidenav-normal {
     transition: all 0.1s ease 0s;
@@ -22723,11 +22713,6 @@ hr.horizontal.gray-light {
     border-radius: 0.25rem;
   }
 
-  .navbar-vertical.navbar-expand-lg .navbar-nav .nav .nav-link {
-    padding-top: calc($navbar-vertical-nav-link-padding-y / 1.5);
-    padding-bottom: calc($navbar-vertical-nav-link-padding-y / 1.5);
-    padding-left: 15px;
-  }
 
   .navbar-vertical.navbar-expand-lg .navbar-nav .nav .nav-link>span.sidenav-normal {
     transition: all 0.1s ease 0s;
@@ -22824,11 +22809,6 @@ hr.horizontal.gray-light {
     border-radius: 0.25rem;
   }
 
-  .navbar-vertical.navbar-expand-xl .navbar-nav .nav .nav-link {
-    padding-top: calc($navbar-vertical-nav-link-padding-y / 1.5);
-    padding-bottom: calc($navbar-vertical-nav-link-padding-y / 1.5);
-    padding-left: 15px;
-  }
 
   .navbar-vertical.navbar-expand-xl .navbar-nav .nav .nav-link>span.sidenav-normal {
     transition: all 0.1s ease 0s;
@@ -22923,12 +22903,6 @@ hr.horizontal.gray-light {
     padding-left: 1rem;
     padding-right: 1rem;
     border-radius: 0.25rem;
-  }
-
-  .navbar-vertical.navbar-expand-xxl .navbar-nav .nav .nav-link {
-    padding-top: calc($navbar-vertical-nav-link-padding-y / 1.5);
-    padding-bottom: calc($navbar-vertical-nav-link-padding-y / 1.5);
-    padding-left: 15px;
   }
 
   .navbar-vertical.navbar-expand-xxl .navbar-nav .nav .nav-link>span.sidenav-normal {

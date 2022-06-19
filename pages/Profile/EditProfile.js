@@ -356,11 +356,11 @@ const EditProfile = () => {
                     <div className="col-lg-6">
                       <div className="form-group">
                         <label className="form-control-label" 
-                        for="input-KTP">Upload KTP</label>
+                        for="input-KTP">Upload ID Card</label>
                         <input
                         type="file"
                         className="form-control"
-                        placeholder="choose file"
+                        placeholder="Upload your Identity Card"
                         name="file"
                         onChange={handleFileKTP}
                         required
@@ -369,14 +369,14 @@ const EditProfile = () => {
                     </div>
                     <div className="col-lg-6">
                       <div className="form-group">
-                        <label className="form-control-label" for="input-NIK">NIK/Induk kependudukan</label>
+                        <label className="form-control-label" for="input-NIK">ID Number</label>
                         <input
                         type="number"
                         className="form-control"
-                        placeholder="enter your id number"
+                        placeholder="enter your ID number"
                         name="NIK" required
-                        // minLength="16" 
-                        // maxLength="16"
+                        minLength="16" 
+                        maxLength="16"
                         onChange={handleChangeEdit}
                         value={user.NIK}
                       />
@@ -449,14 +449,14 @@ const EditProfile = () => {
                     <div className="col-lg-6 text-end">
                       <div className="d-flex justify-content-between">
                         <Link href={{ pathname: '/Profile'}}>
-                          <a className="btn bg-red mb-0">Cancel</a>
+                          <a className="btn bg-cancel mb-0">Cancel</a>
                         </Link>
                       </div>
                     </div>
                     <div className="col-lg-6 text-end">
-                      <Button onClick={handleUpdate} color="primary" type="button">
+                      <button onClick={handleUpdate} className="btn bg-button mb-0" type="button">
                         Save changes
-                      </Button>
+                      </button>
                     </div>
                 </div>
               </form>
