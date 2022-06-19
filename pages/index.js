@@ -139,21 +139,21 @@ const index = (props) => {
             </div>
             </div>
 
-    <div class="container-fluid mt--6">
-      <div class="row">
-        <div class="col-xl-6">
-          <div class="card">
-            <div class="card-header bg-transparent">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h6 class="text-uppercase ls-1 mb-1">Overview</h6>
-                  <h5 class="h3 mb-0">Sales value</h5>
+    <div className="container-fluid mt--6">
+      <div className="row">
+        <div className="col-xl-6">
+          <div className="card">
+            <div className="card-header bg-transparent">
+              <div className="row align-items-center">
+                <div className="col">
+                  <h6 className="text-uppercase ls-1 mb-1">Overview</h6>
+                  <h5 className="h3 mb-0">Sales value</h5>
                 </div>
               </div>
             </div>
             <CardBody>
-            <div class="card-body">
-              <div class="chart">
+            <div className="card-body">
+              <div className="chart">
                 <Bar
                   data={{
                     labels : SalesChartData?.map((data) => data.Month),
@@ -172,19 +172,19 @@ const index = (props) => {
             </CardBody>
           </div>
         </div>
-        <div class="col-xl-6">
-          <div class="card">
-            <div class="card-header bg-transparent">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
-                  <h5 class="h3 mb-0">Total orders</h5>
+        <div className="col-xl-6">
+          <div className="card">
+            <div className="card-header bg-transparent">
+              <div className="row align-items-center">
+                <div className="col">
+                  <h6 className="text-uppercase text-muted ls-1 mb-1">Performance</h6>
+                  <h5 className="h3 mb-0">Total orders</h5>
                 </div>
               </div>
             </div>
             <CardBody>
-            <div class="card-body">
-              <div class="chart">
+            <div className="card-body">
+              <div className="chart">
                 <Bar
                   data={{
                     labels : ChartData?.map((data) => data.Month),

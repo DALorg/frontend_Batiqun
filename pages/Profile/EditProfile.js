@@ -18,6 +18,30 @@ const EditProfile = () => {
     const allProfileData = useSelector((state) => state.Users);
     const { loading, error, user, bitSuccessEdit } = allProfileData;
 
+    useEffect(() => {
+      dispatch(getUsers(Cookies.get('ethAddress'), Cookies.get('UserData')));
+    }, []);
+
+    const [userEdit, setUserEdit] = useState({
+      txtFullName: user.txtFullName,
+      txtEmail: user.txtEmail,
+      txtPassword: user.txtPassword,
+      txtCreatedBy: "user",
+      dtmCreatedDate: "2022-06-05",
+      txtUpdatedBy: "user",
+      dtmUpdatedDate:"2022-06-05",
+      NIK:user.NIK,
+      Bio: user.Bio,
+      Twitter: user.Twitter,
+      Instagram:user.Instagram,
+      Website: user.Website,
+      file:null,
+      file_banner:null,
+      file_profile:null
+    });
+
+    console.log(userEdit);
+
     const router = useRouter()
     const {errors}  = router.query;
 
@@ -71,27 +95,6 @@ const EditProfile = () => {
       setUserEdit(data);
     };
 
-    useEffect(() => {
-      dispatch(getUsers(Cookies.get('ethAddress'), Cookies.get('UserData')));
-    }, []);
-
-    const [userEdit, setUserEdit] = useState({
-      txtFullName: user.txtFullName,
-      txtEmail: user.txtEmail,
-      txtPassword: user.txtPassword,
-      txtCreatedBy: "user",
-      dtmCreatedDate: "2022-06-05",
-      txtUpdatedBy: "user",
-      dtmUpdatedDate:"2022-06-05",
-      NIK:user.NIK,
-      Bio: user.Bio,
-      Twitter: user.Twitter,
-      Instagram:user.Instagram,
-      Website: user.Website,
-      file:null,
-      file_banner:null,
-      file_profile:null
-    });
 
     const handleUpdate = (e) => {
       e.preventDefault();

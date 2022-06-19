@@ -39,7 +39,7 @@ const BuyButton = ({ product }) => {
             clearInterval(timerInterval)
           }
         })
-        fetch().then((result)=>{  
+        fetch().then(function(result) {
           console.log(result);
           dispatch(BuyProduct({
             Product_ActivityID: "7Tk$K9N2nJIPW1BkBiCjpA__",
@@ -53,6 +53,13 @@ const BuyButton = ({ product }) => {
             bitSent: true
       },Cookies.get("UserData")))
       Swal.close();
+    }, function(error) {
+        // Common error handling
+        Swal.fire(
+          "Oops...",
+          "Something went wrong!",
+          "error"
+        )
     })
       } catch (error){
         console.log(error)

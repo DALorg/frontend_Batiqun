@@ -14,7 +14,7 @@ const TransferButton = ({ ProductData }) => {
     const TransferAsset = async () =>{
         try {
           await Moralis.enableWeb3();
-          fetch().then((result)=>{   
+          fetch().then(function(result) {   
           console.log(result);        
          dispatch(TransferProduct({
             Product_ActivityID: "7Tk$K9N2nJIPW1BkBiCjpA__",
@@ -23,7 +23,14 @@ const TransferButton = ({ ProductData }) => {
             ethAddress_From: Cookies.get("ethAddress"),
             Tgl_Penjualan: "2021-09-23"
         },Cookies.get("UserData")
-        ))})
+        ))},function(error) {
+          // Common error handling
+          Swal.fire(
+            "Oops...",
+            "Something went wrong!",
+            "error"
+          )
+      })
         } catch (error){
           console.log(error)
         }
