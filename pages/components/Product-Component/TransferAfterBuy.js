@@ -45,15 +45,17 @@ const TransferAfterBuyButton = ({ ProductData }) => {
               bitSent: false
           },Cookies.get("UserData")
           ))
-        Swal.close();
-      }, function(error) {
-        // Common error handling
+          Swal.fire(
+            "Transfered!",
+            "Your product has been Transfered!",
+            "success"
+          )
+      }).catch((e) =>         
         Swal.fire(
           "Oops...",
           "Something went wrong!",
           "error"
-        )
-    })
+      ));
         } catch (error){
           console.log(error)
         }

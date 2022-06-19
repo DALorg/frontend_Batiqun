@@ -36,53 +36,61 @@ const MintButton = ({ product }) => {
             clearInterval(timerInterval)
           }
         })
-        let metadata = {
-          name: Prodlist.Nama_Product,
-          description : Prodlist.Description,
-          image: global.apiurl + "Data/" + Prodlist.Product_image
-        }
-        await saveFile(`metadata ${Prodlist.Nama_Product}`, {
-          base64: btoa(JSON.stringify(metadata))
-        }, {
-          saveIPFS: true,
-          onSuccess: async (metadataFile) => {
-            console.log(metadataFile._ipfs)
-            await Moralis.enableWeb3()
-            const contract = new web3.eth.Contract(contractABI, contractAddress);
-            const response = await contract.methods.mint(metadataFile._ipfs).send({from: currentUser});
-            console.log(response);
-            const TokenId = response.events.Transfer.returnValues.tokenId;
-            const TransactionHash = response.events.Transfer.transactionHash;
-            dispatch(
-                mintProduct(
-                {
-                  TokenID: TokenId,
-                  Product_ActivityID: "7Tk$K9N2nJIPW1BkBiCjpA__",
-                  ProductId: Prodlist.encProductId,
-                  ethAddress_To: Prodlist.ethAddress,
-                  ethAddress_From: currentUser,
-                  Tgl_Penjualan: "2021-09-23",
-                  Value: Prodlist.Harga,
-                  TransactionHash: TransactionHash,
-                  bitComplete:true,
-                  bitSent: true
-                  }, Cookies.get("UserData"))
-              )
-              
-              Swal.fire(
-                "Minted!",
-                "Your product has been Minted!",
-                "success"
-              )
-          },
-          onError:async (error) => {
-            Swal.fire(
-              "Oops...",
-              "Something went wrong!",
-              "error"
-            )
+
+          let metadata = {
+            name: Prodlist.Nama_Product,
+            description : Prodlist.Description,
+            image: global.apiurl + "Data/" + Prodlist.Product_image
           }
-        })
+          await saveFile(`metadata ${Prodlist.Nama_Product}`, {
+            base64: btoa(JSON.stringify(metadata))
+          }, {
+            saveIPFS: true,
+            onSuccess: async (metadataFile) => {
+              await Moralis.enableWeb3()
+              const contract = new web3.eth.Contract(contractABI, contractAddress);
+              try{
+              const response = await contract.methods.mint(metadataFile._ipfs).send({from: currentUser});
+              const TokenId = response.events.Transfer.returnValues.tokenId;
+              const TransactionHash = response.events.Transfer.transactionHash;
+              dispatch(
+                  mintProduct(
+                  {
+                    TokenID: TokenId,
+                    Product_ActivityID: "7Tk$K9N2nJIPW1BkBiCjpA__",
+                    ProductId: Prodlist.encProductId,
+                    ethAddress_To: Prodlist.ethAddress,
+                    ethAddress_From: currentUser,
+                    Tgl_Penjualan: "2021-09-23",
+                    Value: Prodlist.Harga,
+                    TransactionHash: TransactionHash,
+                    bitComplete:true,
+                    bitSent: true
+                    }, Cookies.get("UserData"))
+                )
+                
+                Swal.fire(
+                  "Minted!",
+                  "Your product has been Minted!",
+                  "success"
+                )
+            }catch(error){
+              Swal.fire(
+                "Oops...",
+                "Something went wrong!",
+                "error"
+              )
+            }
+            },
+            onError:async (error) => {
+              console.log(error);
+              Swal.fire(
+                "Oops...",
+                "Something went wrong!",
+                "error"
+              )
+            }
+          })
         }
       }
 

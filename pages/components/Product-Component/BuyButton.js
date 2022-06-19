@@ -52,15 +52,17 @@ const BuyButton = ({ product }) => {
             bitComplete:true,
             bitSent: true
       },Cookies.get("UserData")))
-      Swal.close();
-    }, function(error) {
-        // Common error handling
-        Swal.fire(
-          "Oops...",
-          "Something went wrong!",
-          "error"
-        )
-    })
+      Swal.fire(
+        "Congratulations!",
+        "Your have bought this Product!",
+        "success"
+      )
+    }).catch((e) =>         
+      Swal.fire(
+        "Oops...",
+        "Something went wrong!",
+        "error"
+    ));
       } catch (error){
         console.log(error)
       }
