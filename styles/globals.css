@@ -7172,7 +7172,7 @@ fieldset:disabled .btn {
 
 .bg-login{
   padding-top: 1.5rem !important;
-  padding-bottom: 1.5rem !important;
+  padding-bottom: 5rem !important;
   background-color: #C7AF9B;
 }
 
@@ -10491,7 +10491,10 @@ fieldset:disabled .btn {
   border-radius: 0.75rem !important;
 }
 
-.rounded-circle,
+.rounded-circle{
+  border-radius: 8% !important;
+}
+
 .avatar.rounded-circle img {
   border-radius: 50% !important;
 }
