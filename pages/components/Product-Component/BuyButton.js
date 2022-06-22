@@ -52,17 +52,21 @@ const BuyButton = ({ product }) => {
             bitComplete:true,
             bitSent: true
       },Cookies.get("UserData")))
-      Swal.fire(
-        "Congratulations!",
-        "Your have bought this Product!",
-        "success"
-      )
+      Swal.fire({
+        title: "Congratulations!",
+        text: "Your have bought this Product!",
+        icon: "success",
+        confirmButtonColor: '#9b6b43'
+      }
+    )
     }).catch((e) =>         
-      Swal.fire(
-        "Oops...",
-        "Something went wrong!",
-        "error"
-    ));
+    Swal.fire({
+      title: "Oops...",
+      text: "Something went wrong!",
+      icon: "error",
+      confirmButtonColor: '#9b6b43'
+    }
+  ));
       } catch (error){
         console.log(error)
       }

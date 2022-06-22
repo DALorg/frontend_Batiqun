@@ -69,17 +69,21 @@ const MintButton = ({ product }) => {
                     }, Cookies.get("UserData"))
                 )
                 
-                Swal.fire(
-                  "Minted!",
-                  "Your product has been Minted!",
-                  "success"
-                )
-            }catch(error){
-              Swal.fire(
-                "Oops...",
-                "Something went wrong!",
-                "error"
+                Swal.fire({
+                  title: "Minted!",
+                  text: "Your product has been Minted!",
+                  icon: "success",
+                  confirmButtonColor: '#9b6b43'
+                }
               )
+            }catch(error){
+              Swal.fire({
+                title: "Oops...",
+                text: "Something went wrong!",
+                icon: "error",
+                confirmButtonColor: '#9b6b43'
+              }
+            )
             }
             },
             onError:async (error) => {
