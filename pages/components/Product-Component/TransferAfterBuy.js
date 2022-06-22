@@ -45,17 +45,21 @@ const TransferAfterBuyButton = ({ ProductData }) => {
               bitSent: false
           },Cookies.get("UserData")
           ))
-          Swal.fire(
-            "Transfered!",
-            "Your product has been Transfered!",
-            "success"
-          )
+          Swal.fire({
+            title: "Transfered!",
+            text: "Your product has been Transfered!",
+            icon: "success",
+            confirmButtonColor: '#9b6b43'
+          }
+        )
       }).catch((e) =>         
-        Swal.fire(
-          "Oops...",
-          "Something went wrong!",
-          "error"
-      ));
+      Swal.fire({
+        title: "Oops...",
+        text: "Something went wrong!",
+        icon: "error",
+        confirmButtonColor: '#9b6b43'
+      }
+    ));
         } catch (error){
           console.log(error)
         }

@@ -36,7 +36,7 @@ const IC_Table = ({ ProductData }) => {
                     </td>
                     <td className="align-middle text-center text-sm">
                     {pa.ethAddress_To === pa.ethAddress_From ? 
-                    <p className="text-xs font-weight-bold mb-0">-</p>
+                    <p className="text-xs font-weight-bold mb-0">You</p>
                     :<Link href={{ pathname: '/Profile/[pid]', query: { pid: pa.ethAddress_To },}}>
                     <a>
                     <p className="text-xs font-weight-bold mb-0">{pa.ethAddress_To?.substring(0, 7) + "..." + pa.ethAddress_To?.substring(pa.ethAddress_To?.length - 7)}</p>
