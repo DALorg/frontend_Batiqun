@@ -97,7 +97,8 @@ const ProductDetail = () => {
                 <p className="text-uppercase text-sm">Current Owner</p>
                 <Link href={{ pathname: '/Profile/[pid]', query: { pid: ProductethAddress },}}>
                     <a>
-                    <h5>{ProductethAddress?.substring(0, 7) + "..." + ProductethAddress?.substring(ProductethAddress?.length - 7)}</h5>
+                    <h5>{ProductethAddress} </h5>
+                    {/* + "..." + ProductethAddress?.substring(ProductethAddress?.length - 7)}</h5> */}
                     </a>
                 </Link>
             </div>

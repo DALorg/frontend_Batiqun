@@ -93,7 +93,7 @@ const EditProducts = () => {
       );
       Swal.fire(
         "Berhasil Update Produk!",
-        "Product " + userEdit.Nama_Product + " Berhasil di Update!",
+        "Produk " + userEdit.Nama_Product + " Berhasil di Update!",
         "success"
       );
     })
@@ -161,7 +161,7 @@ const EditProducts = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <div className="form-group">
-                  <label for="example-text-input" className="form-control-label">Nama Product</label>
+                  <label for="example-text-input" className="form-control-label">Name Product</label>
                     <input
                         type="input"
                         className="form-control"
@@ -216,7 +216,7 @@ const EditProducts = () => {
                   />
               </div>
             </div>
-            <Button onClick={handleUpdate} color="primary" type="button">
+            <Button onClick={handleUpdate} className="btn bg-button mb-0" type="button">
                     Save changes
             </Button>
           </form>

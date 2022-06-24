@@ -18,7 +18,7 @@ export function requireAuthenticationAdmin(gssp) {
                     statusCode: 302
                 }
             };
-        }else if (token === global.admin || token === global.superadmin){
+        }else if (token === global.admin || token === global.superadmin || token === global.seller ){
             if(KTPstatus == "true"){
                 return await gssp(context); // Continue on to call `getServerSideProps` logic
             }else{
@@ -29,7 +29,8 @@ export function requireAuthenticationAdmin(gssp) {
                     }
                 };
             }
-        }else{
+        }
+        else{
             return {
                 redirect: {
                     destination: '/404',
