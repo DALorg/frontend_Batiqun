@@ -1,4 +1,4 @@
-export const contractAddress = "0x9376E61A07DE33D703913E5aFe43E5A2EAF6Fe65";
+export const contractAddress = "0x5D181A4B332D17f4E9F80DAD74DdDCae6D667f7D";
 export const contractABI = [
 	{
 		"anonymous": false,
@@ -97,7 +97,7 @@ export const contractABI = [
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "_uri",
+				"name": "_url",
 				"type": "string"
 			}
 		],
