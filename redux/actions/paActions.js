@@ -9,7 +9,7 @@ import {
   
   export const getPApaging = (Page, Length, Search, asc) => async (dispatch) => {
     try {
-      const res = await axios.post(`https://batiqunapi.azurewebsites.net/api/ProductActivity/GetPaid`, 
+      const res = await axios.post(global.apiurl + `/api/ProductActivity/GetPaid`, 
       {      
         objRequestData: {
         intPage: Page,
@@ -42,7 +42,7 @@ import {
       };
       debugger;
       await axios
-        .post(`https://batiqunapi.azurewebsites.net/api/ProductActivity/PayUser`, testResp, config)
+        .post(global.apiurl + `/api/ProductActivity/PayUser`, testResp, config)
         .then((response) => {
           dispatch({
             type: EDIT_PA,

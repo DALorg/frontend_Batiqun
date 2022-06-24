@@ -84,25 +84,6 @@ export const editUser = (objRequestData, token ) => async (dispatch) => {
 }
 };
 
-export const deleteUsers = (id) => async (dispatch) => {
-  try {
-    await axios
-      .delete(`https://fakestoreapi.com/users/${id}`)
-      .then((response) => {
-        dispatch({
-          type: DELETE_USERS,
-          payload: response.data,
-        });
-        console.log(response);
-      });
-  } catch (error) {
-    dispatch({
-      type: USERS_ERROR,
-      payload: error,
-    });
-  }
-};
-
 export const addUsers = (objRequestData, token) => async (dispatch) => {
   try {
     var testResp = {
@@ -113,7 +94,7 @@ export const addUsers = (objRequestData, token) => async (dispatch) => {
     };
     debugger;
     await axios
-      .post(`https://batiqunapi.azurewebsites.net/api/user/savedata`, testResp, config)
+      .post(global.apiurl + `/api/user/savedata`, testResp, config)
       .then((response) => {
         dispatch({
           type: ADD_USERS,

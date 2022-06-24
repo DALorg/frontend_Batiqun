@@ -7,11 +7,7 @@ export const getDashboard = () => async (dispatch) => {
     try {
        
         const res = await axios.get(global.apiurl + `/api/Leaderboard/Dashboard`);
-        // {
-        //    objRequestData: {
-        //     access_token: Cookies.get("UserData")
-        //    }
-        // }, config);
+      
         dispatch({
             type: GET_DASHBOARD,
             payload: res.data.objData,

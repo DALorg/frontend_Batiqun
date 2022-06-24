@@ -12,7 +12,7 @@ import {
       const config = {
         headers: { Authorization: `Bearer ${token}` }
       };
-      const res = await axios.post(`https://batiqunapi.azurewebsites.net/api/user/GetUnverifyProfile`, 
+      const res = await axios.post(global.apiurl + `/api/user/GetUnverifyProfile`, 
       {      
         objRequestData: {
         intPage: Page,
@@ -47,7 +47,7 @@ import {
       };
       debugger;
       await axios
-        .post(`https://batiqunapi.azurewebsites.net/api/user/VerifyasAdmin`, testResp, config)
+        .post(global.apiurl + `/api/user/VerifyasAdmin`, testResp, config)
         .then((response) => {
           dispatch({
             type: VERIFY_ADMIN,
