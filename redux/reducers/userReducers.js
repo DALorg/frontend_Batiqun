@@ -16,14 +16,12 @@ export default function userReducer(state = initialState, action) {
         bitSuccessEdit: null,
         loading: false,
       };
-
     case ADD_USERS:
       return {
         ...state,
         users: state.users.concat(action.payload),
         loading: false,
       };
-
     case EDIT_USERS:
       return {
         ...state,

@@ -1,5 +1,5 @@
 {
-  "name": "admin_fakestore",
+  "name": "batiqun",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -41,7 +41,6 @@
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
-    "sass": "^1.51.0",
     "sweetalert2": "^11.4.13",
     "web3": "^1.7.3"
   },

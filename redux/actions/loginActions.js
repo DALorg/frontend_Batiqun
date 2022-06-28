@@ -7,7 +7,7 @@ import {
   
   export const LoginAdmin = (id) => async (dispatch) => {
     try {
-      const res = await axios.post(`https://batiqunapimysql20220624114651.azurewebsites.net/api/user/LoginAdmin`, 
+      const res = await axios.post(global.apiurl + `/api/user/LoginAdmin`, 
       {      
         objRequestData: {
           ethAddress: id
@@ -29,7 +29,7 @@ import {
   
   export const LoginUser = (id) => async (dispatch) => {
     try {
-      const res = await axios.post(`https://batiqunapimysql20220624114651.azurewebsites.net/api/user/LoginUser`, 
+      const res = await axios.post(global.apiurl + `/api/user/LoginUser`, 
       {      
         objRequestData: {
           ethAddress: id

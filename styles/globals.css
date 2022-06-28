@@ -7199,6 +7199,8 @@ fieldset:disabled .btn {
   margin-top: 25px;
   background: #9B6B43;
   border-radius: 8px;
+  color: white;
+  font-weight: 500;
 }
 
 .tooltip-inner {
