@@ -44,6 +44,42 @@ export default function Login() {
     return "";
   }
   
+  const fetch = async () => {
+    await axios({
+      url: global.apiurl + 'api/user/LoginUser',
+      method: 'POST',
+      data: {        
+        objRequestData: {
+          ethAddress: user.get('ethAddress')
+    }}  
+    }).then(async function(res){
+      setCookie("UserData", res.data.objData.access_token, 3);
+      setCookie("UserRole", res.data.objData.encRole[0].RoleName, 3);
+      await axios({
+        url: global.apiurl + 'api/user/GetUserKTPStatus/' + user.get('ethAddress'),
+        method: 'GET'
+      }).then((result)=>{
+        setCookie('UsrKTPstatus', result.data.bitSuccess, 3);
+          checkCookie(user.get('ethAddress')).then(
+          function(result) {
+            window.location.replace('/');
+          }, 
+          function(error) {
+              // Common error handling
+              Swal.fire(
+                {
+                  title: "Oops...",
+                  text: "Something went wrong!",
+                  icon: "error",
+                  confirmButtonColor: '#9b6b43'
+                }
+            )
+          }
+      );
+      })
+    })
+  }
+
   function checkCookie(retValue) {
     let user = getCookie("ethAddress");
     if (user != "") {
@@ -114,36 +150,7 @@ export default function Login() {
         </>
     )
     }else{
-      axios({
-        url: global.apiurl + 'api/user/LoginUser',
-        method: 'POST',
-        data: {        
-          objRequestData: {
-            ethAddress: user.get('ethAddress')
-      }}  
-      }).then((res)=>{
-        setCookie("UserData", res.data.objData.access_token, 3);
-        setCookie("UserRole", res.data.objData.encRole[0].RoleName, 3);
-        axios({
-          url: global.apiurl + 'api/user/GetUserKTPStatus/' + user.get('ethAddress'),
-          method: 'GET'
-        }).then((result)=>{
-          setCookie('UsrKTPstatus', result.data.bitSuccess, 3);
-            checkCookie(user.get('ethAddress')).then(
-            function(result) {
-              window.location.replace('/');
-            }, 
-            function(error) {
-                // Common error handling
-                Swal.fire(
-                  "Oops...",
-                  "Something went wrong!",
-                  "error"
-                )
-            }
-        );
-        })
-      })
+      fetch();
       let timerInterval
       return(
         Swal.fire({
