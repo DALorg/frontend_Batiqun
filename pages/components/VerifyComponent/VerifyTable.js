@@ -35,7 +35,8 @@ const VerifyTable = ({ ProductData, loading, error }) => {
               <tr>
                 <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
                 <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Address</th>
-                <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Value</th>
+                <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NIK</th>
+                <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">KTP</th>
                 <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                 <th className="text-secondary opacity-7"></th>
               </tr>
@@ -59,6 +60,11 @@ const VerifyTable = ({ ProductData, loading, error }) => {
                       </td>
                       <td className="align-middle text-center text-sm">
                             <h6 className="mb-0 text-sm">{product.NIK}</h6>
+                      </td>
+                      <td className="align-middle text-center text-sm">
+                        <a href={global.apiurl + "Data/" + product.NIK_Photo} target="_blank" rel="noopener noreferrer">
+                          <img className="avatar" src={global.apiurl + "Data/" + product.NIK_Photo} width="10%" />
+                        </a>
                       </td>
                       {product.txtRoleName == global.admin ||  product.txtRoleName == global.superadmin ? 
                       <td className="align-middle text-center text-sm">

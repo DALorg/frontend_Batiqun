@@ -10,7 +10,6 @@ import Swal from "sweetalert2";
 const TransferAfterBuyButton = ({ ProductData }) => {
 
     const dispatch = useDispatch();
-    let timerInterval;
 
     const TransferAsset = async () =>{
         try {
@@ -22,12 +21,6 @@ const TransferAfterBuyButton = ({ ProductData }) => {
             didOpen: () => {
               Swal.showLoading()
               const b = Swal.getHtmlContainer().querySelector('b')
-              timerInterval = setInterval(() => {
-                b.textContent = Swal.getTimerLeft()
-              }, 100)
-            },
-            willClose: () => {
-              clearInterval(timerInterval)
             }
           })
           await fetch().then(function(result){   
