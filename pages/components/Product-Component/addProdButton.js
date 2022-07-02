@@ -81,10 +81,12 @@ const AddProdButton = ({ profile }) => {
           NIK_Photo: res.data.objData
         }, Cookies.get("UserData"))
       );
-      Swal.fire(
-        "Successfully Update NIK!",
-        "Your NIK will be reviewed by admins!",
-        "success"
+      Swal.fire({
+        title: "Successfully Add New Product!",
+        text: "Your Product will be reviewed by admins!",
+        icon: "success",
+        confirmButtonColor: '#9b6b43'
+      }
       );
     })
         }

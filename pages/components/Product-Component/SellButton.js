@@ -39,10 +39,12 @@ const SellButton = ({ product }) => {
                 bitComplete:true,
                 bitSent: true
                 }, Cookies.get("UserData")),
-            Swal.fire(
-                "Selling!",
-                "Your product has been Listed!",
-                "success"
+            Swal.fire({
+              title: "Selling!",
+              text: "Your product has been Listed!",
+              icon: "success",
+              confirmButtonColor: '#9b6b43'
+            }
             )
             )
         }

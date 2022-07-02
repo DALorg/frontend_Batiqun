@@ -14,10 +14,12 @@ const ProductTable = ({ ProductData, loading, error }) => {
     e.preventDefault()
         dispatch(
           ApproveProduct(Prodlist.encProductId),
-          Swal.fire(
-            "Approved!",
-            "Your product has been approved!",
-            "success"
+          Swal.fire({
+            title: "Approved!",
+            text: "Your product has been approved!",
+            icon: "success",
+            confirmButtonColor: '#9b6b43'
+          }
           )
         )
       }
@@ -28,10 +30,12 @@ const ProductTable = ({ ProductData, loading, error }) => {
     e.preventDefault();
         dispatch(
           RejectProduct(Prodlist.encProductId),
-          Swal.fire(
-            "Rejected!",
-            "Your product has been Rejected!",
-            "success"
+          Swal.fire({
+            title: "Rejected!",
+            text: "Your product has been Rejected!",
+            icon: "success",
+            confirmButtonColor: '#9b6b43'
+          }
           )
         )
       }
