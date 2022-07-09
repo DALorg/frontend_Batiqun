@@ -33,7 +33,7 @@ export function requireAuthenticationAdmin(gssp) {
         else{
             return {
                 redirect: {
-                    destination: '/404',
+                    destination: '/Profile/EditProfile?errors=405',
                     statusCode: 302
                 }
             };

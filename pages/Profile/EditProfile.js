@@ -47,8 +47,8 @@ const EditProfile = () => {
 
     if(errors==405){
       Swal.fire(
-        "Silahkan lengkapi profile",
-        "Isi NIK sesuai dengan KTP anda",
+        "Pastikan anda orang indonesia",
+        "Isi NIK dan unggah KTP anda",
         "warning"
     );
     }
