@@ -88,10 +88,12 @@ const MintButton = ({ product }) => {
             },
             onError:async (error) => {
               console.log(error);
-              Swal.fire(
-                "Oops...",
-                "Something went wrong!",
-                "error"
+              Swal.fire({
+                title: "Oops...",
+                text: "Something went wrong!",
+                icon: "error",
+                confirmButtonColor: '#9b6b43'
+              }
               )
             }
           })

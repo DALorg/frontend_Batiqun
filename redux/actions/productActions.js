@@ -8,6 +8,7 @@ import {
 } from "../reducers/types";
 import axios from "axios";
 import Cookies from 'js-cookie';
+import "../../styles/GlobalVariable"
 
 export const getProducts = () => async (dispatch) => {
   try {
