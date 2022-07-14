@@ -46,11 +46,12 @@ const EditProfile = () => {
     const {errors}  = router.query;
 
     if(errors==405){
-      Swal.fire(
-        "Pastikan anda orang indonesia",
-        "Isi NIK dan unggah KTP anda",
-        "warning"
-    );
+      Swal.fire({
+        title: "Are you form Indonesian?",
+        text: "Input and Upload your ID",
+        icon: "warning",
+        confirmButtonColor: '#9b6b43'
+      });
     }
 
     const handleChangeEdit = (e) => {
@@ -196,19 +197,21 @@ const EditProfile = () => {
     };
 
     if(bitSuccessEdit == true){
-      Swal.fire(
-        "Berhasil Update Profile!",
-        "Profile Berhasil di Update",
-        "success"
-      ).then(function() {
+      Swal.fire({
+      title:"Successfully updated!",
+      text:"Profile has been updated",
+      icon:"success",
+      confirmButtonColor: '#9b6b43'
+      }).then(function() {
         bitSuccessEdit = null;
     });
     }else if(bitSuccessEdit == false){
-        Swal.fire(
-          "Oops...",
-          "Something went wrong!",
-          "error"
-        ).then(function() {
+        Swal.fire({
+        title:"Oops...",
+        text:"Something went wrong!",
+        icon:"error",
+        confirmButtonColor: '#9b6b43'
+        }).then(function() {
           bitSuccessEdit = null;
       });
     }

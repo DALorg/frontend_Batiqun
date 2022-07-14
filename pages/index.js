@@ -199,7 +199,6 @@ const index = (props) => {
                      },
                    ],
                    }}
-
                 />
               </div>
             </div>
